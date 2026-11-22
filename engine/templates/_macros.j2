@@ -1,0 +1,74 @@
+{% macro icon(kind) -%}
+{%- if kind == 'works' -%}<svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm3.7 6.3-4.2 4.6a.9.9 0 0 1-1.3 0L4.3 8.8a.9.9 0 0 1 1.3-1.2l1.2 1.3 3.6-3.9a.9.9 0 1 1 1.3 1.3Z"/></svg>
+{%- elif kind == 'friction' -%}<svg viewBox="0 0 16 16"><path d="M9 1.6a1.2 1.2 0 0 0-2 0L.3 13.1A1.2 1.2 0 0 0 1.300 15h13.4a1.2 1.2 0 0 0 1-1.9L9 1.600ZM8 5.500c.5 0 .9.4.9.9v3.200a.9.9 0 0 1-1.8 0V6.400c0-.5.4-.9.9-.9Zm0 7.300a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+{%- elif kind == 'breaks' -%}<svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm3.100 9.900a.9.9 0 0 1-1.200 1.200L8 9.200l-1.900 1.900a.9.9 0 0 1-1.200-1.200L6.800 8 4.900 6.100a.9.9 0 0 1 1.200-1.200L8 6.800l1.900-1.900a.9.9 0 0 1 1.200 1.200L9.200 8l1.900 1.900Z"/></svg>
+{%- else -%}<svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm0 12.600a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1.500-4.800c-.5.300-.6.500-.6.900a.9.9 0 0 1-1.800 0c0-1.200.7-1.900 1.400-2.300.5-.300.6-.500.6-.800 0-.500-.5-.900-1.100-.900-.600 0-1 .300-1.200.800a.9.9 0 1 1-1.700-.600A3 3 0 0 1 8 3c1.600 0 2.900 1.100 2.900 2.600 0 1.100-.600 1.800-1.400 2.200Z"/></svg>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro status(v) -%}
+<span class="st {{ v }}">{{ icon(v) }}{{ {'works': 'Works', 'friction': 'Friction', 'breaks': 'Breaks', 'unknown': 'Not visible'}[v] }}</span>
+{%- endmacro %}
+
+{% macro sev(n) -%}
+<span class="st sev{{ n }}">{{ icon('friction' if n < 3 else 'breaks') }}{{ {1: 'Minor', 2: 'Moderate', 3: 'Major'}[n] }}</span>
+{%- endmacro %}
+
+{% macro gate(s) -%}
+<span class="st {{ {'pass': 'works', 'pass_with_notes': 'friction', 'fail': 'breaks', 'pending': 'unknown'}[s] }}">{{ icon({'pass': 'works', 'pass_with_notes': 'friction', 'fail': 'breaks', 'pending': 'unknown'}[s]) }}{{ {'pass': 'Pass', 'pass_with_notes': 'Pass with notes', 'fail': 'Fail', 'pending': 'Pending'}[s] }}</span>
+{%- endmacro %}
+
+{# Half-circle gauge. value 0-100 #}
+{% macro gauge(value, label, level_name, size=120) -%}
+{% set r = 46 %}{% set len = 3.14159 * r %}
+<div class="gauge">
+  <svg width="{{ size }}" height="{{ size * 0.6 }}" viewBox="0 0 120 72" role="img" aria-label="{{ label }} {{ value }} out of 100">
+    <path d="M14 62 A46 46 0 0 1 106 62" fill="none" stroke="#e3e5ea" stroke-width="11" stroke-linecap="round"/>
+    <path d="M14 62 A46 46 0 0 1 106 62" fill="none" stroke="var(--brand)" stroke-width="11" stroke-linecap="round" stroke-dasharray="{{ (len * value / 100) | round(1) }} {{ len | round(1) }}"/>
+    <text x="60" y="58" text-anchor="middle" font-size="26" font-weight="800" fill="#0b0f1a" letter-spacing="-1">{{ value }}</text>
+    <text x="60" y="70" text-anchor="middle" font-size="8" font-weight="600" fill="#7a808c">out of 100</text>
+  </svg>
+  <div>
+    <div class="label">{{ label }}</div>
+    <div class="b" style="font-size:15px;line-height:1.15;margin-top:2px">{{ level_name }}</div>
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro ladder(levels, on) -%}
+<div class="ladder">{% for l in levels %}<span class="{{ 'on' if loop.index0 == on else '' }}">{{ l }}</span>{% endfor %}</div>
+{%- endmacro %}
+
+{% macro wordmark(theme, logo) -%}
+<div class="wordmark">{% if logo %}<img src="{{ logo }}" alt="{{ theme.brand_name }}">{% else %}<span class="dots"><i style="background:var(--a1)"></i><i style="background:var(--a2)"></i><i style="background:var(--a3)"></i><i style="background:var(--a4)"></i></span>{{ theme.brand_name }}{% endif %} <small>{{ theme.product_name | replace(theme.brand_name ~ ' ', '') }}</small></div>
+{%- endmacro %}
+
+{% macro foot(left, right) -%}
+<div class="foot"><span>{{ left }}</span><span>{{ right }} · <b class="pg"></b></span></div>
+{%- endmacro %}
+
+{% macro basis(b) -%}
+<span class="basis {{ 'estimate' if b in ['estimate', 'inferred', 'assumption', 'unknown'] else '' }}">{{ b | replace('_', ' ') }}</span>
+{%- endmacro %}
+
+{% macro heatmap(channels, dims, cells_key, index_key, partial_key) -%}
+<div class="heat" style="grid-template-columns: 128px repeat({{ dims | length }}, 1fr) 46px;">
+  <div></div>{% for k, name in dims %}<div class="hh">{{ name }}</div>{% endfor %}<div class="hh" style="justify-content:center">Index</div>
+  {% for ch in channels %}
+  <div class="rh">{{ ch.name }}</div>
+  {% for c in ch[cells_key] %}<div class="{{ c.cls }}" title="{{ c.title }}">{{ c.txt }}</div>{% endfor %}
+  <div class="c idx">{{ ch[index_key] if ch[index_key] is not none else '–' }}{% if ch[partial_key] and ch[index_key] is not none %}*{% endif %}</div>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro heat_legend(zero=false) -%}
+<div class="legend">
+  <span class="b">Score</span>
+  {% if zero %}<span><i class="sw" style="background:#eef1f5"></i>0</span>{% endif %}
+  <span><i class="sw" style="background:var(--s1)"></i>1</span><span><i class="sw" style="background:var(--s2)"></i>2</span><span><i class="sw" style="background:var(--s3)"></i>3</span><span><i class="sw" style="background:var(--s4)"></i>4</span><span><i class="sw" style="background:var(--s5)"></i>5</span>
+  <span><i class="sw" style="background:var(--s3);outline:1.5px dashed #fff;outline-offset:-3px"></i>Dashed = inferred</span>
+  <span><i class="sw" style="background:repeating-linear-gradient(135deg,#f1f3f6 0 4px,#fff 4px 8px);border:1px dashed #c9cdd6"></i>? = not visible, ask in discovery</span>
+  <span>* = partial view</span>
+</div>
+{%- endmacro %}

@@ -1,0 +1,29 @@
+{
+  "_note": "Planning defaults for the illustrative business case. Benchmarks carry a source. Anything marked 'planning assumption' must be validated in discovery. Edit here, not in code.",
+  "cost_per_contact_usd": {
+    "voice":      {"value": 7.20, "basis": "benchmark", "source": "ContactBabel US Contact Center Decision-Makers' Guide 2026, mean inbound call"},
+    "chat":       {"value": 5.84, "basis": "benchmark", "source": "ContactBabel US Contact Center Decision-Makers' Guide 2026, web chat"},
+    "email":      {"value": 4.91, "basis": "benchmark", "source": "ContactBabel US Contact Center Decision-Makers' Guide 2026, email"},
+    "messaging":  {"value": 4.00, "basis": "planning assumption", "source": "No independent 2024-26 benchmark found. Set below web chat because messaging is asynchronous"},
+    "social":     {"value": 4.00, "basis": "planning assumption", "source": "No independent 2024-26 benchmark found. Set equal to messaging"},
+    "ai_resolved":{"value": 1.84, "basis": "benchmark", "source": "Gartner median cost per self-service contact (reported Feb 2024)"}
+  },
+  "assisted_types": ["voice", "chat", "email", "messaging", "social"],
+  "repeat_share": {"value": 0.30, "basis": "benchmark", "source": "SQM Group: industry average first contact resolution about 70%"},
+  "contacts_per_agent_per_year": {"value": 9000, "basis": "planning assumption", "source": "About 40 contacts a day, 225 working days"},
+  "agents_per_qa_analyst": {"value": 30, "basis": "planning assumption", "source": "Typical span for manual quality sampling"},
+  "handle_time_realisation": {"value": 0.50, "basis": "planning assumption", "source": "Half of time saved converts to cost. Gartner: only 20% of leaders report AI-driven headcount cuts, so model capacity release"},
+  "loaded_cost_per_agent_usd": {
+    "_basis": "planning assumption",
+    "default": 25000, "SG": 42000, "AU": 60000, "NZ": 52000, "JP": 45000, "HK": 40000, "KR": 38000,
+    "IN": 9000, "PH": 9000, "ID": 8000, "MY": 14000, "TH": 12000, "VN": 8000, "TW": 26000, "CN": 18000
+  },
+  "levers": {
+    "ai_resolution":   {"label": "AI resolution",            "low": 0.05, "base": 0.10, "high": 0.15, "applies": "share of assisted contacts newly resolved by AI agents", "basis": "planning assumption", "reference": "Gartner 2024: 14% of issues fully resolved in self-service today. Sprinklr customer: 76% AI agent containment in four months"},
+    "repeat_reduction":{"label": "Fewer repeat contacts",    "low": 0.05, "base": 0.10, "high": 0.15, "applies": "share of repeat contacts removed", "basis": "planning assumption", "reference": "SQM Group: about 30% of contacts are not resolved first time"},
+    "voice_shift":     {"label": "Voice to messaging shift", "low": 0.03, "base": 0.06, "high": 0.10, "applies": "share of remaining voice contacts moved to messaging", "basis": "planning assumption", "reference": "McKinsey 2024: most care leaders expect digital to pass 40% of inbound contacts"},
+    "handle_time":     {"label": "Faster handling",          "low": 0.08, "base": 0.12, "high": 0.18, "applies": "handle-time reduction on remaining assisted contacts", "basis": "planning assumption", "reference": "Sprinklr customers: Uber 89 seconds off case handling; a European airline cut handle time 33%"},
+    "quality_automation":{"label": "Automated quality",      "low": 0.30, "base": 0.40, "high": 0.50, "applies": "share of manual QA effort automated", "basis": "planning assumption", "reference": "McKinsey: automated QA can save more than 50% of QA cost; manual QA covers under 5% of contacts"}
+  },
+  "credibility_note": "Gartner (Nov 2026): only 4% of service leaders say AI has delivered the ROI they expected. Lead with the low scenario."
+}

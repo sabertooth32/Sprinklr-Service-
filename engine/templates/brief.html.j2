@@ -1,0 +1,567 @@
+{% import '_macros.j2' as m %}
+{% set acct = d.meta.account %}
+{% set fl = theme.product_name ~ ' · ' ~ theme.tool_name ~ ' · ' ~ acct ~ ' · Internal. Do not forward.' %}
+{% set fr = 'Built ' ~ d.meta.run_date %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SDR Brief — {{ acct }}</title>
+<meta name="viewport" content="width=1280">
+<style>{{ css | safe }}</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="#snapshot">Snapshot</a><a href="#play">Your play</a><a href="#whynow">Why now</a><a href="#people">People</a><a href="#channels">Channels</a><a href="#journey">Journey</a><a href="#maturity">Maturity</a><a href="#gaps">Entry points</a><a href="#value">Business case</a><a href="#outreach">Outreach</a><a href="#tests">Live tests</a><a href="#proof">Proof</a>
+</nav>
+
+{# ============ 1 SNAPSHOT ============ #}
+<section class="page" id="snapshot" data-title="Snapshot">
+  <div class="head">
+    <div>
+      <div class="kicker">SDR account brief · {{ d.meta.region.split('.')[0] }}</div>
+      <h1>{{ acct }} <em>in one page</em></h1>
+      <div class="sub">{{ d.snapshot.one_liner }}</div>
+    </div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}<span class="pill internal" style="margin-top:6px">Internal</span></div>
+  </div>
+  <div class="body row">
+    <div class="grow col">
+      <div class="grid" style="grid-template-columns: repeat({{ d.snapshot.facts | length }}, 1fr); gap:10px">
+        {% for f in d.snapshot.facts %}
+        <div class="card soft" style="padding:10px 12px">
+          <div class="label">{{ f.label }}</div>
+          <div class="num" style="font-size:20px;margin:4px 0 5px">{{ f.value }}</div>
+          {{ m.basis(f.basis) }}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="card brand" style="padding:12px 16px">
+        <div class="label">Why now</div>
+        <div style="font-size:17px;font-weight:700;line-height:1.25;margin-top:3px;letter-spacing:-.01em">{{ d.snapshot.why_now_headline }}</div>
+      </div>
+      <div>
+        <h2>Three ways in</h2>
+        <div class="grid g3">
+          {% for ep in d.entry_points %}
+          <div class="card" style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;gap:8px;align-items:center"><span class="avatar" style="width:24px;height:24px;background:var(--brand);color:#fff">{{ ep.rank }}</span><h3 style="font-size:13px;line-height:1.2">{{ ep.title }}</h3></div>
+            <div class="small ink2">{{ ep.pain }}</div>
+            <div class="tiny"><span class="label">Who</span> {{ ep.buying_centre }}</div>
+            <div class="tiny"><span class="label">Now</span> {{ ep.why_now }}</div>
+            <div>{% for c in ep.caps[:3] %}<span class="pill cap" style="margin:0 3px 3px 0">{{ c }}</span>{% endfor %}</div>
+            <div class="tiny muted">Proof: {{ ep.proof }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col" style="width:290px;flex:none">
+      <div class="card" style="display:flex;align-items:center;gap:14px">
+        <div style="width:74px;height:74px;border-radius:50%;background:conic-gradient(var(--brand) {{ d.icp.total * 3.6 }}deg, var(--line) 0);display:flex;align-items:center;justify-content:center;flex:none">
+          <div style="width:56px;height:56px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px">{{ d.icp.total | round | int }}</div>
+        </div>
+        <div><div class="label">ICP fit · out of 100</div><div class="b" style="font-size:18px">Tier {{ d.icp.tier }}</div><div class="tiny ink2">{{ d.icp.verdict }}</div></div>
+      </div>
+      <div class="card">
+        {{ m.gauge(exp_index, 'Experience index', 'Level ' ~ exp_level[0] ~ ' · ' ~ exp_level[1], 104) }}
+        <div style="height:8px"></div>
+        {{ m.gauge(ai_index, 'AI index', 'Level ' ~ ai_level[0] ~ ' · ' ~ ai_level[1], 104) }}
+        <div class="tiny muted" style="margin-top:6px">Outside-in estimates. Confirm in discovery.</div>
+      </div>
+      <div class="card tint">
+        <div class="label">Value at stake · per year</div>
+        <div class="num" style="margin:4px 0 2px">{{ value.low.total }} – {{ value.base.total }}</div>
+        <div class="tiny ink2">Illustrative. Low to base scenario, on an estimated {{ value.base.cost }} cost to serve.</div>
+      </div>
+      <div class="card soft" style="padding:9px 12px">
+        <div class="label">Sprinklr today</div>
+        <div class="small"><b>{{ d.snapshot.sprinklr_relationship.status | capitalize }}.</b> {{ d.snapshot.sprinklr_relationship.note }}</div>
+      </div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 2 YOUR PLAY ============ #}
+<section class="page" id="play" data-title="Your play">
+  <div class="head">
+    <div><div class="kicker">What to do, step by step</div><h1>Your 10-day play for <em>{{ acct }}</em></h1>
+    <div class="sub">Seven steps. About 60 minutes of prep, then one message a day. Everything you need is in this brief.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body col" style="gap:16px">
+    <div class="steps">
+      <div class="step"><span class="dot">1</span><div class="when">Day 0 · 15 min</div><h3>Read</h3><p>Read pages 1 to 6. Learn the why-now line and the three ways in.</p><div class="out">You can explain the account in 30 seconds.</div></div>
+      <div class="step"><span class="dot">2</span><div class="when">Day 0 · 20 min</div><h3>Test it yourself</h3><p>Run {{ [d.mystery_shop | length, 3] | min }} live tests from the script. Be a real person asking a real question. Screenshot what you see.</p><div class="out">One first-hand proof in your own words.</div></div>
+      <div class="step"><span class="dot">3</span><div class="when">Day 0 · 5 min</div><h3>Check</h3><p>Do the five pre-send checks below. Fix or stop.</p><div class="out">A clean, current contact list.</div></div>
+      <div class="step"><span class="dot">4</span><div class="when">Day 1</div><h3>Send</h3><p>Email the {{ p1 | length }} priority-1 contacts. Use each person's opener. Attach the outside-in infographic.</p><div class="out">{{ p1 | length }} personal emails sent.</div></div>
+      <div class="step"><span class="dot">5</span><div class="when">Day 3 to 7</div><h3>Multi-thread</h3><p>Follow the sequence: LinkedIn, then call. Add a second buying centre.</p><div class="out">Two buying centres in play.</div></div>
+      <div class="step"><span class="dot">6</span><div class="when">Day 8 to 10</div><h3>Make the ask</h3><p>Offer a 30-minute journey walk-through with the value model. One clear ask.</p><div class="out">A meeting, a referral, or a clear no.</div></div>
+      <div class="step"><span class="dot">7</span><div class="when">On reply</div><h3>Hand over</h3><p>Book the meeting. Send this brief and your test notes to the AE. Log it in CRM.</p><div class="out">Qualified meeting with context.</div></div>
+    </div>
+    <div class="grid" style="grid-template-columns: 1.1fr 1fr 1fr; flex:1; min-height:0">
+      <div class="card">
+        <h2>Before you send: five checks</h2>
+        <table>
+          <tr><td class="b" style="width:16px">1</td><td>Open each contact's LinkedIn. Same role today?</td><td class="n muted">1 min</td></tr>
+          <tr><td class="b">2</td><td>Repeat one live test. Does the break point still happen?</td><td class="n muted">2 min</td></tr>
+          <tr><td class="b">3</td><td>Search the news for {{ acct }}, last 7 days. Any change of tone needed?</td><td class="n muted">1 min</td></tr>
+          <tr><td class="b">4</td><td>Check CRM. Open opportunity? Existing owner?</td><td class="n muted">30 s</td></tr>
+          <tr><td class="b">5</td><td>Read your message aloud. Would you send it to a friend who works there?</td><td class="n muted">30 s</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2>What you send</h2>
+        <table>
+          <tr><td class="b">Outside-in infographic</td><td>2 pages. Their journey, where it breaks, what good looks like.</td></tr>
+          <tr><td class="b">Your opener</td><td>One true, specific line per person. Page {{ 5 }}.</td></tr>
+          <tr><td class="b">The ask</td><td>30 minutes to test our outside-in view against their data.</td></tr>
+        </table>
+        <div class="quote" style="margin-top:8px"><span class="label">Positioning</span><br>{{ d.outreach.positioning }}</div>
+      </div>
+      <div class="card" style="background:var(--crit-bg);border-color:transparent">
+        <h2 style="color:var(--crit-ink)">Stop and ask your manager if</h2>
+        <ul class="tight small">
+          <li>CRM shows an open Sprinklr Service opportunity.</li>
+          <li>A contact has moved on or changed role.</li>
+          <li>The account is in the news for a crisis this week.</li>
+          <li>Your live test contradicts this brief.</li>
+          <li>Someone asks for pricing or a contract.</li>
+        </ul>
+        <div class="tiny" style="margin-top:6px;color:var(--crit-ink)">Follow local marketing and privacy rules for each country you contact.</div>
+      </div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 3 WHY NOW + ICP ============ #}
+<section class="page" id="whynow" data-title="Why now">
+  <div class="head">
+    <div><div class="kicker">Timing and fit</div><h1>Why <em>now</em>, and why this account fits</h1></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body row" style="gap:22px">
+    <div class="grow">
+      <h2>Triggers, most urgent first</h2>
+      <table>
+        <tr><th style="width:74px">When</th><th style="width:92px">Type</th><th>What happened</th><th>So what for service</th><th style="width:62px">Urgency</th></tr>
+        {% for t in d.why_now %}
+        <tr><td class="b">{{ t.date }}</td><td>{{ t.type }}</td><td>{{ t.what }}</td><td class="ink2">{{ t.so_what }}</td>
+          <td><span class="pill {{ 'brand' if t.urgency == 'now' else '' }}">{{ t.urgency | capitalize }}</span></td></tr>
+        {% endfor %}
+      </table>
+      <h2 style="margin-top:14px">What leadership says it wants</h2>
+      <div class="grid" style="grid-template-columns: repeat({{ d.snapshot.strategic_priorities | length }}, 1fr); gap:10px">
+        {% for p in d.snapshot.strategic_priorities %}
+        <div class="card soft" style="padding:9px 11px"><div class="b small">{{ p.priority }}</div><div class="tiny ink2" style="margin-top:3px">{{ p.so_what }}</div></div>
+        {% endfor %}
+      </div>
+    </div>
+    <div style="width:420px;flex:none">
+      <h2>ICP scorecard · {{ d.icp.total | round | int }} / 100 · Tier {{ d.icp.tier }}</h2>
+      <table>
+        {% for l in d.icp.scorecard %}
+        <tr><td style="width:128px" class="b">{{ l.line }}</td>
+          <td><div class="bar"><i style="width:{{ (100 * l.points / l.max) | round }}%"></i></div><div class="tiny ink2" style="margin-top:3px">{{ l.reason }}</div></td>
+          <td class="n b" style="width:42px">{{ l.points | round(1) | string | replace('.0', '') }}/{{ l.max | int }}</td></tr>
+        {% endfor %}
+      </table>
+      <div class="tiny muted" style="margin-top:6px">Hard stops checked: {{ d.icp.hard_stops | length }}. Triggered: {{ d.icp.hard_stops | selectattr('triggered') | list | length }}.</div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 4 BUYING CENTRES ============ #}
+<section class="page" id="people" data-title="Buying centres">
+  <div class="head">
+    <div><div class="kicker">Who decides</div><h1>Buying centres and <em>the people in them</em></h1>
+    <div class="sub">Blue bar = contact this week. Every name was re-checked by the people-check agent. Check LinkedIn again before you send.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="grid" style="grid-template-columns: repeat({{ centres | length }}, 1fr); gap:10px; flex:1; min-height:0">
+      {% for c in centres %}
+      <div style="min-width:0;display:flex;flex-direction:column">
+        <div style="background:var(--brand-dark);color:#fff;border-radius:8px 8px 0 0;padding:8px 10px">
+          <div class="b" style="font-size:11.5px;line-height:1.2">{{ c.centre }}</div>
+        </div>
+        <div style="background:var(--soft);padding:7px 10px;font-size:9.5px;line-height:1.35">
+          <div><span class="label">Owns</span> {{ c.what_they_own }}</div>
+          <div style="margin-top:3px"><span class="label">Angle</span> {{ c.our_angle }}</div>
+        </div>
+        <div style="padding-top:6px">
+          {% for p in c.people[:5] %}
+          <div class="chip {{ 'p1' if p.priority == 1 else '' }}"><b>{{ p.name }}</b>{{ p.title }}<div class="role">{{ p.deal_role }}{% if p.role_status != 'current' %} · verify role{% endif %}</div></div>
+          {% endfor %}
+          {% if c.people | length > 5 %}<div class="tiny muted">+{{ c.people | length - 5 }} more in the dossier</div>{% endif %}
+          {% if not c.people %}<div class="tiny muted" style="padding:4px 2px">No validated contact yet. Ask your champion.</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 5 CONTACT CARDS ============ #}
+{% for page in contact_pages %}
+<section class="page" data-title="Contacts {{ loop.index }}">
+  <div class="head">
+    <div><div class="kicker">Personal level · priority 1{% if contact_pages | length > 1 %} · {{ loop.index }} of {{ contact_pages | length }}{% endif %}</div><h1>Who to contact first, and <em>what to say</em></h1></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="grid g3" style="grid-template-rows: repeat(2, 1fr); flex:1; min-height:0; gap:12px">
+      {% for c in page %}
+      <div class="person">
+        <div style="display:flex;gap:9px;align-items:center">
+          <span class="avatar">{{ c.initials }}</span>
+          <div style="min-width:0"><div class="b" style="font-size:12.5px;line-height:1.15">{{ c.name }}</div><div class="tiny ink2 clamp2">{{ c.title }}{% if c.location %} · {{ c.location }}{% endif %}</div></div>
+        </div>
+        <div><span class="pill brand">{{ c.deal_role | capitalize }}</span> <span class="pill">{{ c.centre }}</span>{% if c.role_status != 'current' %} <span class="pill" style="border-style:dashed">Verify role</span>{% endif %}</div>
+        <ul class="tight tiny ink2">{% for x in c.care_about[:3] %}<li>{{ x }}</li>{% endfor %}</ul>
+        <div class="tiny"><span class="label">Hook</span> {{ c.hook }}</div>
+        <div class="quote"><span class="label">Opener</span><br><span class="copytext">{{ c.opener }}</span></div>
+        <div class="tiny muted" style="margin-top:auto"><b class="ink2">Best channel:</b> {{ c.best_channel }}{% if c.avoid %} · <b class="ink2">Avoid:</b> {{ c.avoid[0] }}{% endif %}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endfor %}
+
+{# ============ 6 CHANNELS ============ #}
+<section class="page" id="channels" data-title="Channels">
+  <div class="head">
+    <div><div class="kicker">Experience audit · the estate</div><h1>{{ channels | length }} support channels, <em>about {{ value.base.contacts }} assisted contacts a year</em></h1>
+    <div class="sub">Volumes are estimates unless marked disclosed. Range across channels: {{ value.low.contacts }} to {{ value.high.contacts }}. Incumbents shape your entry point and objections.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body row" style="gap:22px">
+    <div class="grow">
+      <table>
+        <tr><th>Channel</th><th style="width:150px">Est. contacts / year</th><th>What works</th><th>Headline gap</th></tr>
+        {% for ch in channels %}
+        <tr>
+          <td><b>{{ ch.name }}</b><div class="tiny muted">{{ ch.type_label }} · {{ ch.market }}{% if ch.hours %} · {{ ch.hours }}{% endif %}</div></td>
+          <td>{% if ch.volume %}<div style="display:flex;gap:6px;align-items:center"><b style="width:38px">{{ ch.vol_fmt }}</b><div class="bar grow"><i style="width:{{ ch.vol_pct }}%"></i></div></div><div class="tiny muted">{{ ch.vol_range }} · {{ ch.volume.basis }}</div>{% else %}<span class="tiny muted">Not sized</span>{% endif %}</td>
+          <td class="ink2">{{ ch.strengths }}</td>
+          <td>{{ ch.headline_gap }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div style="width:400px;flex:none">
+      <h2>Incumbent stack</h2>
+      <table>
+        <tr><th>Layer</th><th>Vendor</th><th>So what</th></tr>
+        {% for i in d.incumbents %}
+        <tr><td class="b">{{ i.layer }}</td>
+          <td>{{ i.vendor }}{% if i.product %} <span class="muted">{{ i.product }}</span>{% endif %}<div style="margin-top:2px">{{ m.basis('disclosed' if i.status in ['confirmed', 'in-house'] else 'inferred') }} <span class="tiny muted">{{ i.status }}</span></div></td>
+          <td class="ink2 tiny">{{ i.so_what }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 7 JOURNEY ============ #}
+<section class="page" id="journey" data-title="Journey">
+  <div class="head">
+    <div><div class="kicker">Experience audit · the journey</div><h1>Where the {{ acct }} service journey <em>works and where it breaks</em></h1>
+    <div class="sub">Walked from public touchpoints across {{ d.journey.scenarios | length }} everyday needs. Top two break points per stage shown.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="journey">
+      {% for st in stages %}
+      <div class="stage">
+        <div class="chev"><span class="n">STAGE {{ st.n }}</span><span class="t">{{ st.name }}</span></div>
+        <div class="verdict">{{ m.status(st.verdict) }}</div>
+        <div class="sum clamp3">{{ st.summary }}</div>
+        {% for b in st.break_points[:2] %}
+        <div class="pin sev{{ b.severity }}">
+          <div class="ph"><span>{{ b.channel }}</span><span>{{ {1: 'Minor', 2: 'Moderate', 3: 'Major'}[b.severity] }}</span></div>
+          {{ b.what_breaks }}
+          {% if b.caps %}<div class="fix">Fix: {{ b.caps[:2] | join(' + ') }}</div>{% endif %}
+        </div>
+        {% endfor %}
+        {% for s in st.bright_spots[:1] %}
+        <div class="pin ok"><div class="ph"><span>Bright spot</span></div>{{ s.what_works }}</div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="legend" style="margin-top:6px;flex:none">
+      <span class="b">Stage verdict</span>{{ m.status('works') }}{{ m.status('friction') }}{{ m.status('breaks') }}{{ m.status('unknown') }}
+      <span class="b" style="margin-left:10px">Break point</span><span><i class="sw" style="background:var(--warn)"></i>Minor</span><span><i class="sw" style="background:var(--serious)"></i>Moderate</span><span><i class="sw" style="background:var(--crit)"></i>Major</span><span><i class="sw" style="background:var(--good)"></i>Bright spot</span>
+      <span class="muted">{{ all_bps | length }} break points found in total.</span>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 8 MATURITY ============ #}
+<section class="page" id="maturity" data-title="Maturity">
+  <div class="head">
+    <div><div class="kicker">Experience audit · the scores</div><h1>Experience maturity and <em>AI maturity</em>, channel by channel</h1></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body col" style="gap:10px">
+    <div class="grid g2" style="gap:26px;flex:1;min-height:0">
+      <div class="col" style="gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          {{ m.gauge(exp_index, 'Experience index', 'Level ' ~ exp_level[0] ~ ' · ' ~ exp_level[1]) }}
+          <div class="small ink2" style="max-width:290px">{{ d.maturity.experience_headline }}</div>
+        </div>
+        {{ m.ladder(EXP_LEVELS, exp_level[0] - 1) }}
+        {{ m.heatmap(channels, EXP, 'exp_cells', 'exp_index', 'exp_partial') }}
+      </div>
+      <div class="col" style="gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          {{ m.gauge(ai_index, 'AI index', 'Level ' ~ ai_level[0] ~ ' · ' ~ ai_level[1]) }}
+          <div class="small ink2" style="max-width:290px">{{ d.maturity.ai_headline }}</div>
+        </div>
+        {{ m.ladder(AI_LEVELS, ai_level[0]) }}
+        {{ m.heatmap(channels, AI, 'ai_cells', 'ai_index', 'ai_partial') }}
+      </div>
+    </div>
+    <div class="row" style="flex:none;align-items:flex-start">
+      <div class="card soft grow" style="padding:8px 12px"><span class="label">Genuine strengths. Say these first.</span>
+        <ul class="tight small" style="margin-top:3px;columns:2;column-gap:20px">{% for s in d.maturity.strengths %}<li>{{ s }}</li>{% endfor %}</ul></div>
+      <div style="width:430px;flex:none">{{ m.heat_legend(true) }}<div class="tiny muted" style="margin-top:4px">{{ d.maturity.confidence_note }} Index = average score × 20, weighted by channel volume.</div></div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 9 GAP MAP ============ #}
+<section class="page" id="gaps" data-title="Entry points">
+  <div class="head">
+    <div><div class="kicker">From gap to entry point</div><h1>Each gap, mapped to a <em>Sprinklr Service capability</em></h1>
+    <div class="sub">Lead with priority 1. Each row is a conversation starter: the gap, the fix, the outcome, the proof.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:22px">#</th><th style="width:26%">What we saw</th><th style="width:112px">Where</th><th style="width:21%">Sprinklr capability</th><th>Outcome for them</th><th style="width:22%">Proof you can cite</th></tr>
+      {% for g in gaps %}
+      <tr>
+        <td><span class="avatar" style="width:20px;height:20px;font-size:10px;{{ 'background:var(--brand);color:#fff' if g.priority == 1 else '' }}">{{ g.priority }}</span></td>
+        <td class="b">{{ g.gap }}</td>
+        <td class="tiny ink2">{{ g.channel }}<br>Stage {{ g.stage }} · {{ stages[g.stage - 1].name }}</td>
+        <td>{% for c in g.caps[:3] %}<span class="pill cap" style="margin:0 3px 3px 0">{{ c }}</span>{% endfor %}</td>
+        <td>{{ g.outcome }}</td>
+        <td class="tiny ink2">{{ g.proof }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 10 BUSINESS CASE ============ #}
+<section class="page" id="value" data-title="Business case">
+  <div class="head">
+    <div><div class="kicker">Business case · illustrative</div><h1>Value at stake: <em>{{ value.low.total }} to {{ value.base.total }} a year</em></h1>
+    <div class="sub">{{ d.business_case.narrative }}</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body col" style="gap:12px">
+    <div class="grid g4" style="gap:10px;flex:none">
+      <div class="card soft"><div class="label">Cost to serve today · est.</div><div class="num" style="margin-top:4px">{{ value.base.cost }}</div><div class="tiny muted">{{ value.base.contacts }} assisted contacts · about {{ value.base.agents }} agents</div></div>
+      <div class="card tint" style="box-shadow:inset 0 0 0 2px var(--brand)"><div class="label">Low · lead with this</div><div class="num" style="margin-top:4px">{{ value.low.total }}</div><div class="tiny ink2">{{ value.low.pct }} of cost to serve</div></div>
+      <div class="card"><div class="label">Base</div><div class="num" style="margin-top:4px">{{ value.base.total }}</div><div class="tiny muted">{{ value.base.pct }} of cost to serve</div></div>
+      <div class="card"><div class="label">High · only with their data</div><div class="num" style="margin-top:4px">{{ value.high.total }}</div><div class="tiny muted">{{ value.high.pct }} of cost to serve</div></div>
+    </div>
+    <div class="row" style="gap:22px;flex:1;min-height:0">
+      <div class="grow">
+        <h2>Five levers, applied in order. No double counting.</h2>
+        <table>
+          <tr><th>Lever</th><th style="width:150px">Base value / year</th><th class="n">Low</th><th class="n">High</th><th style="width:36%">Rate used (low / base / high)</th></tr>
+          {% for l in lever_rows %}
+          <tr><td class="b">{{ loop.index }}. {{ l.label }}</td>
+            <td><div style="display:flex;gap:6px;align-items:center"><b style="width:44px">{{ l.base }}</b><div class="bar grow"><i style="width:{{ l.base_pct }}%"></i></div></div></td>
+            <td class="n">{{ l.low }}</td><td class="n">{{ l.high }}</td>
+            <td class="tiny ink2"><b>{{ l.rates }}</b> · {{ l.applies }}. <span class="muted">{{ l.reference }}</span></td></tr>
+          {% endfor %}
+        </table>
+        <div class="tiny muted" style="margin-top:6px">Unit costs: {% for u in unit_rows %}{{ u.label }} {{ u.value }} ({{ u.basis }}){{ '; ' if not loop.last else '.' }}{% endfor %} Loaded agent cost {{ loaded_cost }} (assumption).</div>
+      </div>
+      <div style="width:400px;flex:none" class="col">
+        <div>
+          <h2>KPIs that move</h2>
+          <table>
+            <tr><th>KPI</th><th>Today</th><th>Target</th></tr>
+            {% for k in d.business_case.kpis %}
+            <tr><td class="b">{{ k.kpi }}</td><td>{{ k.today }} {{ m.basis(k.today_basis) }}</td><td>{{ k.target }}</td></tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="card soft" style="padding:8px 11px">
+          <span class="label">Say this about the numbers</span>
+          <ul class="tight tiny ink2" style="margin-top:3px">{% for a in d.business_case.assumptions[:4] %}<li>{{ a }}</li>{% endfor %}<li>{{ credibility_note }}</li></ul>
+          {% if d.business_case.upside_not_counted %}<div class="tiny" style="margin-top:3px"><b>Not counted:</b> {{ d.business_case.upside_not_counted | join('; ') }}.</div>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 11 OUTREACH ============ #}
+{% for seq in sequence_pages %}
+<section class="page" {% if loop.first %}id="outreach"{% endif %} data-title="Outreach {{ loop.index }}">
+  <div class="head">
+    <div><div class="kicker">Outreach kit · sequence {{ loop.index }} of {{ sequence_pages | length }}</div><h1>{{ seq.persona }}</h1>
+    <div class="sub">For: {{ seq.for_contacts | join(', ') or 'anyone in this persona' }}. Replace the first line with the person's opener. Keep the rest.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="grid" style="grid-template-columns: repeat({{ 3 if seq.steps | length > 4 else [seq.steps | length, 2] | max }}, 1fr); gap:12px; flex:1; min-height:0; align-content:start">
+      {% for st in seq.steps %}
+      <div class="msg">
+        <div class="mh"><span><span class="pill brand">Day {{ st.day }}</span> <span class="pill">{{ st.channel | capitalize }}</span></span><button class="copy" type="button">Copy</button></div>
+        {% if st.subject %}<div class="subj">Subject: {{ st.subject }}</div>{% endif %}
+        <div class="mb copytext">{{ st.body }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endfor %}
+
+{# ============ 12 LIVE TESTS + DISCOVERY ============ #}
+<section class="page" id="tests" data-title="Live tests">
+  <div class="head">
+    <div><div class="kicker">Do it yourself · 20 minutes</div><h1>Mystery-shop script and <em>discovery questions</em></h1>
+    <div class="sub">Be yourself. Ask only what any member of the public may honestly ask. No fake accounts, no fake complaints. Note the time and take a screenshot.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body row" style="gap:22px">
+    <div class="grow">
+      <h2>Live tests</h2>
+      <table>
+        <tr><th style="width:20px">#</th><th style="width:92px">Channel</th><th>Ask this</th><th>Time and look for</th><th>A break point looks like</th></tr>
+        {% for t in d.mystery_shop %}
+        <tr><td class="b">{{ loop.index }}</td><td class="b">{{ t.channel }}</td><td>“{{ t.opening_question }}”</td><td class="ink2"><b>{{ t.time_this }}.</b> {{ t.look_for }}</td><td class="ink2">{{ t.break_point_looks_like }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div style="width:420px;flex:none">
+      <h2>Discovery questions for the first call</h2>
+      <table>
+        {% for q in d.discovery_questions %}
+        <tr><td class="b" style="width:16px">{{ loop.index }}</td><td><b>{{ q.question }}</b><div class="tiny muted">{{ q.why_ask }}</div></td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 13 OBJECTIONS ============ #}
+<section class="page" data-title="Objections">
+  <div class="head">
+    <div><div class="kicker">Stay credible</div><h1>Objections, and <em>what never to say</em></h1></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body row" style="gap:22px">
+    <div class="grow">
+      <h2>Likely objections</h2>
+      <table>
+        <tr><th style="width:36%">They say</th><th>You say</th></tr>
+        {% for o in d.objections %}<tr><td class="b">“{{ o.objection }}”</td><td>{{ o.response }}</td></tr>{% endfor %}
+      </table>
+    </div>
+    <div style="width:420px;flex:none" class="col">
+      <div class="card" style="background:var(--crit-bg);border-color:transparent">
+        <h2 style="color:var(--crit-ink)">Do not say</h2>
+        <ul class="tight small">{% for x in d.do_not_say %}<li>{{ x }}</li>{% endfor %}</ul>
+      </div>
+      <div class="card soft">
+        <h2>Analyst facts you may cite</h2>
+        <ul class="tight tiny ink2">{% for a in analyst_safe %}<li>{{ a.what.split(' - ')[0] }}: {{ a.what.split(' - ')[1:] | join(' - ') | truncate(120) }} ({{ a.source_date }})</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 14 VALIDATION STAMP ============ #}
+{% set v = d.meta.validation %}
+<section class="page" id="proof" data-title="Validation">
+  <div class="head">
+    <div><div class="kicker">Trust but verify</div><h1>How this brief was <em>checked</em></h1>
+    <div class="sub">Every fact has a source and a date. Validators re-checked them. Code gates then tested the dossier and the page layout.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body row" style="gap:22px">
+    <div style="width:330px;flex:none" class="col">
+      <div class="grid g2" style="gap:8px">
+        <div class="card soft"><div class="label">Facts checked</div><div class="num" style="margin-top:3px">{{ v.facts_checked }}</div></div>
+        <div class="card soft"><div class="label">Confirmed</div><div class="num" style="margin-top:3px">{{ v.confirmed }}</div></div>
+        <div class="card soft"><div class="label">Corrected</div><div class="num" style="margin-top:3px">{{ v.corrected }}</div></div>
+        <div class="card soft"><div class="label">Dropped</div><div class="num" style="margin-top:3px">{{ v.dropped }}</div></div>
+        <div class="card soft"><div class="label">People checked</div><div class="num" style="margin-top:3px">{{ v.people_checked }}</div></div>
+        <div class="card soft"><div class="label">People removed</div><div class="num" style="margin-top:3px">{{ v.people_removed }}</div></div>
+      </div>
+      <div class="card tint"><div class="label">In this dossier</div>
+        <div class="small" style="margin-top:3px"><b>{{ report.stats.evidence_total }}</b> evidence records. <b>{{ report.stats.evidence_prospect_safe }}</b> cleared for prospect content. <b>{{ report.warnings | length }}</b> open warnings.</div></div>
+    </div>
+    <div class="grow">
+      <h2>Validation gates</h2>
+      <table>
+        <tr><th style="width:120px">Gate</th><th style="width:150px">Checked by</th><th style="width:120px">Result</th><th>Note</th></tr>
+        {% for g in v.gates %}<tr><td class="b">{{ g.gate }}</td><td>{{ g.by }}</td><td>{{ m.gate(g.status) }}</td><td class="ink2">{{ g.note }}</td></tr>{% endfor %}
+        <tr><td class="b">G5 Dossier</td><td>Code: validate.py</td><td>{{ m.gate('pass' if report.passed and not report.warnings else 'pass_with_notes' if report.passed else 'fail') }}</td><td class="ink2">Schema, sources, freshness, scores, maths. {{ report.errors | length }} errors, {{ report.warnings | length }} warnings.</td></tr>
+        <tr><td class="b">G6 Content rules</td><td>Code: validate.py</td><td>{{ m.gate('pass' if report.passed else 'fail') }}</td><td class="ink2">Prospect content uses only confirmed, dated, non-inferred facts. No people, no vendor names.</td></tr>
+        <tr><td class="b">G8 Human</td><td>You</td><td>{{ m.gate('pending') }}</td><td class="ink2">Five checks on page 2, before every send.</td></tr>
+      </table>
+      {% if report.warnings %}<div class="card soft" style="margin-top:10px;padding:8px 11px"><span class="label">Open warnings</span><ul class="tight tiny ink2" style="margin-top:3px">{% for w in report.warnings[:6] %}<li>{{ w }}</li>{% endfor %}</ul></div>{% endif %}
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 15 EVIDENCE LOG ============ #}
+{% for page in evidence_pages %}
+<section class="page" data-title="Evidence {{ loop.index }}">
+  <div class="head">
+    <div><div class="kicker">Evidence log · {{ loop.index }} of {{ evidence_pages | length }}</div><h1>Sources behind <em>every claim</em></h1></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <table style="font-size:9.6px;table-layout:fixed">
+      <tr><th style="width:48px">ID</th><th>Claim</th><th style="width:30%">Source</th><th style="width:64px">Date</th><th style="width:70px">Type</th><th style="width:68px">Verdict</th><th style="width:60px">Prospect</th></tr>
+      {% for e in page %}
+      <tr><td class="b" style="padding:3px 6px 3px 0">{{ e.id }}</td>
+        <td style="padding:3px 6px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.claim }}</td>
+        <td style="padding:3px 6px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" class="ink2">{% if e.source_url %}<a href="{{ e.source_url }}">{{ e.source_title or e.source_url }}</a>{% else %}{{ e.method or 'Estimate' }}{% endif %}</td>
+        <td style="padding:3px 6px 3px 0">{{ e.source_date }}</td><td style="padding:3px 6px 3px 0">{{ e.evidence_type | replace('_', ' ') }}</td>
+        <td style="padding:3px 6px 3px 0">{{ e.verdict }}</td><td style="padding:3px 0">{{ 'Safe' if e.prospect_safe else 'Internal' }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endfor %}
+
+<script>
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var box = b.closest('.msg');
+    var subj = box.querySelector('.subj');
+    var text = (subj ? subj.textContent + '\n\n' : '') + box.querySelector('.copytext').textContent;
+    navigator.clipboard.writeText(text).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1200); });
+  });
+});
+</script>
+</body>
+</html>

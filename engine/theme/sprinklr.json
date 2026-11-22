@@ -1,0 +1,14 @@
+{
+  "_note": "Approximation of Sprinklr's public look. Replace with official brand values and set logo_path (SVG or PNG, path from the repo root) to re-skin every pack.",
+  "brand_name": "Sprinklr",
+  "product_name": "Sprinklr Service",
+  "tool_name": "Account Radar",
+  "logo_path": null,
+  "font": "Inter",
+  "colors": {
+    "brand": "#2a78d6",
+    "brand_dark": "#0d366b",
+    "brand_tint": "#e8f1fd",
+    "accent": ["#2a78d6", "#1baf7a", "#eda100", "#eb6834"]
+  }
+}
