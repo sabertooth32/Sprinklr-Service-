@@ -2578,5 +2578,25 @@
    "prospect_safe": false,
    "category": "person"
   }
+ ],
+ "open_questions": [
+  "Open the service standards page. Is the Q3 2026 hotline wait still the latest figure?",
+  "Check the CRM. Is there an open opportunity or an existing owner for Northstar?",
+  "Read the Navi Plus pilot release. Does it name a launch date beyond the pilot?",
+  "Confirm on LinkedIn that the acting Head of Complaints is still in role."
+ ],
+ "glossary": [
+  {
+   "term": "Navi",
+   "meaning": "Northstar's own web assistant"
+  },
+  {
+   "term": "Navi Plus",
+   "meaning": "its Gen AI pilot"
+  },
+  {
+   "term": "Simply Service 2028",
+   "meaning": "Northstar's cost and digital plan"
+  }
  ]
 }

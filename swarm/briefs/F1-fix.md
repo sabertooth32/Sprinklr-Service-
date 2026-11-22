@@ -10,5 +10,8 @@
 4. Run `python3 engine/build.py <work folder>/dossier.json`. It must pass validation and the layout gate.
 5. Add a gate entry `G7 Content QA` to `meta.validation.gates` with status and a one-line note, then rebuild once more.
 
+6. Write every point a person must still check into the dossier's top-level `open_questions` (max 12, one short sentence each, starting with a verb). They print in the SDR brief.
+7. List the reviewer items you could not fix because they sit in template text under `fixes_declined`, so the engine owner sees them.
+
 ## Return
 Paths of the outputs, whether validation and layout passed, the fixes applied, and the fixes you declined with reasons.

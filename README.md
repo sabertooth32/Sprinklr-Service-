@@ -10,7 +10,7 @@ New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes.
 
 | You give | You get | Time |
 |---|---|---|
-| A logo | SDR brief (PDF, ~17 pages) · Prospect infographic (PDF, 2 pages) · Outreach kit (copy-paste) | 60–120 min, in the background |
+| A logo | SDR brief (PDF, 20–30 pages) · Prospect infographic (PDF, 2 pages) · Outreach kit (copy-paste) | About 2–3 hours, in the background |
 
 ---
 
@@ -19,9 +19,9 @@ New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes.
 ```
  ① LOGO IN        ② RESEARCH          ③ VALIDATE         ④ SYNTHESISE       ⑤ BUILD + QA        ⑥ SDR SENDS
  ─────────  ──►  ─────────────  ──►  ─────────────  ──►  ─────────────  ──►  ──────────────  ──►  ───────────
- Account name     9 agents            5 agents            1 agent +          PDFs + layout        5 human checks
-                  account level       fact check ×2       code gates         gate + 3 content     then email,
-                  department level    people check        dossier.json       reviewers            LinkedIn, call
+ Account name     9 agents            5 agents            3 agents +         PDFs + layout        5 human checks
+                  account level       fact check ×2       code joins the     gate + 3 content     then email,
+                  department level    people check        verdicts           reviewers + editor   LinkedIn, call
                   personal level      ICP gate ■ STOP
                   channels, AI,       red team
                   incumbents, why now
@@ -33,8 +33,8 @@ New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes.
 
 | Asset | For | What is inside |
 |---|---|---|
-| **SDR brief** | The SDR. Internal | Snapshot and ICP score · 10-day play, step by step · why now · buying centres and contacts with openers · channels, volume, incumbents · journey map with break points · experience and AI maturity heatmaps · gap-to-capability map · business case · outreach sequences · mystery-shop script · discovery questions · objections · validation stamp · evidence log |
-| **Prospect infographic** | The prospect | Outside-in journey view · moments that matter · two maturity indexes · three opportunities · value band · sources. No people, no vendor names, no guesses |
+| **SDR brief** | The SDR. Internal | Snapshot and ICP score · 10-day play, step by step · why now · buying centres and contacts with openers · channels, volume, incumbents · journey map with break points · experience and AI maturity heatmaps · gap-to-capability map · business case · outreach sequences · customer's-eye test script · discovery questions · objections · validation stamp · open questions only a person can close · evidence log |
+| **Prospect infographic** | The prospect | Outside-in journey view · questions worth testing at each stage · two maturity scales (a number only when enough is visible) · three ideas · value band when it rests on solid volumes · sources. No people, no vendor names, no guesses |
 | **Outreach kit** | Copy and paste | First lines per contact · email, LinkedIn and call sequences per persona |
 
 Open `sdr-brief.html` in a browser for the same brief with navigation and copy buttons.
@@ -67,7 +67,7 @@ Every score cites evidence. Anything not visible from outside is left blank and 
 | G4 Red team | Red-team agent | Overclaims, unfair or risky wording |
 | G5 Dossier | `validate.py` | Missing sources, bad maths, stale evidence |
 | G6 Content rules | `validate.py` | Inferred facts, names or vendors in prospect content |
-| G7 Content QA | 3 reviewer agents + layout gate | Gaps, long sentences, clipped pages |
+| G7 Content QA | 3 reviewer agents + editor + layout gate | Gaps, unbacked lines, long sentences, clipped pages |
 | G8 Human | The SDR, 5 minutes | Anything that changed since the run |
 
 ## Business case
@@ -109,6 +109,24 @@ Needs: Python 3 with `jinja2` and `jsonschema`, Node with Playwright and Chromiu
 | Business-case rates and unit costs | `engine/value_defaults.json` |
 | Sprinklr capabilities and proof points | `framework/data/sprinklr-service-facts.json` |
 | Colours, font, logo | `engine/theme/sprinklr.json` |
+
+## Set up once, for best results
+
+| Setting | Why | Where |
+|---|---|---|
+| Network access for the cloud environment | Agents read far more, first-hand, when they can open the brand's own web pages. With the default limited network they work from search summaries only | Cloud environment menu → Edit → Network access. Add the brand's domains, or choose a broader level |
+| GitHub connection | So changes to this tool can be pushed | claude.ai/connect-github, then install the Claude GitHub App on the repository |
+| Connectors | Lusha for people. Semrush and LunarCrush for volume proxies | claude.ai connector settings |
+
+## What the DBS pilot taught us
+
+| Finding | What changed in the tool |
+|---|---|
+| Six research agents hit the shared web-search allowance | Agents plan searches first and report what they could not search. The command explains how to run a second pass |
+| No DBS page could be opened in the pilot environment | Every such fact is marked "search summary". Quotes are never shown as verbatim. The brief lists what to open before sending |
+| The red team blocked 62 findings | Verdicts and red-team blocks are joined to evidence by code. Agents cannot mark anything prospect-safe by hand |
+| Only 14 of 80 maturity scores were visible from outside | The prospect sees the scale, not a number, when under 35% is visible. The gaps become live tests and discovery questions |
+| The "prospect's eyes" reviewer would have ignored the first draft | Observations are phrased as questions to test. The SDR's own live tests are what make the view first-hand |
 
 ## Know the limits
 

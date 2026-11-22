@@ -10,6 +10,7 @@ const [outDir, ...names] = process.argv.slice(2);
 const browser = await chromium.launch();
 let failed = false;
 for (const name of names) {
+  let bad = false;
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   await page.goto('file://' + path.resolve(outDir, `${name}.html`));
   await page.evaluate(() => document.fonts.ready);
@@ -33,11 +34,11 @@ for (const name of names) {
     });
     return out;
   });
-  if (problems.length) { failed = true; console.log(`LAYOUT FAIL ${name}\n  ` + [...new Set(problems)].slice(0, 12).join('\n  ')); }
+  if (problems.length) { failed = true; bad = true; console.log(`LAYOUT FAIL ${name}\n  ` + [...new Set(problems)].slice(0, 12).join('\n  ')); }
   await page.emulateMedia({ media: 'print' });
   await page.pdf({ path: path.resolve(outDir, `${name}.pdf`), width: '1280px', height: '720px', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   const pages = await page.locator('.page').count();
-  console.log(`${failed ? 'built (with layout issues)' : 'ok'}  ${name}.pdf  ${pages} pages`);
+  console.log(`${bad ? 'built (with layout issues)' : 'ok'}  ${name}.pdf  ${pages} pages`);
   if (process.env.SHOTS) {
     const dir = path.resolve(outDir, 'shots'); fs.mkdirSync(dir, { recursive: true });
     await page.emulateMedia({ media: 'print' });

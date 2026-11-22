@@ -1729,6 +1729,32 @@
     }
    },
    "minItems": 20
+  },
+  "glossary": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "type": "object",
+    "required": [
+     "term",
+     "meaning"
+    ],
+    "properties": {
+     "term": {
+      "type": "string"
+     },
+     "meaning": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "open_questions": {
+   "type": "array",
+   "maxItems": 12,
+   "items": {
+    "type": "string"
+   }
   }
  }
 }

@@ -26,6 +26,10 @@ EXP = [("access", "Access"), ("speed", "Speed"), ("resolution", "Resolution"), (
 AI = [("self_service_ai", "Self-service AI"), ("agent_assist", "Agent assist"), ("smart_routing", "Smart routing"),
       ("insight_quality", "Insight & quality"), ("trust_control", "Trust & control")]
 EXP_LEVELS = ["Fragmented", "Functional", "Connected", "Orchestrated", "Predictive"]
+GLOSSARY = [("ICP", "how well the account fits us, out of 100"), ("Tier A", "go now"), ("Buying centre", "a department with a say in the purchase"),
+            ("Incumbent", "the tool or vendor they use today"), ("Break point", "a moment where the customer journey goes wrong"),
+            ("Outside-in", "built from public information only"), ("Multi-thread", "talk to more than one person"),
+            ("AE", "the account executive who owns the deal"), ("CRM", "our own customer database")]
 MIN_COVERAGE = 0.35  # below this share of visible scores, the prospect sees an "early read", not a number
 AI_LEVELS = ["No AI", "Rule-based", "Assisted", "Generative", "Agentic", "Autonomous"]
 CHANNEL_TYPE_LABEL = {"voice": "Voice", "chat": "Chat", "messaging": "Messaging", "email": "Email / form", "social": "Social",
@@ -166,6 +170,8 @@ def build_context(dossier, theme):
         "contact_pages": chunks([c for c in contacts if c["priority"] == 1], 6),
         "stages": stages, "all_bps": all_bps, "gaps": gaps,
         "sequence_pages": dossier["outreach"]["sequences"],
+        "later_pages": [pg for pg in chunks([c for c in contacts if c["priority"] > 1], 8) if pg],
+        "glossary": GLOSSARY,
         "evidence_pages": chunks(evidence_used, 22), "incumbent_pages": chunks(dossier["incumbents"], 9), "coverage": coverage,
         "pv": pv, "pv_sources": pv_sources, "obs_by_stage": obs_by_stage,
         "facts": facts, "report_path": report_path,

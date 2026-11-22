@@ -12,6 +12,9 @@
 - `do_not_say`: include every V5 `block` that an SDR could repeat by accident, the banned Sprinklr claims, and the live-test rule.
 - `meta.validation.gates`: G1 Facts, G2 People, G3 ICP, G4 Red team. Status and a one-line note each, using the numbers in `digest/stats.json`.
 - `meta.validation.limits`: what this run could not do.
+- `open_questions` (top level, max 12): points only a person can settle before sending. One short, actionable sentence each. Start with a verb: "Open...", "Read...", "Check...".
+- `glossary` (top level, max 8): account-specific words a new SDR will not know, such as the regulator's name or the brand's product names. `{term, meaning}`, meaning max 8 words.
+- `prospect_view.opportunities_title` and `opportunities_subtitle` (optional): a respectful page-two headline for this account.
 
 ## Then
 Run the code gates as the guide describes: merge, validate, fix, repeat until `engine/validate.py` exits 0.

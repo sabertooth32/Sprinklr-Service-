@@ -36,7 +36,7 @@
 {%- endmacro %}
 
 {% macro ladder(levels, on) -%}
-<div class="ladder">{% for l in levels %}<span class="{{ 'on' if loop.index0 == on else '' }}">{{ l }}</span>{% endfor %}</div>
+<div class="ladder">{% for l in levels %}<span class="{{ 'on' if loop.index0 == on else '' }}">{{ loop.index0 if levels | length == 6 else loop.index }} {{ l }}</span>{% endfor %}</div>
 {%- endmacro %}
 
 {% macro wordmark(theme, logo) -%}

@@ -87,36 +87,37 @@
 <section class="page" id="play" data-title="Your play">
   <div class="head">
     <div><div class="kicker">What to do, step by step</div><h1>Your 10-day play for <em>{{ acct }}</em></h1>
-    <div class="sub">Seven steps. About 60 minutes of prep, then one message a day. Everything you need is in this brief.</div></div>
+    <div class="sub">Seven steps. About 40 minutes of prep, then one touch every few days. Everything you need is in this brief.</div></div>
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
-  <div class="body col" style="gap:16px">
+  <div class="body col" style="gap:9px">
     <div class="steps">
       <div class="step"><span class="dot">1</span><div class="when">Day 0 · 15 min</div><h3>Read</h3><p>Read pages 1 to 6. Learn the why-now line and the three ways in.</p><div class="out">You can explain the account in 30 seconds.</div></div>
       <div class="step"><span class="dot">2</span><div class="when">Day 0 · 20 min</div><h3>Test it yourself</h3><p>Run {{ [d.mystery_shop | length, 3] | min }} live tests from the script as an ordinary customer. Never mention Sprinklr. Note what happens.</p><div class="out">You have seen it as their customer does.</div></div>
       <div class="step"><span class="dot">3</span><div class="when">Day 0 · 5 min</div><h3>Check</h3><p>Do the five pre-send checks below. Fix or stop.</p><div class="out">A clean, current contact list.</div></div>
-      <div class="step"><span class="dot">4</span><div class="when">Day 1</div><h3>Send</h3><p>Email the {{ p1 | length }} priority-1 contacts. Use each person's opener. Attach the outside-in infographic.</p><div class="out">{{ p1 | length }} personal emails sent.</div></div>
+      <div class="step"><span class="dot">4</span><div class="when">Day 1</div><h3>Send</h3><p>Send message 1 to the {{ p1 | length }} priority-1 contacts, on each person's best channel. Start with their opener. Attach the infographic.</p><div class="out">{{ p1 | length }} personal first messages sent.</div></div>
       <div class="step"><span class="dot">5</span><div class="when">Day 3 to 7</div><h3>Multi-thread</h3><p>Follow the sequence: LinkedIn, then call. Add a second buying centre.</p><div class="out">Two buying centres in play.</div></div>
-      <div class="step"><span class="dot">6</span><div class="when">Day 8 to 10</div><h3>Make the ask</h3><p>Offer a 30-minute journey walk-through with the value model. One clear ask.</p><div class="out">A meeting, a referral, or a clear no.</div></div>
+      <div class="step"><span class="dot">6</span><div class="when">Day 8 to 10</div><h3>Make the ask</h3><p>Offer a short call to test our outside-in view against what they know. One clear ask.</p><div class="out">A meeting, a referral, or a clear no.</div></div>
       <div class="step"><span class="dot">7</span><div class="when">On reply</div><h3>Hand over</h3><p>Book the meeting. Send this brief and your test notes to the AE. Log it in CRM.</p><div class="out">Qualified meeting with context.</div></div>
     </div>
-    <div class="grid" style="grid-template-columns: 1.1fr 1fr 1fr; flex:1; min-height:0">
+    <div class="grid" style="grid-template-columns: 1.1fr 1fr 1fr; flex:none">
       <div class="card">
         <h2>Before you send: five checks</h2>
-        <table>
+        <table class="tightrows">
           <tr><td class="b" style="width:16px">1</td><td>Open each contact's LinkedIn. Same role today?</td><td class="n muted" style="white-space:nowrap;width:44px">1 min</td></tr>
           <tr><td class="b">2</td><td>Repeat one live test as a customer. Does the break point still happen?</td><td class="n muted" style="white-space:nowrap">2 min</td></tr>
-          <tr><td class="b">3</td><td>Search the news for {{ acct }}, last 7 days. Any change of tone needed?</td><td class="n muted" style="white-space:nowrap;width:44px">1 min</td></tr>
+          <tr><td class="b">3</td><td>Open the source of each fact you use. Still true? Any news in the last 7 days?</td><td class="n muted" style="white-space:nowrap;width:44px">1 min</td></tr>
           <tr><td class="b">4</td><td>Check CRM. Open opportunity? Existing owner?</td><td class="n muted" style="white-space:nowrap">30 s</td></tr>
           <tr><td class="b">5</td><td>Read your message aloud. Would you send it to a friend who works there?</td><td class="n muted" style="white-space:nowrap">30 s</td></tr>
         </table>
       </div>
       <div class="card">
         <h2>What you send</h2>
-        <table>
+        <table class="tightrows">
           <tr><td class="b">Outside-in infographic</td><td>2 pages. Their journey, where it breaks, what good looks like.</td></tr>
-          <tr><td class="b">Your opener</td><td>One true, specific line per person. Page {{ 5 }}.</td></tr>
-          <tr><td class="b">The ask</td><td>30 minutes to test our outside-in view against their data.</td></tr>
+          <tr><td class="b">Your opener</td><td>One true, specific line per person. See the contact cards.</td></tr>
+          <tr><td class="b">The ask</td><td>A short call to test our outside-in view against what they know.</td></tr>
+          <tr><td class="b">Contact details</td><td>Not in this brief. Use your sales tool, or ask Claude to reveal them.</td></tr>
         </table>
         <div class="quote" style="margin-top:8px"><span class="label">Positioning</span><br>{{ d.outreach.positioning }}</div>
       </div>
@@ -131,6 +132,12 @@
           <li>A live test asks for your identity or account. End it politely.</li>
         </ul>
         <div class="tiny" style="margin-top:6px;color:var(--crit-ink)">Follow local marketing and privacy rules for each country you contact.</div>
+      </div>
+    </div>
+    <div class="card soft" style="padding:7px 14px;flex:none">
+      <span class="label">Words used in this brief</span>
+      <div class="tiny ink2" style="margin-top:2px;line-height:1.55">
+        {% for t, mng in glossary %}<span style="white-space:nowrap"><b>{{ t }}</b> = {{ mng }}</span>{{ ' · ' if not loop.last else '' }}{% endfor %}
       </div>
     </div>
   </div>
@@ -162,7 +169,7 @@
     </div>
     <div style="width:420px;flex:none">
       <h2>ICP scorecard · {{ d.icp.total | round | int }} / 100 · Tier {{ d.icp.tier }}</h2>
-      <table>
+      <table class="tightrows">
         {% for l in d.icp.scorecard %}
         <tr><td style="width:128px" class="b">{{ l.line }}</td>
           <td><div class="bar"><i style="width:{{ (100 * l.points / l.max) | round }}%"></i></div><div class="tiny ink2" style="margin-top:3px">{{ l.reason }}</div></td>
@@ -170,6 +177,8 @@
         {% endfor %}
       </table>
       <div class="tiny muted" style="margin-top:6px">Hard stops checked: {{ d.icp.hard_stops | length }}. Triggered: {{ d.icp.hard_stops | selectattr('triggered') | list | length }}.</div>
+      {% if d.glossary %}<div class="card soft" style="padding:7px 11px;margin-top:8px"><span class="label">Words for this account</span>
+        <div class="tiny ink2" style="margin-top:2px;line-height:1.5">{% for g in d.glossary[:6] %}<b>{{ g.term }}</b> = {{ g.meaning }}{{ ' · ' if not loop.last else '' }}{% endfor %}</div></div>{% endif %}
     </div>
   </div>
   {{ m.foot(fl, fr) }}
@@ -220,7 +229,7 @@
       <div class="person">
         <div style="display:flex;gap:9px;align-items:center">
           <span class="avatar">{{ c.initials }}</span>
-          <div style="min-width:0"><div class="b" style="font-size:12.5px;line-height:1.15">{{ c.name }}</div><div class="tiny ink2 clamp2">{{ c.title }}{% if c.location %} · {{ c.location }}{% endif %}</div></div>
+          <div style="min-width:0"><div class="b" style="font-size:12.5px;line-height:1.15">{{ c.name }}{% if c.linkedin_url %} <a href="{{ c.linkedin_url }}" class="tiny" style="font-weight:600;color:var(--brand)">LinkedIn ↗</a>{% endif %}</div><div class="tiny ink2 clamp2">{{ c.title }}{% if c.location %} · {{ c.location }}{% endif %}</div></div>
         </div>
         <div><span class="pill brand">{{ c.deal_role | capitalize }}</span> <span class="pill">{{ c.centre }}</span>{% if c.role_status != 'current' %} <span class="pill" style="border-style:dashed">Verify role</span>{% endif %}</div>
         <ul class="tight tiny ink2">{% for x in c.care_about[:3] %}<li>{{ x }}</li>{% endfor %}</ul>
@@ -230,6 +239,29 @@
       </div>
       {% endfor %}
     </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endfor %}
+
+{# ============ 5b SECOND WAVE ============ #}
+{% for page in later_pages %}
+<section class="page" data-title="Second wave {{ loop.index }}">
+  <div class="head">
+    <div><div class="kicker">Personal level · priority 2 and 3</div><h1>Second wave: <em>who comes next</em></h1>
+    <div class="sub">Priority 2 = contact after a first reply, or in week two. Priority 3 = know the name, do not contact cold.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:22px">P</th><th style="width:22%">Who</th><th style="width:15%">Role in the deal</th><th style="width:24%">Hook</th><th>Opener</th><th style="width:13%">Channel</th></tr>
+      {% for c in page %}
+      <tr><td class="b">{{ c.priority }}</td>
+        <td><b>{{ c.name }}</b>{% if c.linkedin_url %} <a href="{{ c.linkedin_url }}" class="tiny" style="color:var(--brand);font-weight:600">LinkedIn ↗</a>{% endif %}<div class="tiny muted">{{ c.title }}</div></td>
+        <td>{{ c.deal_role | capitalize }}<div class="tiny muted">{{ c.centre }}{% if c.role_status != 'current' %} · verify role{% endif %}</div></td>
+        <td class="ink2">{{ c.hook }}</td><td>{{ c.opener }}</td><td class="tiny ink2">{{ c.best_channel }}</td></tr>
+      {% endfor %}
+    </table>
   </div>
   {{ m.foot(fl, fr) }}
 </section>
@@ -386,9 +418,9 @@
   <div class="body col" style="gap:12px">
     <div class="grid g4" style="gap:10px;flex:none">
       <div class="card soft"><div class="label">Cost to serve today · est.</div><div class="num" style="margin-top:4px">{{ value.base.cost }}</div><div class="tiny muted">{{ value.base.contacts }} assisted contacts · about {{ value.base.agents }} agents</div></div>
-      <div class="card tint" style="box-shadow:inset 0 0 0 2px var(--brand)"><div class="label">Low · lead with this</div><div class="num" style="margin-top:4px">{{ value.low.total }}</div><div class="tiny ink2">{{ value.low.pct }} of cost to serve</div></div>
-      <div class="card"><div class="label">Base</div><div class="num" style="margin-top:4px">{{ value.base.total }}</div><div class="tiny muted">{{ value.base.pct }} of cost to serve</div></div>
-      <div class="card"><div class="label">High · only with their data</div><div class="num" style="margin-top:4px">{{ value.high.total }}</div><div class="tiny muted">{{ value.high.pct }} of cost to serve</div></div>
+      <div class="card tint" style="box-shadow:inset 0 0 0 2px var(--brand)"><div class="label">Low · quote this one first</div><div class="num" style="margin-top:4px">{{ value.low.total }}</div><div class="tiny ink2">{{ value.low.pct }} of a {{ value.low.cost }} cost base</div></div>
+      <div class="card"><div class="label">Base</div><div class="num" style="margin-top:4px">{{ value.base.total }}</div><div class="tiny muted">{{ value.base.pct }} of a {{ value.base.cost }} cost base</div></div>
+      <div class="card"><div class="label">High · only with their data</div><div class="num" style="margin-top:4px">{{ value.high.total }}</div><div class="tiny muted">{{ value.high.pct }} of a {{ value.high.cost }} cost base</div></div>
     </div>
     <div class="row" style="gap:22px;flex:1;min-height:0">
       <div class="grow">
@@ -402,7 +434,7 @@
             <td class="tiny ink2" style="padding-left:16px"><b>{{ l.rates }}</b> · {{ l.applies }}. <span class="muted">{{ l.reference }}</span></td></tr>
           {% endfor %}
         </table>
-        <div class="tiny muted" style="margin-top:6px">Unit costs: {% for u in unit_rows %}{{ u.label }} {{ u.value }} ({{ u.basis }}){{ '; ' if not loop.last else '.' }}{% endfor %} Loaded agent cost {{ loaded_cost }} (assumption).</div>
+        <div class="tiny muted" style="margin-top:6px">Unit costs: {% for u in unit_rows %}{{ u.label }} {{ u.value }} ({{ u.basis }}){{ '; ' if not loop.last else '.' }}{% endfor %} Yearly cost of one agent, salary plus overheads: {{ loaded_cost }} (assumption).</div>
         <div class="tiny ink2" style="margin-top:5px"><b>Credibility:</b> {{ credibility_note }}</div>
       </div>
       <div style="width:400px;flex:none" class="col">
@@ -525,7 +557,7 @@
 <section class="page" id="proof" data-title="Validation">
   <div class="head">
     <div><div class="kicker">Trust but verify</div><h1>How this brief was <em>checked</em></h1>
-    <div class="sub">Every fact has a source and a date. Validators re-checked them. Code gates then tested the dossier and the page layout.</div></div>
+    <div class="sub">Every fact has a source. Validators re-checked the ones this brief leans on. Code then tested the dossier and the page layout.</div></div>
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
   <div class="body row" style="gap:22px">
@@ -557,6 +589,28 @@
   </div>
   {{ m.foot(fl, fr) }}
 </section>
+
+{# ============ 14b OPEN QUESTIONS ============ #}
+{% if d.open_questions %}
+<section class="page" data-title="Open questions">
+  <div class="head">
+    <div><div class="kicker">Only a person can close these</div><h1>Still to check <em>before you rely on it</em></h1>
+    <div class="sub">The agents could not settle these points. Close the ones that touch your message before you send it.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="grid g2" style="gap:10px 26px;align-content:start">
+      {% for q in d.open_questions[:12] %}
+      <div style="display:flex;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px">
+        <span style="width:16px;height:16px;border:1.5px solid var(--ink-2);border-radius:4px;flex:none;margin-top:2px"></span>
+        <div style="font-size:11.5px;line-height:1.4">{{ q }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endif %}
 
 {# ============ 15 EVIDENCE LOG ============ #}
 {% for page in evidence_pages %}

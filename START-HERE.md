@@ -9,7 +9,7 @@ A helper that researches one company for you and hands you a ready-to-use sales 
 | You do | The helper does |
 |---|---|
 | Type a company name | Researches the company, its departments and its people |
-| Wait (60–120 minutes, in the background) | Checks every fact twice. Drops what it cannot prove |
+| Wait (about 2–3 hours, in the background) | Checks every fact twice. Drops what it cannot prove |
 | Read the brief | Builds your brief, a visual for the prospect, and ready-to-send messages |
 | Do 5 quick checks, then send | Nothing. It never contacts anyone for you |
 

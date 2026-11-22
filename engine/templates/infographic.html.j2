@@ -10,9 +10,9 @@
 <style>{{ css | safe }}
 .hero { font-size: 31px; }
 .track { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-.obs { border-radius: 10px; padding: 11px 12px; background: var(--warn-bg); border-top: 4px solid var(--warn); font-size: 11.6px; line-height: 1.42; }
+.obs { border-radius: 10px; padding: 11px 12px; background: var(--brand-tint); border-top: 4px solid var(--brand); font-size: 11.6px; line-height: 1.42; }
 .obs h3 { font-size: 13px; margin-bottom: 4px; line-height: 1.2; }
-.obs .ph { font-size: 8.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--warn-ink); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+.obs .ph { font-size: 8.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--brand-dark); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
 .obs .ph svg { width: 10px; height: 10px; fill: #d99400; }
 .smooth { border-radius: 10px; padding: 11px 12px; background: var(--soft); font-size: 10.8px; color: var(--muted); border-top: 4px solid #d5d9e0; line-height: 1.4; }
 .opp { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 7px; }
@@ -57,9 +57,9 @@
         {% for st in stages %}
         <div>
           {% for o in obs_by_stage.get(st.n, []) %}
-          <div class="obs" style="margin-bottom:6px"><div class="ph">{{ m.icon('friction') }}Moment that matters</div><h3>{{ o.title }}</h3>{{ o.text }}</div>
+          <div class="obs" style="margin-bottom:6px"><div class="ph">A question worth testing</div><h3>{{ o.title }}</h3>{{ o.text }}</div>
           {% else %}
-          <div class="smooth">No friction seen from outside at this stage.</div>
+          <div class="smooth">Not covered in this first view.</div>
           {% endfor %}
         </div>
         {% endfor %}
@@ -76,12 +76,9 @@
         {{ m.ladder(levels, on) }}
         <div class="tiny muted" style="margin-top:5px">Based on {{ seen_n }} of {{ total_n }} signals visible from outside.</div>
         {% else %}
-        <div class="label">{{ title }} · early read</div>
-        <div style="display:flex;align-items:center;gap:14px;margin-top:6px">
-          <div style="flex:none"><div class="num">{{ seen_n }}<span style="font-size:14px;color:var(--muted);font-weight:600"> of {{ total_n }}</span></div><div class="tiny muted">signals visible from outside</div></div>
-          <div class="small ink2">Too few signals are public to score this fairly. What we can see points to <b>{{ lvl[1] | lower }}</b> or above. Your data completes the picture.</div>
-        </div>
-        <div class="bar" style="margin-top:8px"><i style="width:{{ (100 * seen_n / total_n) | round }}%"></i></div>
+        <div class="label">{{ title }} · the scale we use</div>
+        {{ m.ladder(levels, -1) }}
+        <div class="small ink2" style="margin-top:7px">We have not placed you on this scale. Most of what decides it is not public, and we would rather ask than guess.</div>
         {% endif %}
       </div>
       {% endfor %}
@@ -96,8 +93,8 @@
   <div class="head">
     <div>
       <div class="kicker">From observation to opportunity</div>
-      <h1 class="hero">Three moves that <em>lift the journey</em></h1>
-      <div class="sub">Each one builds on what you already have. None needs a rip-and-replace.</div>
+      <h1 class="hero">{{ pv.opportunities_title or 'Three ideas to test together' }}</h1>
+      <div class="sub">{{ pv.opportunities_subtitle or 'Each one builds on what you already have.' }}</div>
     </div>
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
@@ -140,7 +137,7 @@
 
     <div style="flex:none">
       <div class="label" style="margin-bottom:3px">Sources · public information only</div>
-      <div class="src">{% for s in pv_sources[:12] %}<span>{{ loop.index }}. {{ s.source_title or s.claim }} · {{ s.source_date }} · {{ s.source_url }}</span>{% endfor %}</div>
+      <div class="src">{% for s in pv_sources[:12] %}<span>{{ loop.index }}. <a href="{{ s.source_url }}">{{ s.source_title or s.claim }}</a> · {{ s.source_date }}</span>{% endfor %}</div>
     </div>
   </div>
   {{ m.foot(fl, 'Page') }}

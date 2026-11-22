@@ -1,6 +1,6 @@
 # 06 · The swarm — who does what
 
-One account name in. Eighteen specialists. Eight gates. One pack out.
+One account name in. Twenty-two specialists. Eight gates. One pack out.
 
 ```
  SDR types the logo
@@ -29,6 +29,7 @@ One account name in. Eighteen specialists. Eight gates. One pack out.
                                 ▼
 ┌─ CONTENT QA (3 agents, parallel) ──────────────────────────────────────────┐
 │ Q1 Completeness & traceability   Q2 Plain English   Q3 Prospect's eyes     │
+│ then F1 editor applies their fixes and rebuilds                            │
 └───────────────────────────────┬────────────────────────────────────────────┘
                                 ▼
                     SDR: five human checks, then send

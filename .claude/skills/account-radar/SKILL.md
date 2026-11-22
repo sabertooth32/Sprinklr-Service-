@@ -22,7 +22,7 @@ Call the Workflow tool with the saved workflow:
 Workflow({ name: "account-radar", args: { account: "<name>", slug: "<slug>", run_date: "<today YYYY-MM-DD>", region: "<markets>", notes: "<SDR notes>" } })
 ```
 
-It runs in the background: 9 research agents, 5 validators, synthesis, build and 3 content reviewers. Tell the SDR it takes roughly 60 to 120 minutes and that they can keep working.
+It runs in the background: 9 research agents, 5 validators, 3 synthesis writers, a builder, 3 content reviewers and an editor. Tell the SDR it takes roughly 2 to 3 hours and that they can keep working.
 
 To run in stages, add `stop_after: "validate"` or `stop_after: "synthesise"`, then resume with `resumeFromRunId`.
 
@@ -57,6 +57,13 @@ Emails and phones are never revealed by the swarm. If the SDR wants them:
 2. Reveal emails for priority-1 contacts only, with Lusha `prospecting_contact_enrich` using the stored `lusha_id`.
 3. Give them to the SDR in chat or push to their sales tool. Do not write them into the dossier or any committed file.
 
+## 5b. When the SDR brings back live-test notes
+
+The SDR's own tests are the only first-hand evidence. When they share notes ("here is what I saw"):
+1. Add one evidence record per test to `dossier.json`: id `LT-n`, `evidence_type: first_hand`, `via: sdr_live_test`, the channel's public URL, today's date, `verdict: confirmed`, `confidence: medium`, `category: channel`. Record what happened, never a staff name.
+2. Update the matching channel scores, journey break points and prospect observations. Remove any point the test disproved.
+3. Rebuild and re-run the gates. Tell the SDR what changed.
+
 ## 6. Hand over
 
 Send the three files with SendUserFile:
@@ -72,6 +79,7 @@ Then give this summary, nothing longer:
 | Contact this week | Count and names |
 | Value at stake | Low to base, "illustrative" |
 | Checked | Facts checked, corrected, dropped; people removed |
+| Still to check | The top 3 open questions from the brief |
 | Your next step | "Open the brief, page 2. Do the five checks before you send." |
 
 ## Guardrails

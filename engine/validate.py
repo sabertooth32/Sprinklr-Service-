@@ -227,6 +227,8 @@ def validate(dossier):
     if want == "C":
         E("icp: tier C. This account must not get a pack")
 
+    if len(dossier["outreach"]["positioning"].split()) > 45:
+        E(f"outreach.positioning is {len(dossier['outreach']['positioning'].split())} words. Keep it to 45: one idea the SDR can say aloud")
     for ch in dossier["channels"]:
         if len(ch["name"]) > 30:
             E(f"channel {ch['id']}: name \"{ch['name']}\" is {len(ch['name'])} characters. Keep channel names to 30. Put detail in strengths or headline_gap")
@@ -283,6 +285,8 @@ def validate(dossier):
         if n.lower() in pv_text:
             E(f"prospect_view: names a contact ({n}). People never appear in prospect content")
     for inc in dossier["incumbents"]:
+        if inc["vendor"].strip().lower() in ("not public", "unknown", "none", "not disclosed", "in-house", "n/a"):
+            continue  # a placeholder, not a vendor name
         if inc["status"] != "in-house" and len(inc["vendor"]) > 3 and re.search(rf"\b{re.escape(inc['vendor'].lower())}\b", pv_text):
             E(f"prospect_view: names incumbent vendor '{inc['vendor']}'")
     for bad in ("fail", "fails", "failed", "failure", "terrible", "worst", "broken", "poor", "bad"):
