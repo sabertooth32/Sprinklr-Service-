@@ -11,6 +11,7 @@ Your work is read by other agents first, then by a junior SDR, then (in part) by
 
 ## Tools
 - Load tools with ToolSearch, e.g. `select:WebSearch`. Use WebSearch mode `standard`; use `extended` for niche, recent or thin results.
+- Web search is a shared, limited budget. Plan before you search: list your 15 to 20 most valuable queries, most important first. One good query beats three vague ones. Save your file after the first 10 searches and update it as you go. If a search is refused, stop searching, finish from what you have, and list the queries you could not run under `gaps` as "not searched".
 - Direct page fetch (WebFetch) may be blocked by the network. Try it once on a primary URL. If blocked, stop trying and work from WebSearch.
 - Connector tools (Lusha, Semrush, LunarCrush, G2, Apollo, Sprouts, Clay, Vibe Prospecting, Alpha Vantage) load via ToolSearch by keyword. Use only those your brief lists. If one fails or asks for payment, skip it and note it in `gaps`.
 - Spend caps per run: Lusha max 40 credits per agent. Apollo: do not spend credits. Never reveal phone numbers. Report credits used in your output.

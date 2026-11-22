@@ -26,6 +26,14 @@ It runs in the background: 9 research agents, 5 validators, synthesis, build and
 
 To run in stages, add `stop_after: "validate"` or `stop_after: "synthesise"`, then resume with `resumeFromRunId`.
 
+### If agents report "search budget ran out"
+
+Web search is a shared, limited allowance. When several agents report unsearched queries in their `gaps`:
+
+1. Let the phase finish. Do not start validation on thin research.
+2. Re-run the workflow with the same args and `resumeFromRunId`. Finished agents are skipped. For a thin file, delete it first so its agent runs again, or send that agent a gap-fill message listing its unsearched queries.
+3. Tell the SDR in one line that a second pass is running and why.
+
 ## 3. Read the result
 
 | Result | What you do |
