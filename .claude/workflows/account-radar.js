@@ -6,6 +6,7 @@ export const meta = {
     { title: 'Research', detail: '8 specialists in parallel, then personal-level research on top contacts' },
     { title: 'Validate', detail: 'fact checks, people check, ICP judge, red team' },
     { title: 'Synthesise', detail: 'build dossier.json and pass the code gates' },
+    { title: 'Build and QA', detail: 'render the PDFs, three content reviewers, apply fixes' },
   ],
 }
 
@@ -45,6 +46,17 @@ const ICP = {
     headline: { type: 'string' },
   },
   required: ['file', 'total', 'tier', 'hard_stop', 'headline'],
+}
+const BUILD = {
+  type: 'object',
+  properties: {
+    outputs: { type: 'array', items: { type: 'string' }, description: 'Paths of the files built' },
+    validation_passed: { type: 'boolean' },
+    layout_passed: { type: 'boolean' },
+    changes: { type: 'array', items: { type: 'string' }, description: 'What you changed in the dossier' },
+    declined: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['outputs', 'validation_passed', 'layout_passed'],
 }
 const SYNTH = {
   type: 'object',
@@ -119,4 +131,23 @@ if (a.stop_after === 'validate') {
 phase('Synthesise')
 const synth = await run('S1-synthesise', 'dossier builder', 'Synthesise', SYNTH, 'high')
 
-return { account: a.account, slug, icp, research: researchFlat, validation, synth }
+if (!synth || !synth.validator_passed) {
+  log('Dossier did not pass the code gates. Stopping before build.')
+  return { account: a.account, slug, stopped: 'code gates', icp, research: researchFlat, validation, synth }
+}
+if (a.stop_after === 'synthesise') {
+  return { account: a.account, slug, stopped: 'stop_after=synthesise', icp, research: researchFlat, validation, synth }
+}
+
+// ---------- 4. build and content QA ----------
+phase('Build and QA')
+const build = await run('B1-build', 'pack builder', 'Build and QA', BUILD)
+const qa = await parallel([
+  () => run('Q1-completeness', 'content QA', 'Build and QA'),
+  () => run('Q2-plain-english', 'content QA', 'Build and QA'),
+  () => run('Q3-prospect-lens', 'content QA', 'Build and QA'),
+])
+const final = await run('F1-fix', 'editor', 'Build and QA', BUILD, 'high')
+log(`Pack ${final && final.validation_passed && final.layout_passed ? 'ready' : 'needs attention'}: ${dir}/out/`)
+
+return { account: a.account, slug, icp, research: researchFlat, validation, synth, build, qa: qa.filter(Boolean), final }
