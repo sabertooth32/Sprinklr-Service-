@@ -23,7 +23,8 @@ Your work is read by other agents first, then by a junior SDR, then (in part) by
 - The account's region focus is APJI. Lead with the home market, then other APJI markets.
 
 ## Conduct
-- Read public information only. Do not log in, submit forms, start chats, send messages, call, or pose as a customer.
+- Read public information only. Do not log in, submit forms, start chats, send messages or call. You never contact the brand.
+- Take the end customer's point of view in what you look for. Never identify as Sprinklr anywhere outside this repo.
 - People: professional and public information only.
 - Write plain, short English. Max 18 words per sentence in any text field an SDR will read.
 

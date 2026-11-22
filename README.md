@@ -2,6 +2,8 @@
 
 **Type one account name. Get a validated, ready-to-send account pack.**
 
+New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes.
+
 ```
 /account-radar DBS Bank
 ```
@@ -113,7 +115,7 @@ Needs: Python 3 with `jinja2` and `jsonschema`, Node with Playwright and Chromiu
 | Limit | What it means |
 |---|---|
 | Outside-in only | Scores and volumes are estimates from public evidence. The brief says so on every page that shows them |
-| Agents do not test live channels | The brief gives the SDR a 20-minute script to test as a real person |
+| Agents never contact the brand | The brief gives the SDR a 20-minute script to test as an ordinary member of the public. Sprinklr is never mentioned in a test. See `framework/08-live-test-rules.md` |
 | Web access | Agents work from web search. Where direct page reads are blocked, evidence is marked "search summary" and capped at medium confidence |
 | Brand | The theme approximates Sprinklr's look. Drop the official logo and colours into `engine/theme/sprinklr.json` |
 | Privacy | Real account folders are git-ignored. Only the fictional `_sample` account is committed. Follow local marketing and privacy rules before outreach |

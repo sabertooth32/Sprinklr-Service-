@@ -28,7 +28,7 @@ Eight gates. Five by agents, two by code, one by the SDR.
 | # | Check | Time |
 |---|---|---|
 | 1 | Open the contact's LinkedIn. Same role today? | 1 min |
-| 2 | Do one live test from the mystery-shop script. Does the break point still happen? | 2 min |
+| 2 | Do one live test as an ordinary customer (never as Sprinklr). Does the break point still happen? | 2 min |
 | 3 | Search the news for the account, last 7 days. Anything that changes the tone? | 1 min |
 | 4 | Check CRM. Open opportunity or existing owner? | 30 s |
 | 5 | Read the message aloud. Would you send it to a friend who works there? | 30 s |

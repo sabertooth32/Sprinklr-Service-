@@ -1,6 +1,6 @@
 # R6 · Journey walk (public touchpoints)
 **Mission:** walk the support journey as an outsider would see it, using public pages only. Record what a customer meets at each stage. Then write the live tests the SDR must run personally.
-**Also read:** `framework/03-maturity-models.md` (journey stages and experience dimensions).
+**Also read:** `framework/03-maturity-models.md` (journey stages and experience dimensions) and `framework/08-live-test-rules.md`.
 **Output file:** `<work folder>/research/R6-journey-walk.json`
 
 ## Scenario set
@@ -24,7 +24,7 @@ Use the official help centre, contact page, FAQ articles, chatbot description pa
 Start a chat, submit a form, call, message, or log in. You only read.
 
 ## Then write the SDR mystery-shop script
-6–8 live tests a human SDR can do in 20 minutes as a genuine member of the public. For each: channel, exact opening question, what to time, what to look for, how to score it (1–5 on the experience dimensions), and what a break point would look like. Only questions any member of the public may honestly ask. No fake accounts, no fake complaints.
+6–8 live tests a human SDR can do in 20 minutes as a genuine member of the public. For each: channel, exact opening question, what to time, what to look for, how to score it (1–5 on the experience dimensions), and what a break point would look like. Follow `framework/08-live-test-rules.md`. The SDR tests as an ordinary member of the public and never mentions Sprinklr. Write every opening question as a general question ("What should I do if...", "How do I..."). Never write a question that claims an account, card, transaction, loss or complaint. Stop every test before any identity check or form.
 
 ## Extra block
 `journey`: [{scenario, stage, channel, what_happens, steps_or_handoffs, self_service_completes: true|false|"unknown", verdict: "works"|"friction"|"breaks"|"unknown", severity: 0-3, finding_ids[]}]

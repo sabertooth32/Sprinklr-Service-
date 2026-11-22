@@ -56,7 +56,7 @@ Older than the window: keep it, mark `stale: true`, keep it out of prospect cont
 3. **Estimates show their maths.** Volume = inputs × assumptions, each input sourced.
 4. **Quote, do not paraphrase,** in the `quote` field.
 5. **People data stays professional.** Role, public statements, public career history only. No family, health, home, politics, religion or private social accounts.
-6. **No deception.** Agents do not pose as customers, open fake complaints, log in, call, or use anyone's identity. Agents read public pages only. Live channel tests are done by the SDR as a real person asking real questions.
+6. **Customer's-eye view, honestly.** Agents read public pages only and never contact the brand. Live tests are done by the SDR as an ordinary member of the public, never as Sprinklr. See `framework/08-live-test-rules.md`: first name only, general questions, no false claims, no identity steps.
 7. **Respect the prospect.** Write what we observed, not insults. Every gap is phrased as an opportunity.
 8. **Spend limits.** Search is fine. Reveal contact details only when the brief says so, and report credits used.
 9. **Say what you could not find.** Every agent returns a `gaps` list.

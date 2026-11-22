@@ -27,7 +27,7 @@ SHOTS=1 python3 engine/build.py accounts/_sample/dossier.json   # also writes pa
 
 1. Real account data never goes into git. This repository is public.
 2. Every claim needs a source and a date. Follow `framework/02-evidence-standard.md`.
-3. Agents read public information only. They never contact a prospect or its support channels.
+3. Agents read public information only. They never contact a prospect or its support channels. Live tests are run by the SDR as an ordinary customer, never as Sprinklr (`framework/08-live-test-rules.md`).
 4. Never send outreach for an SDR. Draft only.
 5. Prospect-facing text: no people, no vendor names, no inferred facts, sentences under 20 words.
 6. Fix content in the dossier, not in the templates. Change templates only to improve every account.

@@ -293,6 +293,19 @@ def validate(dossier):
             if st["channel"] == "email" and not st.get("subject"):
                 E(f"outreach '{seq['persona']}' day {st['day']}: email needs a subject")
 
+    # --- live-test rules (framework/08-live-test-rules.md)
+    for t in dossier["mystery_shop"]:
+        q = t["opening_question"].lower()
+        if "sprinklr" in " ".join(str(v) for v in t.values()).lower():
+            E(f"mystery_shop {t['id']}: mentions Sprinklr. Live tests are run as an ordinary member of the public")
+        if re.search(r"\b(my|our) (card|account|transaction|payment|transfer|money|bill|order|booking|policy|claim|complaint)\b", q) or \
+                re.search(r"\bi (have|had|see|saw|lost|made|was charged|want to (make|file|lodge) a complaint)\b", q):
+            E(f"mystery_shop {t['id']}: the question claims a personal case (\"{t['opening_question'][:60]}\"). Ask a general question instead")
+    for seq in dossier["outreach"]["sequences"]:
+        for st in seq["steps"]:
+            if re.search(r"\b(mystery[- ]shopp\w*|we (tested|audited)|our audit)\b", st["body"].lower()):
+                E(f"outreach '{seq['persona']}' day {st['day']}: do not say we tested, audited or mystery-shopped them")
+
     # --- gates recorded by the swarm
     for g in dossier["meta"]["validation"]["gates"]:
         if g["status"] == "fail":

@@ -37,10 +37,10 @@ Count what you did for `meta.validation` (facts checked, confirmed, corrected, d
 | `gap_map` | 4–8 gaps → Sprinklr capability → outcome → proof. Priority 1 = lead with this | |
 | `business_case` | Country code for agent cost, agent estimate, 4–7 KPIs (today → target), assumptions, upside not counted | Never put value numbers in text. The engine computes them |
 | `outreach` | 2–4 sequences by persona. 4–5 steps each over about 10 working days: email, LinkedIn, call | Email max 90 words, 4 short paragraphs. LinkedIn max 45 words. Call opener max 70 words |
-| `mystery_shop` | 5–8 live tests from R6 the SDR runs personally | |
+| `mystery_shop` | 5–8 live tests from R6 the SDR runs as an ordinary member of the public. Follow `framework/08-live-test-rules.md`: general questions only, no claimed account, card, transaction or complaint, never the word Sprinklr | |
 | `discovery_questions` | 6–10 open questions that test our hypotheses | |
 | `objections` | 4–6 likely objections with a two-sentence response | Include "we build AI in-house" if true |
-| `do_not_say` | Claims that would embarrass us. Always include banned Sprinklr claims that apply | |
+| `do_not_say` | Claims that would embarrass us. Always include banned Sprinklr claims that apply, plus: never say we tested or audited their contact centre; never share test screenshots or name their staff | |
 | `prospect_view` | Outside-in infographic content | See below |
 
 ## Scoring rules
@@ -53,7 +53,7 @@ Count what you did for `meta.validation` (facts checked, confirmed, corrected, d
 - Lead with what we observed about their customers' experience, not with Sprinklr.
 - One idea per message. One clear, small ask.
 - No flattery. No "I hope this finds you well". No hype words: revolutionary, game-changing, leverage, synergy, cutting-edge, seamless.
-- Mention the outside-in view as the reason to talk: "we mapped your service journey from the outside".
+- Mention the outside-in view as the reason to talk: "we looked at your service journey the way a customer sees it". Never write "we tested", "we audited" or "we mystery-shopped".
 - Never quote a value number in outreach. Offer to walk through the model.
 - Use `{{first_name}}` and `{{sdr_name}}` as merge fields.
 

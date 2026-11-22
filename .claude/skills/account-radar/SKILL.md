@@ -69,7 +69,7 @@ Then give this summary, nothing longer:
 ## Guardrails
 
 - Never send an email, message or connection request for the SDR. Draft only, and only when asked.
-- Never contact the prospect's support channels. Live tests are the SDR's job, as a real person.
+- Never contact the prospect's support channels. Live tests are the SDR's job, as an ordinary member of the public who never mentions Sprinklr. Rules: `framework/08-live-test-rules.md`.
 - Never put contact details, or anything from `accounts/`, in git. `.gitignore` enforces this. Do not override it.
 - Never present an estimate as a fact. Never claim a Gartner CCaaS Magic Quadrant position. See `framework/07-capability-map.md`.
 - If a connector is unavailable or out of credits, continue without it and say what is missing.
