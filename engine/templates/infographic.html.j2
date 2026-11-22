@@ -10,11 +10,11 @@
 <style>{{ css | safe }}
 .hero { font-size: 31px; }
 .track { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-.obs { border-radius: 10px; padding: 9px 11px; background: var(--warn-bg); border-top: 4px solid var(--warn); font-size: 10.5px; line-height: 1.38; }
-.obs h3 { font-size: 11.5px; margin-bottom: 3px; line-height: 1.2; }
+.obs { border-radius: 10px; padding: 11px 12px; background: var(--warn-bg); border-top: 4px solid var(--warn); font-size: 11.6px; line-height: 1.42; }
+.obs h3 { font-size: 13px; margin-bottom: 4px; line-height: 1.2; }
 .obs .ph { font-size: 8.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--warn-ink); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
 .obs .ph svg { width: 10px; height: 10px; fill: #d99400; }
-.smooth { border-radius: 10px; padding: 9px 11px; background: var(--soft); font-size: 10px; color: var(--muted); border-top: 4px solid #d5d9e0; }
+.smooth { border-radius: 10px; padding: 11px 12px; background: var(--soft); font-size: 10.8px; color: var(--muted); border-top: 4px solid #d5d9e0; line-height: 1.4; }
 .opp { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 7px; }
 .opp .n { width: 30px; height: 30px; border-radius: 50%; background: var(--brand); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
 .opp h3 { font-size: 15px; line-height: 1.2; letter-spacing: -.01em; }
@@ -92,7 +92,7 @@
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
   <div class="body col" style="gap:12px">
-    <div class="grid g3" style="flex:1;min-height:0;gap:14px">
+    <div class="grid g3" style="flex:1 0 auto;gap:14px">
       {% for o in pv.opportunities %}
       <div class="opp">
         <div class="n">{{ loop.index }}</div>
@@ -100,7 +100,8 @@
         <div class="label">What good looks like</div>
         <div style="font-size:11.5px;line-height:1.45">{{ o.what_good_looks_like }}</div>
         <div class="how"><span class="label" style="color:var(--brand-dark)">How {{ theme.product_name }} helps</span>
-          {% for c in o.caps[:2] %}<div style="margin-top:3px"><b>{{ c.name }}.</b> {{ c.what_it_does }}</div>{% endfor %}
+          {% for c in o.caps[:1] %}<div style="margin-top:3px"><b>{{ c.name }}.</b> {{ c.what_it_does }}</div>{% endfor %}
+          {% if o.caps | length > 1 %}<div style="margin-top:3px" class="ink2">Also: {{ o.caps[1:3] | map(attribute='name') | join(', ') }}.</div>{% endif %}
         </div>
       </div>
       {% endfor %}
@@ -108,17 +109,17 @@
 
     <div class="row" style="flex:none;align-items:stretch">
       {% if pv.show_value_band %}
-      <div class="card tint" style="width:330px;flex:none">
+      <div class="card tint" style="width:330px;flex:none;display:flex;flex-direction:column;justify-content:center">
         <div class="label">Value at stake · illustrative</div>
-        <div class="num big" style="margin:5px 0 3px">{{ value.low.total }}–{{ value.base.total }}</div>
+        <div class="num" style="margin:6px 0 5px;font-size:30px;white-space:nowrap">{{ value.low.total }} – {{ value.base.total }}</div>
         <div class="tiny ink2">Per year, across five levers. Built on public estimates of your contact volume and independent cost benchmarks. Conservative by design. We would like to test it with your numbers.</div>
       </div>
       {% endif %}
       <div class="card grow">
         <div class="label">The measures that move</div>
-        <table style="margin-top:4px">
+        <table style="margin-top:4px;font-size:10.4px">
           <tr><th>Measure</th><th>Direction</th><th>How</th></tr>
-          {% for k in d.business_case.kpis[:5] %}<tr><td class="b">{{ k.kpi }}</td><td>{{ k.target }}</td><td class="ink2">{{ k.lever }}</td></tr>{% endfor %}
+          {% for k in d.business_case.kpis[:4] %}<tr><td class="b" style="padding:4px 8px 4px 0">{{ k.kpi }}</td><td style="padding:4px 8px 4px 0">{{ k.target }}</td><td class="ink2" style="padding:4px 0">{{ k.lever }}</td></tr>{% endfor %}
         </table>
       </div>
       <div class="card brand" style="width:300px;flex:none;display:flex;flex-direction:column;justify-content:center">

@@ -31,7 +31,7 @@
         {% for f in d.snapshot.facts %}
         <div class="card soft" style="padding:10px 12px">
           <div class="label">{{ f.label }}</div>
-          <div class="num" style="font-size:20px;margin:4px 0 5px">{{ f.value }}</div>
+          <div class="num" style="font-size:18px;margin:4px 0 5px;line-height:1.1">{{ f.value }}</div>
           {{ m.basis(f.basis) }}
         </div>
         {% endfor %}
@@ -104,11 +104,11 @@
       <div class="card">
         <h2>Before you send: five checks</h2>
         <table>
-          <tr><td class="b" style="width:16px">1</td><td>Open each contact's LinkedIn. Same role today?</td><td class="n muted">1 min</td></tr>
-          <tr><td class="b">2</td><td>Repeat one live test as a customer. Does the break point still happen?</td><td class="n muted">2 min</td></tr>
-          <tr><td class="b">3</td><td>Search the news for {{ acct }}, last 7 days. Any change of tone needed?</td><td class="n muted">1 min</td></tr>
-          <tr><td class="b">4</td><td>Check CRM. Open opportunity? Existing owner?</td><td class="n muted">30 s</td></tr>
-          <tr><td class="b">5</td><td>Read your message aloud. Would you send it to a friend who works there?</td><td class="n muted">30 s</td></tr>
+          <tr><td class="b" style="width:16px">1</td><td>Open each contact's LinkedIn. Same role today?</td><td class="n muted" style="white-space:nowrap;width:44px">1 min</td></tr>
+          <tr><td class="b">2</td><td>Repeat one live test as a customer. Does the break point still happen?</td><td class="n muted" style="white-space:nowrap">2 min</td></tr>
+          <tr><td class="b">3</td><td>Search the news for {{ acct }}, last 7 days. Any change of tone needed?</td><td class="n muted" style="white-space:nowrap;width:44px">1 min</td></tr>
+          <tr><td class="b">4</td><td>Check CRM. Open opportunity? Existing owner?</td><td class="n muted" style="white-space:nowrap">30 s</td></tr>
+          <tr><td class="b">5</td><td>Read your message aloud. Would you send it to a friend who works there?</td><td class="n muted" style="white-space:nowrap">30 s</td></tr>
         </table>
       </div>
       <div class="card">
@@ -384,30 +384,31 @@
       <div class="grow">
         <h2>Five levers, applied in order. No double counting.</h2>
         <table>
-          <tr><th>Lever</th><th style="width:150px">Base value / year</th><th class="n">Low</th><th class="n">High</th><th style="width:36%">Rate used (low / base / high)</th></tr>
+          <tr><th>Lever</th><th style="width:150px">Base value / year</th><th class="n" style="width:60px">Low</th><th class="n" style="width:60px">High</th><th style="width:38%;padding-left:16px">Rate used (low / base / high)</th></tr>
           {% for l in lever_rows %}
           <tr><td class="b">{{ loop.index }}. {{ l.label }}</td>
-            <td><div style="display:flex;gap:6px;align-items:center"><b style="width:44px">{{ l.base }}</b><div class="bar grow"><i style="width:{{ l.base_pct }}%"></i></div></div></td>
+            <td><div style="display:flex;gap:6px;align-items:center"><b style="width:54px;flex:none">{{ l.base }}</b><div class="bar grow"><i style="width:{{ l.base_pct }}%"></i></div></div></td>
             <td class="n">{{ l.low }}</td><td class="n">{{ l.high }}</td>
-            <td class="tiny ink2"><b>{{ l.rates }}</b> · {{ l.applies }}. <span class="muted">{{ l.reference }}</span></td></tr>
+            <td class="tiny ink2" style="padding-left:16px"><b>{{ l.rates }}</b> · {{ l.applies }}. <span class="muted">{{ l.reference }}</span></td></tr>
           {% endfor %}
         </table>
         <div class="tiny muted" style="margin-top:6px">Unit costs: {% for u in unit_rows %}{{ u.label }} {{ u.value }} ({{ u.basis }}){{ '; ' if not loop.last else '.' }}{% endfor %} Loaded agent cost {{ loaded_cost }} (assumption).</div>
+        <div class="tiny ink2" style="margin-top:5px"><b>Credibility:</b> {{ credibility_note }}</div>
       </div>
       <div style="width:400px;flex:none" class="col">
         <div>
           <h2>KPIs that move</h2>
           <table>
             <tr><th>KPI</th><th>Today</th><th>Target</th></tr>
-            {% for k in d.business_case.kpis %}
+            {% for k in d.business_case.kpis[:6] %}
             <tr><td class="b">{{ k.kpi }}</td><td>{{ k.today }} {{ m.basis(k.today_basis) }}</td><td>{{ k.target }}</td></tr>
             {% endfor %}
           </table>
         </div>
         <div class="card soft" style="padding:8px 11px">
           <span class="label">Say this about the numbers</span>
-          <ul class="tight tiny ink2" style="margin-top:3px">{% for a in d.business_case.assumptions[:4] %}<li>{{ a }}</li>{% endfor %}<li>{{ credibility_note }}</li></ul>
-          {% if d.business_case.upside_not_counted %}<div class="tiny" style="margin-top:3px"><b>Not counted:</b> {{ d.business_case.upside_not_counted | join('; ') }}.</div>{% endif %}
+          <ul class="tight tiny ink2" style="margin-top:3px">{% for a in d.business_case.assumptions[:3] %}<li>{{ a }}</li>{% endfor %}</ul>
+          {% if d.business_case.upside_not_counted %}<div class="tiny" style="margin-top:3px"><b>Not counted:</b> {{ d.business_case.upside_not_counted[:3] | join('; ') | replace('.;', ';') | trim('.') }}.</div>{% endif %}
         </div>
       </div>
     </div>
@@ -427,7 +428,7 @@
     <div class="grid" style="grid-template-columns: repeat({{ 3 if seq.steps | length > 4 else [seq.steps | length, 2] | max }}, 1fr); gap:12px; flex:1; min-height:0; align-content:start">
       {% for st in seq.steps %}
       <div class="msg">
-        <div class="mh"><span><span class="pill brand">Day {{ st.day }}</span> <span class="pill">{{ st.channel | capitalize }}</span></span><button class="copy" type="button">Copy</button></div>
+        <div class="mh"><span><span class="pill brand">Day {{ st.day }}</span> <span class="pill">{{ {'email': 'Email', 'linkedin': 'LinkedIn', 'call': 'Call', 'event': 'Event'}[st.channel] }}</span></span><button class="copy" type="button">Copy</button></div>
         {% if st.subject %}<div class="subj">Subject: {{ st.subject }}</div>{% endif %}
         <div class="mb copytext">{{ st.body }}</div>
       </div>
@@ -457,7 +458,7 @@
       <table>
         <tr><th style="width:20px">#</th><th style="width:92px">Channel</th><th>Ask this</th><th>Time and look for</th><th>A break point looks like</th></tr>
         {% for t in d.mystery_shop %}
-        <tr><td class="b">{{ loop.index }}</td><td class="b">{{ t.channel }}</td><td>“{{ t.opening_question }}”</td><td class="ink2"><b>{{ t.time_this }}.</b> {{ t.look_for }}</td><td class="ink2">{{ t.break_point_looks_like }}</td></tr>
+        <tr><td class="b">{{ loop.index }}</td><td class="b">{{ t.channel }}</td><td>“{{ t.opening_question }}”</td><td class="ink2"><b>{{ t.time_this | trim('.') }}.</b> {{ t.look_for }}</td><td class="ink2">{{ t.break_point_looks_like }}</td></tr>
         {% endfor %}
       </table>
     </div>
@@ -547,12 +548,12 @@
   </div>
   <div class="body">
     <table style="font-size:9.6px;table-layout:fixed">
-      <tr><th style="width:48px">ID</th><th>Claim</th><th style="width:30%">Source</th><th style="width:64px">Date</th><th style="width:70px">Type</th><th style="width:68px">Verdict</th><th style="width:60px">Prospect</th></tr>
+      <tr><th style="width:48px">ID</th><th>Claim</th><th style="width:30%">Source</th><th style="width:76px">Date</th><th style="width:72px">Type</th><th style="width:70px">Verdict</th><th style="width:58px">Prospect</th></tr>
       {% for e in page %}
       <tr><td class="b" style="padding:3px 6px 3px 0">{{ e.id }}</td>
         <td style="padding:3px 6px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.claim }}</td>
         <td style="padding:3px 6px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" class="ink2">{% if e.source_url %}<a href="{{ e.source_url }}">{{ e.source_title or e.source_url }}</a>{% else %}{{ e.method or 'Estimate' }}{% endif %}</td>
-        <td style="padding:3px 6px 3px 0">{{ e.source_date }}</td><td style="padding:3px 6px 3px 0">{{ e.evidence_type | replace('_', ' ') }}</td>
+        <td style="padding:3px 6px 3px 0;white-space:nowrap">{{ e.source_date }}</td><td style="padding:3px 6px 3px 0">{{ e.evidence_type | replace('_', ' ') }}</td>
         <td style="padding:3px 6px 3px 0">{{ e.verdict }}</td><td style="padding:3px 0">{{ 'Safe' if e.prospect_safe else 'Internal' }}</td></tr>
       {% endfor %}
     </table>

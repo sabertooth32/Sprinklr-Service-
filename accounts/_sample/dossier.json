@@ -1,0 +1,2582 @@
+{
+ "meta": {
+  "account": "Northstar Pacific Bank",
+  "slug": "_sample",
+  "run_date": "2026-11-22",
+  "region": "APJI. Fictional markets: Port Meridian (HQ), Selanta and the Orivu Islands",
+  "focus": "FICTIONAL SAMPLE for engine testing. Retail banking service. No real company, person or source.",
+  "validation": {
+   "facts_checked": 42,
+   "confirmed": 30,
+   "corrected": 3,
+   "dropped": 6,
+   "people_checked": 11,
+   "people_removed": 2,
+   "gates": [
+    {
+     "gate": "G1 Facts",
+     "by": "V1 and V2 fact-check agents",
+     "status": "pass_with_notes",
+     "note": "42 facts checked. 3 corrected, 6 dropped, 2 unverified and 1 stale kept internal."
+    },
+    {
+     "gate": "G2 People",
+     "by": "V3 people-check agent",
+     "status": "pass_with_notes",
+     "note": "11 people checked. 2 removed. 1 acting role kept as map only."
+    },
+    {
+     "gate": "G3 ICP",
+     "by": "V4 ICP judge",
+     "status": "pass",
+     "note": "92.5 points, tier A. No hard stop."
+    },
+    {
+     "gate": "G4 Red team",
+     "by": "V5 red-team agent",
+     "status": "pass_with_notes",
+     "note": "Outage, regulator and vendor findings set to internal only. No blocks open."
+    }
+   ]
+  }
+ },
+ "snapshot": {
+  "one_liner": "FICTIONAL SAMPLE. Northstar Pacific Bank is an invented Port Meridian retail bank. It serves about 6 million customers in three APJI markets.",
+  "industry": "Retail banking (fictional)",
+  "hq": "Port Meridian (fictional city-state)",
+  "facts": [
+   {
+    "label": "Retail customers",
+    "value": "6.1M",
+    "basis": "disclosed",
+    "evidence": [
+     "R1-01"
+    ]
+   },
+   {
+    "label": "APJI markets served",
+    "value": "3",
+    "basis": "disclosed",
+    "evidence": [
+     "R1-01"
+    ]
+   },
+   {
+    "label": "Service colleagues",
+    "value": "1,000+",
+    "basis": "disclosed",
+    "evidence": [
+     "R4-02"
+    ]
+   },
+   {
+    "label": "Assisted contacts a year",
+    "value": "About 9.75M",
+    "basis": "estimate",
+    "evidence": [
+     "R4-02",
+     "R4-12",
+     "R4-16",
+     "R4-17"
+    ]
+   },
+   {
+    "label": "Live service channels",
+    "value": "7",
+    "basis": "disclosed",
+    "evidence": [
+     "R4-01"
+    ]
+   },
+   {
+    "label": "Branches",
+    "value": "84",
+    "basis": "disclosed",
+    "evidence": [
+     "R4-15"
+    ]
+   }
+  ],
+  "strategic_priorities": [
+   {
+    "priority": "Simply Service 2028: 80% of service contacts on digital channels",
+    "so_what": "Digital channels must resolve, not redirect. Today several send customers back to the phone.",
+    "evidence": [
+     "R1-02"
+    ]
+   },
+   {
+    "priority": "Cost-to-income ratio of 45% by FY2028",
+    "so_what": "Service cost is in scope. Repeat contacts and long calls are the visible levers.",
+    "evidence": [
+     "R1-02"
+    ]
+   },
+   {
+    "priority": "Responsible use of AI in customer service",
+    "so_what": "They will want tested, auditable AI. Lead with control, not speed.",
+    "evidence": [
+     "R7-05",
+     "R7-03"
+    ]
+   }
+  ],
+  "sprinklr_relationship": {
+   "status": "none found",
+   "note": "Fictional account. No Sprinklr relationship exists or is implied."
+  },
+  "why_now_headline": "A new service head, a 2027 complaints rule and a cost plan arrive together."
+ },
+ "icp": {
+  "total": 92.5,
+  "tier": "A",
+  "verdict": "Tier A. High volume, seven channels, a public AI agenda and visible gaps between channels. Full pack, multi-thread now.",
+  "scorecard": [
+   {
+    "line": "Contact volume",
+    "max": 20,
+    "points": 20,
+    "reason": "Over 4 million calls disclosed. More than 1,000 service colleagues."
+   },
+   {
+    "line": "Scale",
+    "max": 15,
+    "points": 15,
+    "reason": "6.1 million retail customers."
+   },
+   {
+    "line": "Channel complexity",
+    "max": 15,
+    "points": 15,
+    "reason": "Seven live channels across voice, chat, messaging, social and branches."
+   },
+   {
+    "line": "Industry fit",
+    "max": 10,
+    "points": 10,
+    "reason": "Retail banking. High-contact B2C."
+   },
+   {
+    "line": "Fragmentation",
+    "max": 10,
+    "points": 5,
+    "reason": "Four separate tools seen, but only two are confirmed. Half marks."
+   },
+   {
+    "line": "AI ambition vs. reality",
+    "max": 10,
+    "points": 10,
+    "reason": "Public AI agenda and pilots. The web assistant cannot hand over to a person."
+   },
+   {
+    "line": "Why now",
+    "max": 10,
+    "points": 10,
+    "reason": "New service head in July 2026. Complaints rule from January 2027."
+   },
+   {
+    "line": "APJI footprint",
+    "max": 5,
+    "points": 5,
+    "reason": "Three markets and three service languages."
+   },
+   {
+    "line": "Access",
+    "max": 5,
+    "points": 2.5,
+    "reason": "Buying centres are named. No existing Sprinklr relationship. Half marks."
+   }
+  ],
+  "hard_stops": [
+   {
+    "stop": "Fewer than 100 service agents",
+    "triggered": false,
+    "note": "More than 1,000 service colleagues disclosed."
+   },
+   {
+    "stop": "Pure B2B, low contact volume",
+    "triggered": false,
+    "note": "Retail bank with millions of contacts."
+   },
+   {
+    "stop": "Signed a full-suite competitor in the last 12 months, no visible gaps",
+    "triggered": false,
+    "note": "No such signing found. Gaps are visible."
+   },
+   {
+    "stop": "Sanctions, legal or reputational block",
+    "triggered": false,
+    "note": "None found."
+   },
+   {
+    "stop": "Open Sprinklr Service opportunity already owned by an AE",
+    "triggered": false,
+    "note": "Fictional account. The SDR checks CRM before sending."
+   }
+  ]
+ },
+ "why_now": [
+  {
+   "date": "2026-07",
+   "type": "New leader",
+   "what": "A new Group Head of Customer Service started on 1 July 2026.",
+   "so_what": "New leaders review the estate in their first six months. Reach her before plans lock.",
+   "urgency": "now",
+   "evidence": [
+    "R9-01"
+   ]
+  },
+  {
+   "date": "2026-09",
+   "type": "Incident",
+   "what": "A six-hour app outage in September sent customers to the hotline.",
+   "so_what": "Peak-load resilience is a live topic. Let them raise it; do not lead with it.",
+   "urgency": "now",
+   "evidence": [
+    "R8-02"
+   ]
+  },
+  {
+   "date": "2027-01",
+   "type": "Regulation",
+   "what": "Banks must publish complaint-handling times from January 2027.",
+   "so_what": "Slow follow-up becomes public. Stage 6 gaps gain a deadline.",
+   "urgency": "soon",
+   "evidence": [
+    "R8-03"
+   ]
+  },
+  {
+   "date": "2026-05",
+   "type": "Strategy and cost plan",
+   "what": "Simply Service 2028 targets 80% digital contacts and a 45% cost-to-income ratio.",
+   "so_what": "Digital must resolve more, at lower cost. That is our case.",
+   "urgency": "soon",
+   "evidence": [
+    "R1-02"
+   ]
+  },
+  {
+   "date": "2026-06",
+   "type": "AI launch",
+   "what": "Navi Plus entered pilot with 300,000 app customers.",
+   "so_what": "The pilot will expose hand-over and control gaps. Offer help, not a replacement.",
+   "urgency": "soon",
+   "evidence": [
+    "R7-03"
+   ]
+  },
+  {
+   "date": "2027",
+   "type": "Possible tender (unverified)",
+   "what": "Trade press and a forum post point to a platform tender and a contract renewal in 2027.",
+   "so_what": "Unverified. Test it in discovery. Never state it to the prospect.",
+   "urgency": "background",
+   "evidence": [
+    "R8-04",
+    "R3-04"
+   ]
+  }
+ ],
+ "entry_points": [
+  {
+   "rank": 1,
+   "title": "Let Navi hand over to a person",
+   "pain": "Navi answers questions but cannot pass a customer to an agent. Customers restart on the phone.",
+   "buying_centre": "Digital / channels",
+   "why_now": "Navi Plus is in pilot. Hand-over is the next thing the pilot must solve.",
+   "capability_ids": [
+    "ai-agents",
+    "live-chat",
+    "knowledge-base"
+   ],
+   "proof": "An Asia-based fintech resolved 274K+ cases by chatbot in eight months. Live chat CSAT was 4.51 out of 5.",
+   "evidence": [
+    "R6-02",
+    "R7-02",
+    "R4-19"
+   ]
+  },
+  {
+   "rank": 2,
+   "title": "Carry context from app to phone",
+   "pain": "Customers verified in the app give card number and ID again on the hotline.",
+   "buying_centre": "Customer service / contact centre",
+   "why_now": "A new service head owns published wait and resolution standards.",
+   "capability_ids": [
+    "unified-agent-desktop",
+    "omnichannel-routing",
+    "messaging-channels"
+   ],
+   "proof": "Uber cut first response time by 33% and average case handling time by 89 seconds.",
+   "evidence": [
+    "R6-05",
+    "R4-03",
+    "R4-13"
+   ]
+  },
+  {
+   "rank": 3,
+   "title": "Answer faster in public",
+   "pain": "Public replies take a median of four hours. Most send the customer to another channel.",
+   "buying_centre": "Social / brand care",
+   "why_now": "Complaint-handling times become public in January 2027.",
+   "capability_ids": [
+    "social-customer-service",
+    "omnichannel-routing"
+   ],
+   "proof": "Gulf Bank (Kuwait) cut average first response time from 58 minutes to under 6 minutes.",
+   "evidence": [
+    "R5-05",
+    "R8-03"
+   ]
+  }
+ ],
+ "buying_centres": [
+  {
+   "centre": "Customer service / contact centre",
+   "what_they_own": "Hotline, in-app chat, secure messages. Wait times, resolution and cost to serve.",
+   "our_angle": "Shorter calls and fewer repeats when context follows the customer."
+  },
+  {
+   "centre": "Digital / channels",
+   "what_they_own": "The app, Navi, Navi Plus and the 80% digital target.",
+   "our_angle": "Keep Navi. Add a clean hand-over to people, with the conversation attached."
+  },
+  {
+   "centre": "CX / customer experience",
+   "what_they_own": "The end-to-end journey, complaints and reputation.",
+   "our_angle": "One outside-in map of seven stages, showing where customers repeat themselves."
+  },
+  {
+   "centre": "Technology",
+   "what_they_own": "Contact-centre platforms, integration and AI risk controls.",
+   "our_angle": "Fewer joins between voice and digital. Tested, logged AI."
+  },
+  {
+   "centre": "Operations / transformation",
+   "what_they_own": "The cost-to-income target and delivery of the 2028 plan.",
+   "our_angle": "An illustrative model of the cost levers, with every assumption visible."
+  },
+  {
+   "centre": "Social / brand care",
+   "what_they_own": "Public replies on social pages and brand risk.",
+   "our_angle": "First replies within the hour, with service cases handled where the customer asked."
+  },
+  {
+   "centre": "Risk / compliance",
+   "what_they_own": "Complaint handling and the 2027 publication rule.",
+   "our_angle": "Faster follow-up and a full record of every contact. Map only for now."
+  }
+ ],
+ "contacts": [
+  {
+   "name": "Aiko Tanaka-Reyes",
+   "title": "Group Head of Customer Service",
+   "location": "Port Meridian",
+   "centre": "Customer service / contact centre",
+   "deal_role": "economic buyer",
+   "priority": 1,
+   "role_status": "current",
+   "role_evidence_date": "2026-07-01",
+   "care_about": [
+    "Hotline wait times",
+    "First contact resolution",
+    "Cost to serve under the 2028 plan"
+   ],
+   "hook": "New in role since July 2026, with published service standards to improve.",
+   "opener": "You took over service in July. We looked at the journey your customers see today.",
+   "best_channel": "Email, then a sponsored introduction",
+   "avoid": [
+    "Do not criticise the team she inherited.",
+    "Do not raise the September outage first."
+   ],
+   "evidence": [
+    "R9-01"
+   ]
+  },
+  {
+   "name": "Mirela Vasquez-Chen",
+   "title": "Head of Conversational AI",
+   "location": "Port Meridian",
+   "centre": "Digital / channels",
+   "deal_role": "champion",
+   "priority": 1,
+   "role_status": "current",
+   "role_evidence_date": "2026-09-23",
+   "care_about": [
+    "Navi's resolution rate",
+    "A safe roll-out of Navi Plus",
+    "Hand-over from assistant to people"
+   ],
+   "hook": "Spoke in September 2026 and leads the Navi Plus pilot.",
+   "opener": "Your help article says Navi cannot connect a customer to a person. May I share our view?",
+   "best_channel": "LinkedIn",
+   "avoid": [
+    "Do not suggest replacing Navi."
+   ],
+   "evidence": [
+    "R9-03",
+    "R7-03"
+   ]
+  },
+  {
+   "name": "Tobias Nakamura-Singh",
+   "title": "Chief Customer Officer",
+   "location": "Port Meridian",
+   "centre": "CX / customer experience",
+   "deal_role": "champion",
+   "priority": 1,
+   "role_status": "current",
+   "role_evidence_date": "2026-11-12",
+   "care_about": [
+    "Journey quality across channels",
+    "Complaint volumes",
+    "Public reputation"
+   ],
+   "hook": "Owns the customer journey that the 2028 plan moves to digital.",
+   "opener": "We looked at seven stages of your service journey from the outside. Three stand out.",
+   "best_channel": "Email",
+   "avoid": [
+    "Do not present our scores as facts about his journey."
+   ],
+   "evidence": [
+    "R9-02",
+    "R1-02"
+   ]
+  },
+  {
+   "name": "Priyanka Halvorsen-Tan",
+   "title": "Head of Contact Centre Operations",
+   "location": "Selanta",
+   "centre": "Customer service / contact centre",
+   "deal_role": "user leader",
+   "priority": 1,
+   "role_status": "current",
+   "role_evidence_date": "2026-10-06",
+   "care_about": [
+    "Peak-hour queues",
+    "Agent workload",
+    "Repeat calls"
+   ],
+   "hook": "Runs both service hubs and was quoted on service in October 2026.",
+   "opener": "Your team answers over four million calls a year. We looked at what reaches them.",
+   "best_channel": "Phone",
+   "avoid": [
+    "Do not imply her agents are the problem."
+   ],
+   "evidence": [
+    "R9-04",
+    "R4-02"
+   ]
+  },
+  {
+   "name": "Kofi Lindqvist-Rao",
+   "title": "Head of Contact Centre Technology",
+   "location": "Port Meridian",
+   "centre": "Technology",
+   "deal_role": "technical evaluator",
+   "priority": 1,
+   "role_status": "current",
+   "role_evidence_date": "2026-09-23",
+   "care_about": [
+    "Platform stability",
+    "Fewer tools to integrate",
+    "AI risk controls"
+   ],
+   "hook": "Spoke for Northstar at a September 2026 service forum.",
+   "opener": "You run the platforms behind every channel. We looked at where customers feel the joins.",
+   "best_channel": "LinkedIn",
+   "avoid": [
+    "Do not attack the telephony platform."
+   ],
+   "evidence": [
+    "R9-03"
+   ]
+  },
+  {
+   "name": "Devan Okafor-Lim",
+   "title": "Chief Digital Officer",
+   "location": "Port Meridian",
+   "centre": "Digital / channels",
+   "deal_role": "economic buyer",
+   "priority": 2,
+   "role_status": "current",
+   "role_evidence_date": "2026-11-12",
+   "care_about": [
+    "The 80% digital contact target",
+    "App adoption",
+    "AI at scale"
+   ],
+   "hook": "Sponsors the target to move 80% of service contacts to digital.",
+   "opener": "Your 2028 plan moves service to digital. We saw where digital hands back to the phone.",
+   "best_channel": "Introduction through the conversational AI team",
+   "avoid": [
+    "Do not pitch a replacement for Navi."
+   ],
+   "evidence": [
+    "R9-02",
+    "R1-02"
+   ]
+  },
+  {
+   "name": "Leilani Brankovic-Wu",
+   "title": "Chief Operating Officer",
+   "location": "Port Meridian",
+   "centre": "Operations / transformation",
+   "deal_role": "economic buyer",
+   "priority": 2,
+   "role_status": "current",
+   "role_evidence_date": "2026-11-12",
+   "care_about": [
+    "The cost-to-income target",
+    "Productivity",
+    "Delivery risk"
+   ],
+   "hook": "Accountable for the cost-to-income target that puts service cost in scope.",
+   "opener": "Service cost sits inside your 2028 target. We modelled the visible levers from outside.",
+   "best_channel": "Executive sponsor, not cold outreach",
+   "avoid": [
+    "Do not quote a savings number. Offer the model."
+   ],
+   "evidence": [
+    "R9-02",
+    "R1-02"
+   ]
+  },
+  {
+   "name": "Marisol Adeyemi-Sato",
+   "title": "Head of Social Care and Digital Engagement",
+   "location": "Port Meridian",
+   "centre": "Social / brand care",
+   "deal_role": "user leader",
+   "priority": 2,
+   "role_status": "current",
+   "role_evidence_date": "2026-10-06",
+   "care_about": [
+    "Public reply times",
+    "Brand risk",
+    "Team capacity"
+   ],
+   "hook": "Leads the social care team that replies in public 12 hours a day.",
+   "opener": "We read 60 public replies from October. May I share what we saw?",
+   "best_channel": "LinkedIn",
+   "avoid": [
+    "Do not criticise the tone of public replies."
+   ],
+   "evidence": [
+    "R9-04",
+    "R5-05"
+   ]
+  },
+  {
+   "name": "Henrik Oyelaran-Ng",
+   "title": "Acting Head of Complaints and Conduct",
+   "location": "Port Meridian",
+   "centre": "Risk / compliance",
+   "deal_role": "influencer",
+   "priority": 3,
+   "role_status": "likely_current",
+   "role_evidence_date": "2026-10-06",
+   "care_about": [
+    "Complaint handling times",
+    "The 2027 publication rule",
+    "Repeat complaints"
+   ],
+   "hook": "Named as acting head in October 2026. Map only until the role is confirmed.",
+   "opener": "From 2027 you publish complaint handling times. We saw where follow-up slows today.",
+   "best_channel": "Do not contact yet",
+   "avoid": [
+    "Do not contact until a permanent appointment is confirmed."
+   ],
+   "evidence": [
+    "R9-04",
+    "R8-03"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "id": "phone",
+   "name": "24/7 phone hotline",
+   "type": "voice",
+   "market": "All three markets",
+   "entry_point": "Contact page and the app's 'Call us' button",
+   "hours": "24/7",
+   "login_required": false,
+   "volume": {
+    "low": 3600000,
+    "base": 4200000,
+    "high": 4800000,
+    "basis": "estimate",
+    "method": "Disclosed 'over 4 million calls answered' in FY2025 (R4-02). Base adds 5% for abandoned calls. Range plus or minus 15%."
+   },
+   "incumbent": "VoxCore CX (likely)",
+   "strengths": "Open 24/7 in three languages, with a person one keypress away.",
+   "headline_gap": "Long peak waits, and app callers must identify themselves again.",
+   "experience": {
+    "access": {
+     "score": 4,
+     "basis": "observed",
+     "note": "24/7 in three languages. Numbers differ by market.",
+     "evidence": [
+      "R4-01"
+     ]
+    },
+    "speed": {
+     "score": 2,
+     "basis": "disclosed",
+     "note": "Peak average wait is 5 min 40 s. Reviews mention holding.",
+     "evidence": [
+      "R4-03",
+      "R5-02"
+     ]
+    },
+    "resolution": {
+     "score": 3.5,
+     "basis": "disclosed",
+     "note": "71% of calls are resolved first time.",
+     "evidence": [
+      "R4-03"
+     ]
+    },
+    "continuity": {
+     "score": 2,
+     "basis": "observed",
+     "note": "App callers must give card number and ID again.",
+     "evidence": [
+      "R6-05"
+     ]
+    },
+    "personal": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 1,
+     "basis": "observed",
+     "note": "Keypad menu only. No speech or intent understanding.",
+     "evidence": [
+      "R6-05"
+     ]
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "smart_routing": {
+     "score": 1,
+     "basis": "observed",
+     "note": "Fixed five-option menu.",
+     "evidence": [
+      "R6-05"
+     ]
+    },
+    "insight_quality": {
+     "score": 1.5,
+     "basis": "inferred",
+     "note": "A job advert points to manual sampling of about 1% of calls.",
+     "evidence": [
+      "R7-06"
+     ]
+    },
+    "trust_control": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Callers can press 0 for a person at any time.",
+     "evidence": [
+      "R6-05"
+     ]
+    }
+   }
+  },
+  {
+   "id": "web-bot",
+   "name": "Web assistant 'Navi'",
+   "type": "self_service",
+   "market": "All three markets",
+   "entry_point": "Chat bubble on every help page",
+   "hours": "24/7",
+   "login_required": false,
+   "volume": {
+    "low": 2200000,
+    "base": 3000000,
+    "high": 3800000,
+    "basis": "estimate",
+    "method": "About 25M help-page visits a year x 12% assistant open rate (R4-19). Not counted as assisted contacts."
+   },
+   "incumbent": "in-house",
+   "strengths": "Always on, no login, instant answers in three languages.",
+   "headline_gap": "No live hand-over: asking for a person returns a phone number.",
+   "experience": {
+    "access": {
+     "score": 5,
+     "basis": "observed",
+     "note": "On every help page, 24/7, with no login.",
+     "evidence": [
+      "R6-01"
+     ]
+    },
+    "speed": {
+     "score": 5,
+     "basis": "disclosed",
+     "note": "Help page promises instant answers at any hour.",
+     "evidence": [
+      "R6-01"
+     ]
+    },
+    "resolution": {
+     "score": 2,
+     "basis": "observed",
+     "note": "Answers common questions. A card dispute gets a guide and a phone number.",
+     "evidence": [
+      "R6-02"
+     ]
+    },
+    "continuity": {
+     "score": 1.5,
+     "basis": "observed",
+     "note": "No transfer to a person. The customer starts again by phone.",
+     "evidence": [
+      "R6-02"
+     ]
+    },
+    "personal": {
+     "score": 2,
+     "basis": "inferred",
+     "note": "No login, so answers cannot use customer details.",
+     "evidence": [
+      "R6-01"
+     ]
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 2.5,
+     "basis": "disclosed",
+     "note": "Understands intent and answers from help content. Cannot complete tasks.",
+     "evidence": [
+      "R7-02",
+      "R6-02"
+     ]
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "No human agents on this channel."
+    },
+    "smart_routing": {
+     "score": 1.5,
+     "basis": "observed",
+     "note": "Every request for a person gets the same phone number and form.",
+     "evidence": [
+      "R6-02"
+     ]
+    },
+    "insight_quality": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "trust_control": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Says it is a virtual assistant. The human route is a phone number.",
+     "evidence": [
+      "R6-01",
+      "R6-02"
+     ]
+    }
+   }
+  },
+  {
+   "id": "app-chat",
+   "name": "In-app live chat",
+   "type": "chat",
+   "market": "All three markets",
+   "entry_point": "Help tab inside the mobile app",
+   "hours": "8am to 10pm daily",
+   "login_required": true,
+   "volume": {
+    "low": 1800000,
+    "base": 2400000,
+    "high": 3000000,
+    "basis": "estimate",
+    "method": "6.1M customers x 55% active app users x 0.7 chats per user a year (R4-16). Range plus or minus 25%."
+   },
+   "incumbent": "Helix CRM",
+   "strengths": "Fast replies from agents who complete card tasks inside the chat.",
+   "headline_gap": "Closed overnight; a verified app session does not carry over to the hotline.",
+   "experience": {
+    "access": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Needs a login. Agents work 8am to 10pm.",
+     "evidence": [
+      "R4-07"
+     ]
+    },
+    "speed": {
+     "score": 4,
+     "basis": "disclosed",
+     "note": "Median first reply is under two minutes.",
+     "evidence": [
+      "R4-03"
+     ]
+    },
+    "resolution": {
+     "score": 4,
+     "basis": "observed",
+     "note": "Agents can freeze cards and change limits in chat.",
+     "evidence": [
+      "R4-07"
+     ]
+    },
+    "continuity": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Chat history stays in the app for 90 days.",
+     "evidence": [
+      "R4-07"
+     ]
+    },
+    "personal": {
+     "score": 4,
+     "basis": "observed",
+     "note": "The customer is logged in, so agents see accounts and products.",
+     "evidence": [
+      "R4-07"
+     ]
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 3,
+     "basis": "disclosed",
+     "note": "Generative assistant Navi Plus is in pilot with 300,000 customers.",
+     "evidence": [
+      "R7-03"
+     ]
+    },
+    "agent_assist": {
+     "score": 2.5,
+     "basis": "disclosed",
+     "note": "AI reply suggestions are in test with 200 chat agents.",
+     "evidence": [
+      "R7-03"
+     ]
+    },
+    "smart_routing": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "insight_quality": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "trust_control": {
+     "score": 4,
+     "basis": "disclosed",
+     "note": "Customers are told when AI answers. Answers are reviewed before release.",
+     "evidence": [
+      "R7-05"
+     ]
+    }
+   }
+  },
+  {
+   "id": "secure-msg",
+   "name": "Secure message and web form",
+   "type": "email",
+   "market": "All three markets",
+   "entry_point": "App inbox and web contact form",
+   "hours": "Replies on working days",
+   "login_required": null,
+   "volume": {
+    "low": 900000,
+    "base": 1300000,
+    "high": 1700000,
+    "basis": "estimate",
+    "method": "6.1M customers x 0.21 written requests per customer a year (R4-17). Range plus or minus 30%."
+   },
+   "incumbent": "Helix CRM",
+   "strengths": "A written record for every request.",
+   "headline_gap": "Three-working-day reply target, and follow-ups need a new message.",
+   "experience": {
+    "access": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Easy to find in the app and on the web.",
+     "evidence": [
+      "R4-11"
+     ]
+    },
+    "speed": {
+     "score": 1.5,
+     "basis": "observed",
+     "note": "Reply target is three working days. Some reviews report longer.",
+     "evidence": [
+      "R4-11",
+      "R5-02"
+     ]
+    },
+    "resolution": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "continuity": {
+     "score": 2,
+     "basis": "observed",
+     "note": "Replies come from a no-reply address. Follow-ups need a new message.",
+     "evidence": [
+      "R4-11"
+     ]
+    },
+    "personal": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 0,
+     "basis": "observed",
+     "note": "No suggested answers before the customer sends.",
+     "evidence": [
+      "R4-11"
+     ]
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "smart_routing": {
+     "score": 1,
+     "basis": "observed",
+     "note": "The customer picks one of nine fixed topics.",
+     "evidence": [
+      "R4-11"
+     ]
+    },
+    "insight_quality": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "trust_control": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   }
+  },
+  {
+   "id": "whatsapp",
+   "name": "WhatsApp service",
+   "type": "messaging",
+   "market": "Port Meridian and Selanta",
+   "entry_point": "Verified number on the contact page",
+   "hours": "Menu 24/7. Agents 8am to 8pm",
+   "login_required": false,
+   "volume": {
+    "low": 1400000,
+    "base": 1500000,
+    "high": 1700000,
+    "basis": "disclosed",
+    "method": "Disclosed first-year total (R4-12). High case assumes launch in the third market."
+   },
+   "incumbent": "Pingline Messaging (likely)",
+   "strengths": "Popular new channel: 1.5 million conversations in its first year.",
+   "headline_gap": "Cannot handle account questions; customers go to the app or hotline.",
+   "experience": {
+    "access": {
+     "score": 4,
+     "basis": "observed",
+     "note": "Verified number, always on. Live in two of three markets.",
+     "evidence": [
+      "R4-13",
+      "R4-12"
+     ]
+    },
+    "speed": {
+     "score": 3.5,
+     "basis": "observed",
+     "note": "Menu is instant. Stated agent reply time is about 10 minutes.",
+     "evidence": [
+      "R4-13"
+     ]
+    },
+    "resolution": {
+     "score": 2,
+     "basis": "observed",
+     "note": "Account questions are sent to the app or the hotline.",
+     "evidence": [
+      "R4-13"
+     ]
+    },
+    "continuity": {
+     "score": 2,
+     "basis": "inferred",
+     "note": "No sign that the conversation follows the customer to the app or hotline.",
+     "evidence": [
+      "R4-13"
+     ]
+    },
+    "personal": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 2,
+     "basis": "observed",
+     "note": "Six-option menu. No task completion.",
+     "evidence": [
+      "R4-13"
+     ]
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "smart_routing": {
+     "score": 2,
+     "basis": "observed",
+     "note": "The menu choice sends the chat to a team.",
+     "evidence": [
+      "R4-13"
+     ]
+    },
+    "insight_quality": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "trust_control": {
+     "score": 3.5,
+     "basis": "observed",
+     "note": "Customers can type AGENT at any time.",
+     "evidence": [
+      "R4-13"
+     ]
+    }
+   }
+  },
+  {
+   "id": "social",
+   "name": "Social care",
+   "type": "social",
+   "market": "All three markets",
+   "entry_point": "Brand pages listed on the contact page",
+   "hours": "9am to 9pm",
+   "login_required": false,
+   "volume": {
+    "low": 250000,
+    "base": 350000,
+    "high": 500000,
+    "basis": "estimate",
+    "method": "About 960 public service posts counted in one October week x 52 x 7 private messages per public post (assumption)."
+   },
+   "incumbent": "Chorus Social (possible)",
+   "strengths": "Staffed 12 hours a day; replies are signed by a person.",
+   "headline_gap": "Median first reply over four hours; most replies redirect the customer.",
+   "experience": {
+    "access": {
+     "score": 4,
+     "basis": "observed",
+     "note": "Pages are listed on the contact page. Replies appear 9am to 9pm.",
+     "evidence": [
+      "R4-01",
+      "R5-05"
+     ]
+    },
+    "speed": {
+     "score": 2,
+     "basis": "observed",
+     "note": "Median first public reply was 4 h 10 min in our sample.",
+     "evidence": [
+      "R5-05"
+     ]
+    },
+    "resolution": {
+     "score": 1.5,
+     "basis": "observed",
+     "note": "44 of 60 replies sent the customer to another channel.",
+     "evidence": [
+      "R5-05"
+     ]
+    },
+    "continuity": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "personal": {
+     "score": 2.5,
+     "basis": "observed",
+     "note": "Replies are signed with initials but follow a template.",
+     "evidence": [
+      "R5-05"
+     ]
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "smart_routing": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "insight_quality": {
+     "score": 1.5,
+     "basis": "inferred",
+     "note": "A job advert describes a weekly spreadsheet export of mentions.",
+     "evidence": [
+      "R3-05"
+     ]
+    },
+    "trust_control": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   }
+  },
+  {
+   "id": "branches",
+   "name": "Branches",
+   "type": "in_person",
+   "market": "All three markets",
+   "entry_point": "Branch locator with live queue times",
+   "hours": "Weekdays 9am to 4pm. Saturday mornings",
+   "login_required": false,
+   "volume": null,
+   "strengths": "84 branches with live queue times and online appointments.",
+   "headline_gap": "Not visible whether branch staff see earlier digital contacts.",
+   "experience": {
+    "access": {
+     "score": 3,
+     "basis": "observed",
+     "note": "84 branches, business hours, online appointments.",
+     "evidence": [
+      "R4-15"
+     ]
+    },
+    "speed": {
+     "score": 3,
+     "basis": "observed",
+     "note": "Live queue time is shown for each branch.",
+     "evidence": [
+      "R4-15"
+     ]
+    },
+    "resolution": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "continuity": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "personal": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   },
+   "ai": {
+    "self_service_ai": {
+     "score": 1,
+     "basis": "observed",
+     "note": "Appointment booking is a fixed form with a topic menu.",
+     "evidence": [
+      "R4-15"
+     ]
+    },
+    "agent_assist": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "smart_routing": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "insight_quality": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    },
+    "trust_control": {
+     "score": null,
+     "basis": "not_visible",
+     "note": "Not visible from outside. Confirm in discovery."
+    }
+   }
+  }
+ ],
+ "incumbents": [
+  {
+   "layer": "Telephony and contact centre",
+   "vendor": "VoxCore CX",
+   "product": "On-premise contact centre platform",
+   "status": "likely",
+   "confidence": "medium",
+   "so_what": "Voice sits apart from digital. Do not attack it. Start with digital and context.",
+   "evidence": [
+    "R3-01",
+    "R3-02"
+   ]
+  },
+  {
+   "layer": "CRM and case management",
+   "vendor": "Helix CRM",
+   "product": "Helix Service Desk",
+   "status": "confirmed",
+   "confidence": "medium",
+   "so_what": "Runs cases and in-app chat. Position alongside it. Renewal timing is unverified.",
+   "evidence": [
+    "R3-03",
+    "R3-04"
+   ]
+  },
+  {
+   "layer": "Web and app assistant",
+   "vendor": "in-house",
+   "product": "Navi and Navi Plus",
+   "status": "in-house",
+   "confidence": "high",
+   "so_what": "Built by their own engineers and a source of pride. Offer hand-over and testing, not a replacement.",
+   "evidence": [
+    "R7-02",
+    "R7-03"
+   ]
+  },
+  {
+   "layer": "WhatsApp messaging provider",
+   "vendor": "Pingline Messaging",
+   "product": "Business messaging gateway",
+   "status": "likely",
+   "confidence": "medium",
+   "so_what": "A separate tool for one channel. Identity checks are missing, so account questions bounce.",
+   "evidence": [
+    "R4-12"
+   ]
+  },
+  {
+   "layer": "Social care",
+   "vendor": "Chorus Social",
+   "product": "Marketing publishing tool",
+   "status": "possible",
+   "confidence": "low",
+   "so_what": "Inferred from one job advert. Ask in discovery who owns social service cases.",
+   "evidence": [
+    "R3-05"
+   ]
+  },
+  {
+   "layer": "Quality management",
+   "vendor": "in-house",
+   "product": "Manual sampling on spreadsheets",
+   "status": "in-house",
+   "confidence": "low",
+   "so_what": "Inferred from a job advert. About 1% of calls appear to be checked.",
+   "evidence": [
+    "R7-06"
+   ]
+  }
+ ],
+ "journey": {
+  "scenarios": [
+   "Urgent: I see a card payment I do not recognise.",
+   "Routine: I want to change my address.",
+   "Anxious: My transfer did not arrive. Where is my money?",
+   "Emotional: I want to make a complaint about service."
+  ],
+  "stages": [
+   {
+    "n": 1,
+    "name": "Find help",
+    "verdict": "friction",
+    "summary": "Help is easy to find. There are many doors and no guide to the right one.",
+    "break_points": [
+     {
+      "id": "BP-01",
+      "channel_id": "phone",
+      "what_breaks": "The contact page lists 11 options, with no guide to the right one.",
+      "customer_feels": "I am not sure where to start.",
+      "severity": 1,
+      "capability_ids": [
+       "knowledge-base",
+       "guided-workflows"
+      ],
+      "evidence": [
+       "R4-01"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": [
+     {
+      "what_works": "Navi sits on every help page, 24/7, with no login.",
+      "evidence": [
+       "R6-01"
+      ]
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "name": "Self-serve",
+    "verdict": "friction",
+    "summary": "Navi answers common questions well. It cannot complete tasks such as a card dispute.",
+    "break_points": [
+     {
+      "id": "BP-02",
+      "channel_id": "web-bot",
+      "what_breaks": "A card dispute question gets a guide and the hotline number.",
+      "customer_feels": "I asked a clear question and got homework.",
+      "severity": 2,
+      "capability_ids": [
+       "ai-agents",
+       "knowledge-base"
+      ],
+      "evidence": [
+       "R6-02"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": [
+     {
+      "what_works": "Navi handled 58% of web chats without a human in FY2025.",
+      "evidence": [
+       "R7-02"
+      ]
+     }
+    ]
+   },
+   {
+    "n": 3,
+    "name": "Reach a human",
+    "verdict": "breaks",
+    "summary": "The web assistant cannot pass a customer to a person. Peak hotline waits are long.",
+    "break_points": [
+     {
+      "id": "BP-03",
+      "channel_id": "web-bot",
+      "what_breaks": "Asking Navi for a person returns a phone number and a callback form.",
+      "customer_feels": "I have to stop here and start again by phone.",
+      "severity": 3,
+      "capability_ids": [
+       "live-chat",
+       "ai-agents",
+       "omnichannel-routing"
+      ],
+      "evidence": [
+       "R6-02"
+      ],
+      "prospect_safe": true
+     },
+     {
+      "id": "BP-04",
+      "channel_id": "phone",
+      "what_breaks": "Peak hotline waits average 5 min 40 s; reviews often mention holding.",
+      "customer_feels": "My time does not matter.",
+      "severity": 3,
+      "capability_ids": [
+       "voice-ai-agents",
+       "omnichannel-routing",
+       "workforce-management"
+      ],
+      "evidence": [
+       "R4-03",
+       "R5-02"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": [
+     {
+      "what_works": "Hotline callers can press 0 for a person at any time.",
+      "evidence": [
+       "R6-05"
+      ]
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "name": "Explain",
+    "verdict": "breaks",
+    "summary": "Customers who are verified in the app identify themselves again on the phone.",
+    "break_points": [
+     {
+      "id": "BP-05",
+      "channel_id": "phone",
+      "what_breaks": "Callers from the app are still asked for card number and ID.",
+      "customer_feels": "You already know who I am.",
+      "severity": 3,
+      "capability_ids": [
+       "unified-agent-desktop",
+       "omnichannel-routing"
+      ],
+      "evidence": [
+       "R6-05"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": []
+   },
+   {
+    "n": 5,
+    "name": "Resolve",
+    "verdict": "friction",
+    "summary": "In-app chat resolves card tasks. WhatsApp and the web assistant send customers elsewhere.",
+    "break_points": [
+     {
+      "id": "BP-06",
+      "channel_id": "whatsapp",
+      "what_breaks": "Account questions on WhatsApp are sent to the app or the hotline.",
+      "customer_feels": "I chose this channel and it cannot help me.",
+      "severity": 2,
+      "capability_ids": [
+       "messaging-channels",
+       "guided-workflows"
+      ],
+      "evidence": [
+       "R4-13"
+      ],
+      "prospect_safe": true
+     },
+     {
+      "id": "BP-07",
+      "channel_id": "phone",
+      "what_breaks": "Quality checks appear to sample about 1% of calls.",
+      "customer_feels": "The same mistake can reach the next caller.",
+      "severity": 1,
+      "capability_ids": [
+       "quality-management",
+       "conversational-analytics"
+      ],
+      "evidence": [
+       "R7-06"
+      ],
+      "prospect_safe": false
+     }
+    ],
+    "bright_spots": [
+     {
+      "what_works": "In-app chat agents can freeze a card or change a limit in the chat.",
+      "evidence": [
+       "R4-07"
+      ]
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "name": "Follow up",
+    "verdict": "friction",
+    "summary": "Written channels close slowly. Customers must ask again to learn what happened.",
+    "break_points": [
+     {
+      "id": "BP-08",
+      "channel_id": "secure-msg",
+      "what_breaks": "Replies come from a no-reply address; follow-ups need a new message.",
+      "customer_feels": "I have to explain it all again.",
+      "severity": 2,
+      "capability_ids": [
+       "unified-agent-desktop",
+       "agent-copilot"
+      ],
+      "evidence": [
+       "R4-11"
+      ],
+      "prospect_safe": true
+     },
+     {
+      "id": "BP-09",
+      "channel_id": "phone",
+      "what_breaks": "Card dispute outcomes arrive by letter; no online tracker is mentioned.",
+      "customer_feels": "I do not know if anything is happening.",
+      "severity": 2,
+      "capability_ids": [
+       "messaging-channels",
+       "outbound-voice"
+      ],
+      "evidence": [
+       "R6-10"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": []
+   },
+   {
+    "n": 7,
+    "name": "Speak up",
+    "verdict": "friction",
+    "summary": "The social team is present and polite. Public replies are slow and move customers elsewhere.",
+    "break_points": [
+     {
+      "id": "BP-10",
+      "channel_id": "social",
+      "what_breaks": "Median first public reply took 4 h 10 min; most replies redirect.",
+      "customer_feels": "I complained in public and got a form letter.",
+      "severity": 2,
+      "capability_ids": [
+       "social-customer-service",
+       "omnichannel-routing"
+      ],
+      "evidence": [
+       "R5-05"
+      ],
+      "prospect_safe": true
+     }
+    ],
+    "bright_spots": [
+     {
+      "what_works": "The mobile app holds a 4.6 rating from 212,000 ratings.",
+      "evidence": [
+       "R5-01"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "maturity": {
+  "experience_headline": "Connected: strong inside each channel, weaker when customers move between them.",
+  "ai_headline": "Assisted: a capable web assistant and live pilots, while menus still run phone and WhatsApp.",
+  "strengths": [
+   "In-app chat replies in under two minutes and completes card tasks.",
+   "Navi is always on and handled 58% of web chats without a human.",
+   "A published Responsible AI statement, with human review before release.",
+   "Service standards are published every quarter."
+  ],
+  "confidence_note": "Outside-in view from public sources. Agent assist, routing and quality tools are mostly not visible. Confirm in discovery."
+ },
+ "gap_map": [
+  {
+   "gap": "The web assistant cannot hand a customer to a person.",
+   "channel_id": "web-bot",
+   "stage": 3,
+   "capability_ids": [
+    "ai-agents",
+    "live-chat"
+   ],
+   "outcome": "More requests finish in chat. Fewer customers restart on the phone.",
+   "proof": "Umniah (Jordan) cut chatbot-to-agent handovers by 53%.",
+   "priority": 1,
+   "evidence": [
+    "R6-02"
+   ]
+  },
+  {
+   "gap": "App callers identify themselves again on the hotline.",
+   "channel_id": "phone",
+   "stage": 4,
+   "capability_ids": [
+    "unified-agent-desktop",
+    "omnichannel-routing"
+   ],
+   "outcome": "The customer tells the story once. Calls get shorter.",
+   "proof": "Uber cut average case handling time by 89 seconds.",
+   "priority": 1,
+   "evidence": [
+    "R6-05"
+   ]
+  },
+  {
+   "gap": "A keypad menu routes hotline calls by button, not by need.",
+   "channel_id": "phone",
+   "stage": 3,
+   "capability_ids": [
+    "voice-ai-agents",
+    "ai-agents",
+    "omnichannel-routing"
+   ],
+   "outcome": "Routine calls are answered at once. Peak waits fall.",
+   "proof": "A leading telecommunications provider reached 76.18% AI agent containment within four months.",
+   "priority": 1,
+   "evidence": [
+    "R6-05",
+    "R4-03"
+   ]
+  },
+  {
+   "gap": "WhatsApp cannot serve account questions.",
+   "channel_id": "whatsapp",
+   "stage": 5,
+   "capability_ids": [
+    "messaging-channels",
+    "guided-workflows"
+   ],
+   "outcome": "Customers finish account requests in the channel they chose.",
+   "proof": "A leading European airline cut average handle time from 15 minutes to 10 minutes.",
+   "priority": 2,
+   "evidence": [
+    "R4-13"
+   ]
+  },
+  {
+   "gap": "Public social replies are slow and redirect the customer.",
+   "channel_id": "social",
+   "stage": 7,
+   "capability_ids": [
+    "social-customer-service",
+    "omnichannel-routing"
+   ],
+   "outcome": "First public reply within the hour. Cases are solved where they start.",
+   "proof": "A leading Latin American bank halved first response time, from 66.5 minutes to 30 minutes.",
+   "priority": 2,
+   "evidence": [
+    "R5-05"
+   ]
+  },
+  {
+   "gap": "Secure messages wait days, and follow-ups start again.",
+   "channel_id": "secure-msg",
+   "stage": 6,
+   "capability_ids": [
+    "agent-copilot",
+    "unified-platform"
+   ],
+   "outcome": "Faster written replies, with the full thread in one place.",
+   "proof": "A Middle Eastern e-commerce fashion retailer cut case resolution time from six days to 1.8 days.",
+   "priority": 2,
+   "evidence": [
+    "R4-11",
+    "R5-02"
+   ]
+  },
+  {
+   "gap": "Quality checks appear to cover about 1% of calls.",
+   "channel_id": "phone",
+   "stage": 5,
+   "capability_ids": [
+    "quality-management",
+    "conversational-analytics"
+   ],
+   "outcome": "Every contact is scored. Contact drivers are visible each week.",
+   "proof": "Cdiscount raised customer satisfaction scores by 15% after analysing support conversations.",
+   "priority": 3,
+   "evidence": [
+    "R7-06"
+   ]
+  }
+ ],
+ "business_case": {
+  "agent_cost_country": "default",
+  "agents_fte": {
+   "low": 900,
+   "base": 1100,
+   "high": 1300,
+   "basis": "Estimate. 'More than 1,000 service colleagues' disclosed (R4-02), checked against volume / 9,000 contacts per agent."
+  },
+  "kpis": [
+   {
+    "kpi": "AI resolution rate (web assistant)",
+    "today": "58% of web chats (FY2025)",
+    "today_basis": "disclosed",
+    "target": "65 to 70%, including completed tasks",
+    "lever": "AI resolution"
+   },
+   {
+    "kpi": "First contact resolution (hotline)",
+    "today": "71%",
+    "today_basis": "disclosed",
+    "target": "76 to 80%",
+    "lever": "Fewer repeat contacts"
+   },
+   {
+    "kpi": "Peak hotline wait",
+    "today": "5 min 40 s",
+    "today_basis": "disclosed",
+    "target": "Under 3 minutes",
+    "lever": "Voice to messaging shift"
+   },
+   {
+    "kpi": "Average handle time",
+    "today": "Not published",
+    "today_basis": "unknown",
+    "target": "8 to 12% shorter",
+    "lever": "Faster handling"
+   },
+   {
+    "kpi": "Quality coverage",
+    "today": "About 1% of calls",
+    "today_basis": "estimate",
+    "target": "100% of contacts scored",
+    "lever": "Automated quality"
+   },
+   {
+    "kpi": "Social first response time",
+    "today": "4 h 10 min median (sample of 60)",
+    "today_basis": "estimate",
+    "target": "Under 1 hour",
+    "lever": "Voice to messaging shift"
+   }
+  ],
+  "assumptions": [
+   "Volumes are estimates built from disclosed figures. Each channel shows its method.",
+   "Cost per contact uses global benchmarks, not local labour costs.",
+   "Port Meridian is fictional, so the default agent cost applies.",
+   "About 30% of contacts are repeats, per the industry benchmark.",
+   "Half of the handle time saved converts to cost.",
+   "Web assistant sessions are not counted as assisted contacts."
+  ],
+  "upside_not_counted": [
+   "Fewer tools and contracts to run.",
+   "Customer retention after faster resolution.",
+   "Lower complaint-handling effort under the 2027 rule.",
+   "Sales conversations started in verified messaging."
+  ],
+  "narrative": "Northstar handles about ten million assisted contacts a year, mostly by phone. Five levers apply in order, so nothing is counted twice. The largest are AI resolution of routine requests and faster handling. All rates are planning assumptions. Lead with the low scenario and validate with Northstar's data."
+ },
+ "outreach": {
+  "positioning": "We looked at Northstar's service journey the way a customer sees it. Each channel works well alone. The gaps appear when customers move between them.",
+  "sequences": [
+   {
+    "persona": "Head of Customer Service",
+    "for_contacts": [
+     "Aiko Tanaka-Reyes",
+     "Priyanka Halvorsen-Tan"
+    ],
+    "steps": [
+     {
+      "day": 1,
+      "channel": "email",
+      "subject": "Northstar's service journey, seen from outside",
+      "body": "Hi {{first_name}},\n\nWe looked at Northstar's service journey the way a customer sees it.\n\nIn-app chat stands out. Replies arrive in under two minutes and agents finish card tasks in the chat.\n\nOne thing we noticed on the phone. Your help page asks app callers for card number and ID again.\n\nCould I share the two-page view in a 20-minute call next week?\n\n{{sdr_name}}"
+     },
+     {
+      "day": 3,
+      "channel": "linkedin",
+      "body": "Hi {{first_name}}, we looked at Northstar's service journey the way a customer sees it. In-app chat is a real strength. The step from app to hotline looks like the place to start. Happy to send the two-page view. {{sdr_name}}"
+     },
+     {
+      "day": 6,
+      "channel": "call",
+      "body": "Hi {{first_name}}, this is {{sdr_name}} from Sprinklr. I will be brief. We looked at Northstar's service journey the way a customer sees it. Your published standards show a peak hotline wait of 5 minutes 40 seconds. Your help page also asks app callers to identify themselves again. Is carrying context from app to phone on your list for next year? If so, I can walk you through what we saw."
+     },
+     {
+      "day": 10,
+      "channel": "email",
+      "subject": "The model behind the view",
+      "body": "Hi {{first_name}},\n\nA short follow-up on our outside-in view of Northstar's service journey.\n\nWe also built an illustrative model of what the gaps may cost. It uses public volumes and benchmarks, so it needs your data to be right.\n\nI would rather walk you through the assumptions than send a number.\n\nIs 20 minutes worth it? If not, tell me and I will close the file.\n\n{{sdr_name}}"
+     }
+    ]
+   },
+   {
+    "persona": "Digital / AI",
+    "for_contacts": [
+     "Mirela Vasquez-Chen",
+     "Devan Okafor-Lim",
+     "Kofi Lindqvist-Rao"
+    ],
+    "steps": [
+     {
+      "day": 1,
+      "channel": "email",
+      "subject": "When a customer asks Navi for a person",
+      "body": "Hi {{first_name}},\n\nWe looked at Northstar's service journey the way a customer sees it. Navi was our first stop.\n\nIt is always on, needs no login and says clearly that it is a virtual assistant. Your annual report says it handles 58% of web chats alone.\n\nOne step stood out. Your help article says Navi cannot connect a customer to a person. The customer gets the hotline number or a callback form.\n\nCould I show you the full view in 20 minutes?\n\n{{sdr_name}}"
+     },
+     {
+      "day": 3,
+      "channel": "linkedin",
+      "body": "Hi {{first_name}}, we looked at Northstar's service channels the way a customer sees them. Navi is strong on answers. The step from Navi to a person is where the journey restarts. I can send our two-page view. {{sdr_name}}"
+     },
+     {
+      "day": 6,
+      "channel": "call",
+      "body": "Hi {{first_name}}, {{sdr_name}} from Sprinklr. One minute, then you decide. We looked at Northstar's service channels the way a customer sees them. Navi answers well. Your help article says it cannot connect a customer to a person. I know your team builds Navi in-house. We are not asking you to replace it. Would it help to see how others pass context from assistant to agent?"
+     },
+     {
+      "day": 10,
+      "channel": "email",
+      "subject": "Navi Plus and the hand-over",
+      "body": "Hi {{first_name}},\n\nOne more thought on our outside-in view.\n\nNavi Plus is in pilot with 300,000 customers. The harder test comes when it cannot finish a request.\n\nWe mapped where each channel hands over today, and where the customer starts again.\n\nIs it worth 20 minutes to compare notes? I can send the view first.\n\n{{sdr_name}}"
+     }
+    ]
+   },
+   {
+    "persona": "CX",
+    "for_contacts": [
+     "Tobias Nakamura-Singh",
+     "Marisol Adeyemi-Sato"
+    ],
+    "steps": [
+     {
+      "day": 1,
+      "channel": "email",
+      "subject": "Seven stages of Northstar's service journey",
+      "body": "Hi {{first_name}},\n\nWe looked at Northstar's service journey the way a customer sees it, across seven stages.\n\nThe app is a clear strength. It holds a 4.6 rating from 212,000 ratings.\n\nThe last stage is where we saw room. In a sample of 60 public posts, the median first reply took over four hours. Most replies moved the customer to a private message or the hotline.\n\nCould I share the two-page view in a short call?\n\n{{sdr_name}}"
+     },
+     {
+      "day": 3,
+      "channel": "linkedin",
+      "body": "Hi {{first_name}}, we looked at Northstar's service journey the way a customer sees it. Each channel works well alone. The friction sits between them, where customers explain things twice. I can send the two-page view. {{sdr_name}}"
+     },
+     {
+      "day": 6,
+      "channel": "call",
+      "body": "Hi {{first_name}}, this is {{sdr_name}} from Sprinklr. I will keep it short. We looked at Northstar's service journey the way a customer sees it. We found five things that work well. We also found ten places where the customer slows down or starts again. Would you like the two-page view before we talk? I can send it today."
+     },
+     {
+      "day": 10,
+      "channel": "email",
+      "subject": "A first view to test with you",
+      "body": "Hi {{first_name}},\n\nLast note from me on this.\n\nOur view of Northstar's journey is built only from public sources. Some of it will be wrong.\n\nThat is why I would like to test it with you. Twenty minutes is enough to see where we are right.\n\nIf the timing is off, tell me and I will come back next quarter.\n\n{{sdr_name}}"
+     }
+    ]
+   }
+  ]
+ },
+ "mystery_shop": [
+  {
+   "id": "MS-01",
+   "channel": "Web assistant Navi, daytime",
+   "opening_question": "What should someone do about a card payment they do not recognise?",
+   "time_this": "Time to the first answer, then time to any offer of a person.",
+   "look_for": "Does Navi offer a live chat, or only a phone number?",
+   "break_point_looks_like": "A guide, the hotline number or a callback form. Do not fill in the form."
+  },
+  {
+   "id": "MS-02",
+   "channel": "Phone hotline, weekday at 12.30pm",
+   "opening_question": "How can a customer raise a daily transfer limit?",
+   "time_this": "Seconds from the first ring to a person.",
+   "look_for": "Is the wait announced? Is a general question answered without an ID check?",
+   "break_point_looks_like": "A wait over five minutes, or an ID request first. End politely before any ID step."
+  },
+  {
+   "id": "MS-03",
+   "channel": "WhatsApp service",
+   "opening_question": "Why might a card be declined when travelling?",
+   "time_this": "Time to the first reply after typing AGENT.",
+   "look_for": "Does the agent answer, or point to another channel?",
+   "break_point_looks_like": "You are told to log in to the app or call."
+  },
+  {
+   "id": "MS-04",
+   "channel": "Web assistant Navi, after 10pm",
+   "opening_question": "Is there a person I can chat with now?",
+   "time_this": "Time to learn what is offered at night.",
+   "look_for": "Is any live option offered after hours?",
+   "break_point_looks_like": "Only the hotline number or a callback form."
+  },
+  {
+   "id": "MS-05",
+   "channel": "Web assistant Navi",
+   "opening_question": "How do I follow up on a secure message?",
+   "time_this": "Time to a clear answer.",
+   "look_for": "Is there a way to track a message or reply to it?",
+   "break_point_looks_like": "You are told to send a new message."
+  },
+  {
+   "id": "MS-06",
+   "channel": "Social pages. Read only, do not post",
+   "opening_question": "None. Read the ten latest public replies.",
+   "time_this": "Time between each customer post and the first reply.",
+   "look_for": "Is the question answered in public?",
+   "break_point_looks_like": "A template reply asking for a private message."
+  }
+ ],
+ "discovery_questions": [
+  {
+   "question": "When Navi cannot finish a request, what happens next for the customer?",
+   "why_ask": "Checks the hand-over gap we saw from outside.",
+   "for": "Digital / channels"
+  },
+  {
+   "question": "What does a hotline agent see when a customer calls from the app?",
+   "why_ask": "Checks whether verification and history carry over.",
+   "for": "Customer service / contact centre"
+  },
+  {
+   "question": "Which contact reasons drive the most repeat calls today?",
+   "why_ask": "Sizes the repeat-contact lever with their data.",
+   "for": "Customer service / contact centre"
+  },
+  {
+   "question": "How many tools does an agent use to close one case?",
+   "why_ask": "Tests fragmentation. We could confirm only two tools.",
+   "for": "Technology"
+  },
+  {
+   "question": "How do you check quality across calls, chats and messages?",
+   "why_ask": "Tests the 1% sampling estimate without stating it.",
+   "for": "Customer service / contact centre"
+  },
+  {
+   "question": "Who owns a service question that arrives on a social page?",
+   "why_ask": "Tests whether social care sits with service or marketing.",
+   "for": "Social / brand care"
+  },
+  {
+   "question": "How will you measure complaint-handling times for the 2027 rule?",
+   "why_ask": "Links follow-up gaps to a dated requirement.",
+   "for": "Risk / compliance"
+  },
+  {
+   "question": "What must be true before Navi Plus moves beyond the pilot?",
+   "why_ask": "Surfaces their AI release criteria and risk owners.",
+   "for": "Digital / channels"
+  },
+  {
+   "question": "What would you most like WhatsApp to do that it cannot do today?",
+   "why_ask": "Tests demand for verified, task-completing messaging.",
+   "for": "Digital / channels"
+  }
+ ],
+ "objections": [
+  {
+   "objection": "We build our AI in-house.",
+   "response": "Keep it. Navi already handles 58% of web chats. We focus on the hand-over to people and on testing before release."
+  },
+  {
+   "objection": "We already use Helix CRM for service.",
+   "response": "It stays the system of record. We connect to it and add the channels and context around the agent."
+  },
+  {
+   "objection": "Our telephony contract has years to run.",
+   "response": "Then start with digital channels and context. Voice can follow when the contract allows."
+  },
+  {
+   "objection": "We are in a cost programme. No new spend.",
+   "response": "That is why we modelled cost levers first. Let us test the low scenario with your data."
+  },
+  {
+   "objection": "Sprinklr is a social media tool.",
+   "response": "Social care is one part. Forrester named Sprinklr a Strong Performer for contact-centre platforms in Q2 2025."
+  }
+ ],
+ "do_not_say": [
+  "Do not claim a Gartner Magic Quadrant position for contact centre as a service. Sprinklr is not in the 2025 or 2026 editions.",
+  "Do not say Sprinklr cuts contact-centre costs by 30%. That claim is unverified.",
+  "Do not name a reference bank in APJI for Sprinklr Service. None is published with results.",
+  "Do not present the Forrester 210% ROI study as new. Its date is unclear.",
+  "Do not name VoxCore CX, Helix CRM, Pingline Messaging or Chorus Social to the prospect.",
+  "Do not quote the 1% quality sampling estimate as fact. It comes from one job advert.",
+  "Do not open with the September outage or the complaints rule. Let them raise it.",
+  "Do not mention a 2027 tender or contract renewal. Both are unverified.",
+  "Do not say Navi is weak. It handles 58% of web chats alone.",
+  "Do not quote a value number in outreach. Offer to walk through the model.",
+  "Never say we tested, audited or mystery-shopped their contact centre.",
+  "Never share live-test screenshots or transcripts. Never name their staff."
+ ],
+ "prospect_view": {
+  "title": "Northstar Pacific Bank: your service journey, seen from outside",
+  "subtitle": "Fictional sample. An outside-in first view, built only from public sources.",
+  "framing": "We looked at your public service channels the way a customer sees them. This is a first view to test with you. Scores are outside-in estimates, not facts about your operation.",
+  "strengths": [
+   {
+    "text": "In-app chat replies in under two minutes, and agents complete card tasks in the chat.",
+    "evidence": [
+     "R4-03",
+     "R4-07"
+    ]
+   },
+   {
+    "text": "Navi is always on, needs no login and handled 58% of web chats alone.",
+    "evidence": [
+     "R6-01",
+     "R7-02"
+    ]
+   },
+   {
+    "text": "You tell customers when AI answers, and review AI answers before release.",
+    "evidence": [
+     "R7-05"
+    ]
+   }
+  ],
+  "observations": [
+   {
+    "stage": 3,
+    "title": "From assistant to person",
+    "text": "Asking Navi for a person returns the hotline number and a callback form. The chat does not continue with an agent.",
+    "evidence": [
+     "R6-02"
+    ]
+   },
+   {
+    "stage": 4,
+    "title": "Telling the story twice",
+    "text": "The 'Calling us' page asks callers to have card number and ID ready. This includes calls made from the app.",
+    "evidence": [
+     "R6-05"
+    ]
+   },
+   {
+    "stage": 6,
+    "title": "Knowing it is done",
+    "text": "Secure message replies come from a no-reply address. Card dispute outcomes arrive by letter, with no online tracker mentioned.",
+    "evidence": [
+     "R4-11",
+     "R6-10"
+    ]
+   },
+   {
+    "stage": 7,
+    "title": "Replies in public",
+    "text": "In a sample of 60 public posts, the median first reply took 4 hours 10 minutes. 44 replies moved the customer to another channel.",
+    "evidence": [
+     "R5-05"
+    ]
+   }
+  ],
+  "opportunities": [
+   {
+    "title": "One conversation, from assistant to agent",
+    "what_good_looks_like": "The assistant passes the full conversation to a live agent. The customer never starts again.",
+    "capability_ids": [
+     "ai-agents",
+     "live-chat",
+     "omnichannel-routing"
+    ]
+   },
+   {
+    "title": "Known on every channel",
+    "what_good_looks_like": "A customer verified in the app is recognised on the phone and in messaging. Agents see one history.",
+    "capability_ids": [
+     "unified-agent-desktop",
+     "messaging-channels",
+     "omnichannel-routing"
+    ]
+   },
+   {
+    "title": "Answers in public, updates without asking",
+    "what_good_looks_like": "Public questions get a first reply within the hour. Customers receive progress updates without having to ask.",
+    "capability_ids": [
+     "social-customer-service",
+     "messaging-channels"
+    ]
+   }
+  ],
+  "cta": "Spend 30 minutes with us to test this view against your own data.",
+  "show_value_band": true
+ },
+ "evidence": [
+  {
+   "id": "R1-01",
+   "claim": "Northstar Pacific Bank serves 6.1 million retail customers in three markets.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/investors/annual-report-fy2025",
+   "source_title": "FICTIONAL - Northstar Pacific Bank Annual Report FY2025",
+   "source_date": "2026-03",
+   "quote": "We serve 6.1 million customers across Port Meridian, Selanta and the Orivu Islands.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "strategy"
+  },
+  {
+   "id": "R1-02",
+   "claim": "The 'Simply Service 2028' plan targets 80% of service contacts on digital channels and a 45% cost-to-income ratio.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/investors/investor-day-2026",
+   "source_title": "FICTIONAL - Investor Day 2026: Simply Service 2028",
+   "source_date": "2026-05-19",
+   "quote": "By 2028, four in five service contacts will start and finish on a digital channel.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "strategy"
+  },
+  {
+   "id": "R3-01",
+   "claim": "A July 2026 job advert seeks a telephony engineer for an on-premise VoxCore CX platform.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/careers/telephony-engineer-voxcore",
+   "source_title": "FICTIONAL - Job advert: Telephony Engineer, Contact Centre Platforms",
+   "source_date": "2026-07-08",
+   "quote": "Maintain and upgrade our on-premise VoxCore CX contact centre platform.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "technology"
+  },
+  {
+   "id": "R3-02",
+   "claim": "A 2024 tender notice named VoxCore CX as contact-centre telephony supplier on a five-year term.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/press/tender-notice-2024-telephony",
+   "source_title": "FICTIONAL - Tender award notice: contact centre telephony",
+   "source_date": "2024-06-12",
+   "confidence": "low",
+   "verdict": "stale",
+   "via": "page",
+   "stale": true,
+   "prospect_safe": false,
+   "category": "technology"
+  },
+  {
+   "id": "R3-03",
+   "claim": "Helix CRM lists Northstar as a customer for case management and in-app chat.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/vendors/helix-crm-customer-page",
+   "source_title": "FICTIONAL - Helix CRM customer page: Northstar Pacific Bank",
+   "source_date": "2025-09",
+   "quote": "Northstar runs service cases and in-app chat on Helix Service Desk.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "technology"
+  },
+  {
+   "id": "R3-04",
+   "claim": "A forum post says the Helix CRM contract is due for renewal in mid-2027.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/forums/cx-tech-forum-thread-4411",
+   "source_title": "FICTIONAL - CX technology forum thread",
+   "source_date": "2026-06-03",
+   "confidence": "low",
+   "verdict": "unverified",
+   "via": "search_summary",
+   "prospect_safe": false,
+   "category": "technology"
+  },
+  {
+   "id": "R3-05",
+   "claim": "Social care appears to run on Chorus Social, a marketing tool, with weekly spreadsheet reports.",
+   "evidence_type": "inferred",
+   "source_url": "https://example.com/northstar/careers/social-community-executive",
+   "source_title": "FICTIONAL - Job advert: Social Community Executive",
+   "source_date": "2026-08-21",
+   "method": "Job advert asks for Chorus Social skills and a weekly export of mentions to spreadsheets. One advert, no second source.",
+   "confidence": "low",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "technology"
+  },
+  {
+   "id": "R4-01",
+   "claim": "The contact page lists 11 ways to get help, from a 24/7 hotline to social pages.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/contact-us",
+   "source_title": "FICTIONAL - Contact us",
+   "source_date": "2026-11-10",
+   "quote": "Call us any time, day or night, in three languages.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-02",
+   "claim": "More than 1,000 service colleagues answered over 4 million hotline calls in FY2025.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/investors/sustainability-report-fy2025",
+   "source_title": "FICTIONAL - Sustainability Report FY2025",
+   "source_date": "2026-04",
+   "quote": "Our 1,000-plus service colleagues answered over 4 million calls.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "volume"
+  },
+  {
+   "id": "R4-03",
+   "claim": "Published standards show a 5 min 40 s peak hotline wait and 71% first-call resolution. In-app chat replies in under two minutes.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/help/service-standards-q3-2026",
+   "source_title": "FICTIONAL - Our service standards, Q3 2026",
+   "source_date": "2026-10-15",
+   "quote": "Average peak wait 5 min 40 s. First-call resolution 71%. Median first chat reply 1 min 50 s.",
+   "confidence": "high",
+   "verdict": "corrected",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-07",
+   "claim": "In-app chat needs a login and has live agents from 8am to 10pm. Agents can freeze cards and change limits.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/chat-with-us-in-the-app",
+   "source_title": "FICTIONAL - Help article: Chat with us in the app",
+   "source_date": "2026-11-10",
+   "quote": "Because you are logged in, our team can see your accounts. Chat history is kept for 90 days.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-11",
+   "claim": "Secure messages offer nine fixed topics, a three-working-day reply target and replies from a no-reply address.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/secure-message",
+   "source_title": "FICTIONAL - Help article: Send us a secure message",
+   "source_date": "2026-11-10",
+   "quote": "We aim to reply within three working days. To follow up, please send a new message.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-12",
+   "claim": "WhatsApp service launched in November 2025 in two markets and handled 1.5 million conversations in its first year.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/press/whatsapp-first-year",
+   "source_title": "FICTIONAL - Press release: One year of Northstar on WhatsApp",
+   "source_date": "2026-11-05",
+   "quote": "Customers in Port Meridian and Selanta started 1.5 million conversations, delivered with our partner Pingline Messaging.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "volume"
+  },
+  {
+   "id": "R4-13",
+   "claim": "The WhatsApp service opens with a six-option menu and sends account questions to the app or the hotline.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/whatsapp",
+   "source_title": "FICTIONAL - Help article: Message us on WhatsApp",
+   "source_date": "2026-11-10",
+   "quote": "Type AGENT any time. Agents reply 8am to 8pm, usually within 10 minutes. For account questions, log in to the app or call us.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-15",
+   "claim": "The branch locator lists 84 branches with live queue times and an appointment form.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/branches/locator",
+   "source_title": "FICTIONAL - Branch locator",
+   "source_date": "2026-11-10",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R4-16",
+   "claim": "In-app chat handles about 2.4 million conversations a year.",
+   "evidence_type": "inferred",
+   "source_url": "https://example.com/northstar/research/volume-in-app-chat",
+   "source_title": "FICTIONAL - Account Radar estimate: in-app chat volume",
+   "source_date": "2026-11-14",
+   "method": "6.1M customers x 55% active app users (assumption) x 0.7 chats per user a year (assumption) = 2.35M. Range plus or minus 25%.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "volume"
+  },
+  {
+   "id": "R4-17",
+   "claim": "Secure messages and web forms total about 1.3 million a year.",
+   "evidence_type": "inferred",
+   "source_url": "https://example.com/northstar/research/volume-secure-message",
+   "source_title": "FICTIONAL - Account Radar estimate: secure message volume",
+   "source_date": "2026-11-14",
+   "method": "6.1M customers x 0.21 written requests per customer a year (assumption) = 1.28M. Range plus or minus 30%.",
+   "confidence": "low",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "volume"
+  },
+  {
+   "id": "R4-19",
+   "claim": "The web assistant Navi handles about 3.0 million sessions a year.",
+   "evidence_type": "inferred",
+   "source_url": "https://example.com/northstar/research/volume-web-assistant",
+   "source_title": "FICTIONAL - Account Radar estimate: web assistant sessions",
+   "source_date": "2026-11-14",
+   "method": "About 25M help-page visits a year (traffic estimate) x 12% assistant open rate (assumption) = 3.0M. Range plus or minus 25%.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "volume"
+  },
+  {
+   "id": "R5-01",
+   "claim": "The mobile app holds a 4.6 out of 5 rating from 212,000 ratings.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/reviews/app-store-listing",
+   "source_title": "FICTIONAL - App store listing: Northstar Mobile",
+   "source_date": "2026-11-12",
+   "confidence": "high",
+   "verdict": "corrected",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "customer_voice"
+  },
+  {
+   "id": "R5-02",
+   "claim": "Of 120 recent public reviews, 41 mention hotline hold time. 14 mention slow secure message replies.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/reviews/review-site-sample-nov-2026",
+   "source_title": "FICTIONAL - Review site sample, 120 reviews read",
+   "source_date": "2026-11-12",
+   "quote": "Forty minutes on hold to unblock a card.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "customer_voice"
+  },
+  {
+   "id": "R5-05",
+   "claim": "In 60 public social posts from October 2026, the median first reply took 4 h 10 min. 44 replies redirected the customer.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/social/public-reply-sample-oct-2026",
+   "source_title": "FICTIONAL - Public social reply sample, 60 posts timed",
+   "source_date": "2026-10-31",
+   "quote": "Hi, please send us a private message or call our hotline.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "customer_voice"
+  },
+  {
+   "id": "R6-01",
+   "claim": "The 'Meet Navi' page shows a labelled virtual assistant on every help page, 24/7, with no login.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/meet-navi",
+   "source_title": "FICTIONAL - Help article: Meet Navi, our virtual assistant",
+   "source_date": "2026-11-12",
+   "quote": "I'm Navi, Northstar's virtual assistant. Instant answers on every help page, any time. No login needed.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R6-02",
+   "claim": "A help article says Navi cannot connect customers to a person. For card disputes it gives a guide and the hotline number.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/what-navi-can-do",
+   "source_title": "FICTIONAL - Help article: What Navi can and cannot do",
+   "source_date": "2026-11-12",
+   "quote": "Navi can't connect you to a colleague yet. Please call our hotline or request a callback. For card disputes, Navi shares our dispute guide and hotline number.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R6-05",
+   "claim": "The 'Calling us' page shows a five-option keypad menu. It asks all callers, including app callers, for card number and ID.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/calling-us",
+   "source_title": "FICTIONAL - Help article: Calling us",
+   "source_date": "2026-11-12",
+   "quote": "Have your card number and ID ready, even if you call from the app. Press 0 at any time to speak to us.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R6-10",
+   "claim": "The card dispute page says outcomes are sent by letter within 30 days and mentions no online tracker.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/help/card-disputes",
+   "source_title": "FICTIONAL - Help article: Disputing a card payment",
+   "source_date": "2026-11-12",
+   "quote": "We will write to you with the outcome within 30 days.",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "channel"
+  },
+  {
+   "id": "R7-02",
+   "claim": "The annual report says the in-house assistant Navi handled 58% of web chats without a human in FY2025.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/investors/annual-report-fy2025#digital",
+   "source_title": "FICTIONAL - Northstar Pacific Bank Annual Report FY2025, digital section",
+   "source_date": "2026-03",
+   "quote": "Navi, built by our own engineers, resolved 58% of web chats without a colleague.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "ai"
+  },
+  {
+   "id": "R7-03",
+   "claim": "A generative assistant, Navi Plus, is in pilot with 300,000 app customers. 200 chat agents are testing AI reply suggestions.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/press/navi-plus-pilot",
+   "source_title": "FICTIONAL - Press release: Navi Plus pilot begins",
+   "source_date": "2026-06-24",
+   "confidence": "high",
+   "verdict": "corrected",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "ai"
+  },
+  {
+   "id": "R7-05",
+   "claim": "A Responsible AI statement says customers are told when AI answers and AI answers are reviewed before release.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/about/responsible-ai",
+   "source_title": "FICTIONAL - Our Responsible AI statement",
+   "source_date": "2026-03-30",
+   "quote": "We always tell you when you are talking to AI. Every AI answer type is reviewed by a person before release.",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": true,
+   "category": "ai"
+  },
+  {
+   "id": "R7-06",
+   "claim": "Quality checks appear to sample about 1% of hotline calls by hand.",
+   "evidence_type": "inferred",
+   "source_url": "https://example.com/northstar/careers/quality-analyst-service",
+   "source_title": "FICTIONAL - Job advert: Quality Analyst, Customer Service",
+   "source_date": "2026-09-02",
+   "method": "Advert asks analysts to score five calls per agent a month. Five calls / about 480 calls per agent a month = about 1%.",
+   "confidence": "low",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "ai"
+  },
+  {
+   "id": "R8-02",
+   "claim": "A mobile app outage on 14 September 2026 lasted about six hours and led to long hotline queues.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/news/meridian-ledger-app-outage",
+   "source_title": "FICTIONAL - The Meridian Ledger: Northstar app down for six hours",
+   "source_date": "2026-09-15",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "trigger"
+  },
+  {
+   "id": "R8-03",
+   "claim": "The Port Meridian Monetary Board requires banks to publish complaint-handling times from January 2027.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/regulator/notice-2026-14-complaint-handling",
+   "source_title": "FICTIONAL - Port Meridian Monetary Board Notice 2026-14",
+   "source_date": "2026-08-18",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "trigger"
+  },
+  {
+   "id": "R8-04",
+   "claim": "A trade newsletter reports that Northstar plans a contact-centre platform tender in 2027.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/news/apji-service-tech-weekly-issue-88",
+   "source_title": "FICTIONAL - APJI Service Tech Weekly, issue 88",
+   "source_date": "2026-10-09",
+   "confidence": "low",
+   "verdict": "unverified",
+   "via": "search_summary",
+   "prospect_safe": false,
+   "category": "trigger"
+  },
+  {
+   "id": "R9-01",
+   "claim": "Aiko Tanaka-Reyes was appointed Group Head of Customer Service from 1 July 2026.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/press/new-group-head-of-customer-service",
+   "source_title": "FICTIONAL - Press release: Northstar names Group Head of Customer Service",
+   "source_date": "2026-06-17",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "person"
+  },
+  {
+   "id": "R9-02",
+   "claim": "The leadership page lists Devan Okafor-Lim, Leilani Brankovic-Wu and Tobias Nakamura-Singh in their current roles.",
+   "evidence_type": "first_hand",
+   "source_url": "https://example.com/northstar/about/leadership",
+   "source_title": "FICTIONAL - Our leadership team",
+   "source_date": "2026-11-12",
+   "confidence": "high",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "person"
+  },
+  {
+   "id": "R9-03",
+   "claim": "Mirela Vasquez-Chen and Kofi Lindqvist-Rao spoke for Northstar at a September 2026 service forum.",
+   "evidence_type": "third_party",
+   "source_url": "https://example.com/northstar/events/apji-service-futures-forum-2026-speakers",
+   "source_title": "FICTIONAL - APJI Service Futures Forum 2026: speakers",
+   "source_date": "2026-09-23",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "person"
+  },
+  {
+   "id": "R9-04",
+   "claim": "A newsroom article quotes Priyanka Halvorsen-Tan, Marisol Adeyemi-Sato and Henrik Oyelaran-Ng by title.",
+   "evidence_type": "disclosed",
+   "source_url": "https://example.com/northstar/newsroom/inside-our-service-hubs",
+   "source_title": "FICTIONAL - Newsroom: Inside our service hubs",
+   "source_date": "2026-10-06",
+   "confidence": "medium",
+   "verdict": "confirmed",
+   "via": "page",
+   "prospect_safe": false,
+   "category": "person"
+  }
+ ]
+}

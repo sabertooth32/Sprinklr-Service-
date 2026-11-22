@@ -24,7 +24,7 @@ Count what you did for `meta.validation` (facts checked, confirmed, corrected, d
 | Section | What goes in | Limits |
 |---|---|---|
 | `evidence` | Only findings you actually reference. Keep the research ids (`R4-07`). Set `category`, `verdict`, `stale`, `prospect_safe` | `prospect_safe` only if confirmed or corrected, not inferred, not low confidence, dated, fresh |
-| `snapshot` | One-liner, 4–6 headline facts, 2–4 strategic priorities with a "so what for service" | One-liner max 25 words |
+| `snapshot` | One-liner, 4–6 headline facts, 2–4 strategic priorities with a "so what for service" | One-liner max 25 words. Fact values max 20 characters, e.g. "18.4M", "SGD 22.9B" |
 | `icp` | V4's scorecard. Nine lines, in framework order | Verdict max 25 words |
 | `why_now` | 3–7 dated triggers, most urgent first | `so_what` max 18 words |
 | `entry_points` | Exactly 3. Pain + buying centre + why now + Sprinklr capability + one proof point from the facts file | Title max 8 words |

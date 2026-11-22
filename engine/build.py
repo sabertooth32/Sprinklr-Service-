@@ -55,7 +55,7 @@ def cell(score):
 
 def build_context(dossier, theme):
     facts = json.loads((ROOT / "framework" / "data" / "sprinklr-service-facts.json").read_text())
-    caps = {c["id"]: c for c in facts["capabilities"]}
+    caps = {c["id"]: {**c, "name": c["name"].split(" (")[0]} for c in facts["capabilities"]}  # short names for pills
     ev = {e["id"]: e for e in dossier["evidence"]}
     idx = gates.indexes(dossier)
     by_id = {c["id"]: c for c in idx["channels"]}
@@ -159,7 +159,7 @@ def build_context(dossier, theme):
         "contact_pages": chunks([c for c in contacts if c["priority"] == 1], 6),
         "stages": stages, "all_bps": all_bps, "gaps": gaps,
         "sequence_pages": dossier["outreach"]["sequences"],
-        "evidence_pages": chunks(evidence_used, 24),
+        "evidence_pages": chunks(evidence_used, 22),
         "pv": pv, "pv_sources": pv_sources, "obs_by_stage": obs_by_stage,
         "facts": facts, "report_path": report_path,
         "analyst_safe": [a for a in facts.get("analyst_recognition", []) if "NOT" not in a["what"] and "not included" not in a["what"]][:3],
@@ -177,7 +177,7 @@ def outreach_md(ctx):
     for seq in d["outreach"]["sequences"]:
         out += ["", f"## Sequence — {seq['persona']}", "", f"For: {', '.join(seq['for_contacts']) or 'this persona'}", ""]
         for st in seq["steps"]:
-            out.append(f"### Day {st['day']} · {st['channel'].title()}" + (f" · Subject: {st['subject']}" if st.get("subject") else ""))
+            out.append(f"### Day {st['day']} · {st['channel'].title().replace('Linkedin', 'LinkedIn')}" + (f" · Subject: {st['subject']}" if st.get("subject") else ""))
             out += ["", "```", st["body"], "```", ""]
     return "\n".join(out) + "\n"
 

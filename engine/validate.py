@@ -227,6 +227,10 @@ def validate(dossier):
     if want == "C":
         E("icp: tier C. This account must not get a pack")
 
+    for f in dossier["snapshot"]["facts"]:
+        if len(f["value"]) > 20:
+            E(f"snapshot fact '{f['label']}': value \"{f['value']}\" is {len(f['value'])} characters. Keep headline values to 20, e.g. \"6.1M\" or \"SGD 22.9B\"")
+
     # --- G5.6 people
     names = []
     for c in dossier["contacts"]:
@@ -235,6 +239,8 @@ def validate(dossier):
             E(f"contact {c['name']}: no evidence for the role")
         if c["priority"] == 1 and c["role_status"] != "current":
             W(f"contact {c['name']}: priority 1 but role only 'likely_current'. Check LinkedIn before sending")
+        if re.search(r"\b(mystery[- ]shopp\w*|we (tested|audited|tried|asked|called|messaged|chatted)|our (audit|test)s?)\b", c["opener"].lower()):
+            E(f"contact {c['name']}: opener describes a test of their channels. Say what a customer sees, not what we did")
         for field, limit in (("hook", 24), ("opener", 30)):
             n = len(c[field].split())
             if n > limit:

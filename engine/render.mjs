@@ -25,6 +25,10 @@ for (const name of names) {
         if (r.height && r.bottom - limit > worst) { worst = r.bottom - limit; who = (el.className || el.tagName) + ': ' + (el.textContent || '').trim().slice(0, 50); }
         if (r.width && r.right > box.right - 20) out.push(`page ${i + 1}: element runs off the right edge (${(el.textContent || '').trim().slice(0, 40)})`);
       });
+      // A box whose own content spills out of it will overlap its neighbours.
+      pg.querySelectorAll('.card, .opp, .msg, .person, .pin, .obs, .stage, .chip').forEach(el => {
+        if (el.scrollHeight - el.clientHeight > 3) out.push(`page ${i + 1} "${pg.dataset.title || ''}": a box is too small for its text (${(el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 50)})`);
+      });
       if (worst > 1) out.push(`page ${i + 1} "${pg.dataset.title || ''}": content overflows by ${Math.round(worst)}px (${who})`);
     });
     return out;
