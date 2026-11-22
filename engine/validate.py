@@ -249,6 +249,9 @@ def validate(dossier):
         W("contacts: fewer than 3 priority-1 contacts")
 
     # --- G5.7 business case computes
+    country = dossier["business_case"]["agent_cost_country"]
+    if country not in value_model.load_defaults()["loaded_cost_per_agent_usd"]:
+        W(f"business_case: no agent cost for country '{country}'. Using the default. Add it to engine/value_defaults.json")
     result = value_model.compute(dossier)
     sc = result["scenarios"]
     if sc["base"]["total"] <= 0:
@@ -273,9 +276,9 @@ def validate(dossier):
     for inc in dossier["incumbents"]:
         if inc["status"] != "in-house" and len(inc["vendor"]) > 3 and re.search(rf"\b{re.escape(inc['vendor'].lower())}\b", pv_text):
             E(f"prospect_view: names incumbent vendor '{inc['vendor']}'")
-    for bad in ("fail", "terrible", "worst", "broken", "poor ", "bad "):
-        if bad in pv_text:
-            W(f"prospect_view: contains '{bad.strip()}'. Phrase gaps as opportunities")
+    for bad in ("fail", "fails", "failed", "failure", "terrible", "worst", "broken", "poor", "bad"):
+        if re.search(rf"\b{bad}\b", pv_text):
+            W(f"prospect_view: contains '{bad}'. Phrase gaps as opportunities")
     crisp = [("prospect_view", pv, True), ("outreach", dossier["outreach"], True),
              ("contacts", dossier["contacts"], False), ("entry_points", dossier["entry_points"], False),
              ("journey", dossier["journey"], False), ("gap_map", dossier["gap_map"], False)]
@@ -304,8 +307,10 @@ def validate(dossier):
         q = t["opening_question"].lower()
         if "sprinklr" in " ".join(str(v) for v in t.values()).lower():
             E(f"mystery_shop {t['id']}: mentions Sprinklr. Live tests are run as an ordinary member of the public")
-        if re.search(r"\b(my|our) (card|account|transaction|payment|transfer|money|bill|order|booking|policy|claim|complaint)\b", q) or \
-                re.search(r"\bi (have|had|see|saw|lost|made|was charged|want to (make|file|lodge) a complaint)\b", q):
+# "What should I do if I see a transaction I do not recognise?" is honest. "I have a fraudulent transaction" is not.
+        stated = re.sub(r"\b(if|when|in case|suppose)\b[^?.!]*", "", q)  # drop hypothetical clauses, keep what is asserted
+        if re.search(r"\bi (have|had|see|saw|lost|made|sent|paid|was charged|was debited|got charged|want to (make|file|lodge) a complaint|want to complain)\b", stated) or \
+                re.search(r"\b(my|our) (card|account|transaction|payment|transfer|money|bill|order|booking|policy|claim|complaint|refund)\b", stated):
             E(f"mystery_shop {t['id']}: the question claims a personal case (\"{t['opening_question'][:60]}\"). Ask a general question instead")
     for seq in dossier["outreach"]["sequences"]:
         for st in seq["steps"]:
