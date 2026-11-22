@@ -523,6 +523,8 @@
       </div>
       <div class="card tint"><div class="label">In this dossier</div>
         <div class="small" style="margin-top:3px"><b>{{ report.stats.evidence_total }}</b> evidence records. <b>{{ report.stats.evidence_prospect_safe }}</b> cleared for prospect content. <b>{{ report.warnings | length }}</b> open warnings.</div></div>
+      {% if v.limits %}<div class="card" style="background:var(--warn-bg);border-color:transparent"><div class="label" style="color:var(--warn-ink)">Know the limits of this run</div>
+        <ul class="tight tiny" style="margin-top:3px">{% for l in v.limits %}<li>{{ l }}</li>{% endfor %}</ul></div>{% endif %}
     </div>
     <div class="grow">
       <h2>Validation gates</h2>

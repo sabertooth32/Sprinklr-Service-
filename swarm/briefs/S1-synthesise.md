@@ -1,12 +1,29 @@
-# S1 · Synthesise the dossier
+# S1 · Synthesis guide (shared by S1a, S1b and S1c)
 
-**Mission:** turn validated research into ONE file, `<work folder>/dossier.json`. The engine builds every SDR page and the prospect infographic from it. A junior SDR will act on every word.
+**Mission:** turn validated research into `<work folder>/dossier.json`. The engine builds every SDR page and the prospect infographic from it. A junior SDR will act on every word.
+
+Three agents each write one part. Code joins them:
+
+| Agent | Writes | Sections |
+|---|---|---|
+| S1a Account and people | `<work folder>/parts/a.json` | `meta`, `snapshot`, `icp`, `why_now`, `buying_centres`, `contacts` |
+| S1b Experience audit | `<work folder>/parts/b.json` | `channels`, `incumbents`, `journey`, `maturity`, `gap_map`, `mystery_shop` |
+| S1c Commercial and content | `<work folder>/parts/c.json` | `entry_points`, `business_case`, `outreach`, `discovery_questions`, `objections`, `do_not_say`, `prospect_view`, and the gates in `meta.validation` |
+
+## How evidence works (read this twice)
+1. Run `python3 engine/digest.py <work folder>` once. It joins every finding with the validators' verdicts.
+2. Read `<work folder>/digest/index-*.md` for your areas. One line per finding: id, verdict, SAFE or internal, type, confidence, date, claim, validator notes.
+3. Read `<work folder>/digest/blocks/*.json` for the structured blocks (channels, stack, journey, people, scorecard, red-team issues).
+4. In your part, **reference evidence by id only** (`"evidence": ["R4-25", "R7-04"]`). Do not write an `evidence` section. `engine/merge_parts.py` copies the records, so nobody can change a verdict or a prospect-safe flag by hand.
+5. Need an estimate of your own, such as a channel volume? Add it under `extra_evidence` in your part: `{"id": "S-01", "claim": "...", "evidence_type": "inferred", "method": "how you worked it out", "source_date": "<run date>", "confidence": "low", "category": "volume"}`.
+6. To hold a SAFE record back from the prospect, list its id under `not_prospect_safe`. You may restrict. You may never widen.
+7. Records marked `internal` can support internal sections. They can never support `prospect_view`.
+8. If every record is `via: search_summary`, no page was opened. Paraphrase facts. Never present a quote as verbatim in prospect content.
 
 ## Read first
-1. `framework/01-icp.md`, `03-maturity-models.md`, `04-value-model.md`, `05-validation-gates.md`.
-2. `framework/data/sprinklr-service-facts.json` — the only Sprinklr capabilities, proof points and analyst facts you may use. Use capability `id`s exactly. Read its `unverified` list: those claims are banned.
-3. Everything in `<work folder>/research/` and `<work folder>/validation/`.
-4. `engine/schema/dossier.schema.json` — the contract. `accounts/_sample/dossier.json` shows a complete example if it exists.
+1. `framework/01-icp.md`, `03-maturity-models.md`, `04-value-model.md`, `05-validation-gates.md`, `08-live-test-rules.md`.
+2. `framework/data/sprinklr-service-facts.json` — the only Sprinklr capabilities, proof points and analyst facts you may use. Use capability `id`s exactly. Its `unverified` list is banned.
+3. `engine/schema/dossier.schema.json` — the contract. `accounts/_sample/dossier.json` is a complete, passing example.
 
 ## Apply the validators before you write anything
 | Validator said | You do |
@@ -18,12 +35,11 @@
 | V4 `irrelevant_findings` | Drop |
 | V5 `block` | Fix or delete. V5 `internal_only` → `prospect_safe: false` |
 | V2 score review | Take the lower score |
-Count what you did for `meta.validation` (facts checked, confirmed, corrected, dropped, people checked, people removed). List the gates G1–G4 with status and a one-line note.
+The digest already applies fact-check verdicts and red-team blocks to each finding. You apply them to the structured blocks: people, vendors, scores, themes. The counts in `meta.validation` are filled by code. S1c lists the gates G1 to G4 with status and a one-line note, and writes `meta.validation.limits`: 2 to 4 plain sentences on what this run could not do (for example: no page was opened, so every quote needs a live check).
 
 ## Section guide
 | Section | What goes in | Limits |
 |---|---|---|
-| `evidence` | Only findings you actually reference. Keep the research ids (`R4-07`). Set `category`, `verdict`, `stale`, `prospect_safe` | `prospect_safe` only if confirmed or corrected, not inferred, not low confidence, dated, fresh |
 | `snapshot` | One-liner, 4–6 headline facts, 2–4 strategic priorities with a "so what for service" | One-liner max 25 words. Fact values max 20 characters, e.g. "18.4M", "SGD 22.9B" |
 | `icp` | V4's scorecard. Nine lines, in framework order | Verdict max 25 words |
 | `why_now` | 3–7 dated triggers, most urgent first | `so_what` max 18 words |
@@ -66,8 +82,10 @@ Count what you did for `meta.validation` (facts checked, confirmed, corrected, d
 - No words like fail, broken, poor, bad, worst.
 - Sentences max 20 words.
 
-## Then pass the code gates
-Run `python3 engine/validate.py <work folder>/dossier.json`. Fix every FAIL and re-run until it exits 0. Read the warnings and fix those that are cheap. Do not weaken a fact or flip `prospect_safe` just to pass: remove the claim instead.
+## Then pass the code gates (S1c does this, after a.json and b.json exist)
+1. `python3 engine/merge_parts.py <work folder>` builds `dossier.json`. Fix any unknown evidence id in the part that used it.
+2. `python3 engine/validate.py <work folder>/dossier.json`. Fix every FAIL in the part file that owns the section, merge again, and re-run until it exits 0.
+3. Read the warnings and fix the cheap ones. Never weaken a fact to pass: remove the claim instead.
 
 ## Return
-The dossier path, whether the validator passed, its last lines, what you dropped and why, and open questions for the SDR.
+Your part's path, what you left out and why, and open questions for the SDR. S1c also returns whether the validator passed and its last lines.

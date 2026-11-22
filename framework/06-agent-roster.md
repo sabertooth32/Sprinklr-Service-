@@ -18,8 +18,8 @@ One account name in. Eighteen specialists. Eight gates. One pack out.
 └───────────────────────────────┬────────────────────────────────────────────┘
               Tier C or hard stop? ──► STOP. No content.
                                 ▼
-┌─ SYNTHESISE (1 agent + code gates) ────────────────────────────────────────┐
-│ S1 builds dossier.json  ──►  validate.py (G5, G6)  ──►  fix until it passes │
+┌─ SYNTHESISE (3 agents + code gates) ────────────────────────────────────────┐
+│ S1a + S1b + S1c write parts ─► code joins verdicts ─► validate.py (G5, G6)  │
 └───────────────────────────────┬────────────────────────────────────────────┘
                                 ▼
 ┌─ BUILD (code) ─────────────────────────────────────────────────────────────┐

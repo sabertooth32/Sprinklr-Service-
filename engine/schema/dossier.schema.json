@@ -110,6 +110,13 @@
          }
         }
        }
+      },
+      "limits": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "maxItems": 4
       }
      }
     }

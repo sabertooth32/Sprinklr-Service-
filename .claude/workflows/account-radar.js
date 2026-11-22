@@ -5,7 +5,7 @@ export const meta = {
   phases: [
     { title: 'Research', detail: '8 specialists in parallel, then personal-level research on top contacts' },
     { title: 'Validate', detail: 'fact checks, people check, ICP judge, red team' },
-    { title: 'Synthesise', detail: 'build dossier.json and pass the code gates' },
+    { title: 'Synthesise', detail: 'three writers, verdicts joined by code, then the code gates' },
     { title: 'Build and QA', detail: 'render the PDFs, three content reviewers, apply fixes' },
   ],
 }
@@ -129,7 +129,12 @@ if (a.stop_after === 'validate') {
 
 // ---------- 3. synthesise ----------
 phase('Synthesise')
-const synth = await run('S1-synthesise', 'dossier builder', 'Synthesise', SYNTH, 'high')
+// Two parts are written in parallel, then a third builds on both and runs the code gates.
+await parallel([
+  () => run('S1a-account-people', 'dossier builder: account and people', 'Synthesise', undefined, 'high'),
+  () => run('S1b-experience', 'dossier builder: experience audit', 'Synthesise', undefined, 'high'),
+])
+const synth = await run('S1c-commercial-content', 'dossier builder: commercial case and content', 'Synthesise', SYNTH, 'high')
 
 if (!synth || !synth.validator_passed) {
   log('Dossier did not pass the code gates. Stopping before build.')
