@@ -3,6 +3,7 @@
 **Input:** `<work folder>/validation/Q1-completeness.json`, `Q2-plain-english.json`, `Q3-prospect-lens.json`, and `<work folder>/dossier.json`.
 
 ## Do
+0. Edit `<work folder>/dossier.json` directly from here on. Do not run `engine/merge_parts.py` again: it would rebuild the dossier from the parts and undo your edits. Never change `verdict` or `prospect_safe` on an evidence record.
 1. Read all three reviews. Apply every `block` and `fix` item by editing the dossier. Apply rewrites from Q2 where they keep the meaning.
 2. If Q3 found a statement that is no longer true, remove it and anything built on it.
 3. Never add a new fact. If a fix needs new evidence, remove the claim instead and list it under open questions.
