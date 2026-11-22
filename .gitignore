@@ -1,0 +1,8 @@
+# Account research holds named people and live sales intelligence. Keep it out of git.
+accounts/*
+!accounts/_sample/
+!accounts/README.md
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
