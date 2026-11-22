@@ -66,16 +66,26 @@
       </div>
     </div>
 
-    <div class="row" style="flex:none;align-items:center;gap:18px">
+    <div class="row" style="flex:none;align-items:stretch;gap:18px">
+      {% for key, title, idx, lvl, levels, on, seen_n, total_n, ok in [
+        ('exp', 'Experience maturity', exp_index, exp_level, EXP_LEVELS, exp_level[0] - 1, coverage.exp_seen, coverage.exp_total, coverage.exp_ok),
+        ('ai', 'AI in service maturity', ai_index, ai_level, AI_LEVELS, ai_level[0], coverage.ai_seen, coverage.ai_total, coverage.ai_ok)] %}
       <div class="card" style="flex:1;padding:10px 14px">
-        {{ m.gauge(exp_index, 'Experience maturity · outside-in estimate', 'Level ' ~ exp_level[0] ~ ' of 5 · ' ~ exp_level[1], 96) }}
-        {{ m.ladder(EXP_LEVELS, exp_level[0] - 1) }}
+        {% if ok %}
+        {{ m.gauge(idx, title ~ ' · outside-in estimate', 'Level ' ~ lvl[0] ~ ' of 5 · ' ~ lvl[1], 96) }}
+        {{ m.ladder(levels, on) }}
+        <div class="tiny muted" style="margin-top:5px">Based on {{ seen_n }} of {{ total_n }} signals visible from outside.</div>
+        {% else %}
+        <div class="label">{{ title }} · early read</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:6px">
+          <div style="flex:none"><div class="num">{{ seen_n }}<span style="font-size:14px;color:var(--muted);font-weight:600"> of {{ total_n }}</span></div><div class="tiny muted">signals visible from outside</div></div>
+          <div class="small ink2">Too few signals are public to score this fairly. What we can see points to <b>{{ lvl[1] | lower }}</b> or above. Your data completes the picture.</div>
+        </div>
+        <div class="bar" style="margin-top:8px"><i style="width:{{ (100 * seen_n / total_n) | round }}%"></i></div>
+        {% endif %}
       </div>
-      <div class="card" style="flex:1;padding:10px 14px">
-        {{ m.gauge(ai_index, 'AI in service maturity · outside-in estimate', 'Level ' ~ ai_level[0] ~ ' of 5 · ' ~ ai_level[1], 96) }}
-        {{ m.ladder(AI_LEVELS, ai_level[0]) }}
-      </div>
-      <div style="width:250px;flex:none" class="tiny muted">Indexes score each public support channel on five experience and five AI dimensions. They are estimates from public evidence only. Your own data will sharpen them.</div>
+      {% endfor %}
+      <div style="width:250px;flex:none;align-self:center" class="tiny muted">We look at each public support channel on five experience and five AI dimensions. Most of how service runs is not visible from outside. Your own data will sharpen this view.</div>
     </div>
   </div>
   {{ m.foot(fl, 'Page') }}

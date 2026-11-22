@@ -40,13 +40,13 @@ The digest already applies fact-check verdicts and red-team blocks to each findi
 ## Section guide
 | Section | What goes in | Limits |
 |---|---|---|
-| `snapshot` | One-liner, 4–6 headline facts, 2–4 strategic priorities with a "so what for service" | One-liner max 25 words. Fact values max 20 characters, e.g. "18.4M", "SGD 22.9B" |
+| `snapshot` | One-liner, 4–6 headline facts, 2–4 strategic priorities with a "so what for service" | One-liner max 25 words. Fact labels max 32 characters, values max 20, e.g. "18.4M", "SGD 22.9B" |
 | `icp` | V4's scorecard. Nine lines, in framework order | Verdict max 25 words |
 | `why_now` | 3–7 dated triggers, most urgent first | `so_what` max 18 words |
 | `entry_points` | Exactly 3. Pain + buying centre + why now + Sprinklr capability + one proof point from the facts file | Title max 8 words |
 | `buying_centres` | 3–7 centres present at this account | |
 | `contacts` | Validated people only. Priority 1 = contact this week (5–8 people), 2 = second wave, 3 = map only | Hook max 20 words. Opener max 25 words |
-| `channels` | 4–9 channels that carry real volume. `type` drives the value model. Scores per the maturity rubric, each with evidence. `null` when not visible | `headline_gap` and `strengths` max 14 words |
+| `channels` | 4–9 channels that carry real volume. `type` drives the value model. Scores per the maturity rubric, each with evidence. `null` when not visible | Channel `name` max 30 characters. `headline_gap` and `strengths` max 14 words |
 | `incumbents` | One row per stack layer found. Honest status | |
 | `journey` | Exactly 7 stages. Verdict per stage. Break points with channel, severity, capability, evidence. Bright spots too | `what_breaks` max 16 words |
 | `maturity` | Two headlines, 2–4 genuine strengths, one confidence note | |

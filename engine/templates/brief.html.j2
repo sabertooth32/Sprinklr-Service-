@@ -67,7 +67,7 @@
         {{ m.gauge(exp_index, 'Experience index', 'Level ' ~ exp_level[0] ~ ' · ' ~ exp_level[1], 104) }}
         <div style="height:8px"></div>
         {{ m.gauge(ai_index, 'AI index', 'Level ' ~ ai_level[0] ~ ' · ' ~ ai_level[1], 104) }}
-        <div class="tiny muted" style="margin-top:6px">Outside-in estimates. Confirm in discovery.</div>
+        <div class="tiny muted" style="margin-top:6px">Outside-in estimates from {{ coverage.exp_seen + coverage.ai_seen }} of {{ coverage.exp_total + coverage.ai_total }} scores. Confirm in discovery.</div>
       </div>
       <div class="card tint">
         <div class="label">Value at stake · per year</div>
@@ -147,16 +147,16 @@
     <div class="grow">
       <h2>Triggers, most urgent first</h2>
       <table>
-        <tr><th style="width:74px">When</th><th style="width:92px">Type</th><th>What happened</th><th>So what for service</th><th style="width:62px">Urgency</th></tr>
-        {% for t in d.why_now %}
-        <tr><td class="b">{{ t.date }}</td><td>{{ t.type }}</td><td>{{ t.what }}</td><td class="ink2">{{ t.so_what }}</td>
+        <tr><th style="width:80px">When</th><th style="width:96px">Type</th><th>What happened</th><th>So what for service</th><th style="width:62px">Urgency</th></tr>
+        {% for t in d.why_now[:6] %}
+        <tr><td class="b" style="white-space:nowrap">{{ t.date }}</td><td>{{ t.type }}</td><td>{{ t.what }}</td><td class="ink2">{{ t.so_what }}</td>
           <td><span class="pill {{ 'brand' if t.urgency == 'now' else '' }}">{{ t.urgency | capitalize }}</span></td></tr>
         {% endfor %}
       </table>
-      <h2 style="margin-top:14px">What leadership says it wants</h2>
+      <h2 style="margin-top:10px">What leadership says it wants</h2>
       <div class="grid" style="grid-template-columns: repeat({{ d.snapshot.strategic_priorities | length }}, 1fr); gap:10px">
         {% for p in d.snapshot.strategic_priorities %}
-        <div class="card soft" style="padding:9px 11px"><div class="b small">{{ p.priority }}</div><div class="tiny ink2" style="margin-top:3px">{{ p.so_what }}</div></div>
+        <div class="card soft" style="padding:8px 10px"><div class="b small clamp2" style="line-height:1.25">{{ p.priority }}</div><div class="tiny ink2 clamp2" style="margin-top:3px">{{ p.so_what }}</div></div>
         {% endfor %}
       </div>
     </div>
@@ -226,7 +226,7 @@
         <ul class="tight tiny ink2">{% for x in c.care_about[:3] %}<li>{{ x }}</li>{% endfor %}</ul>
         <div class="tiny"><span class="label">Hook</span> {{ c.hook }}</div>
         <div class="quote"><span class="label">Opener</span><br><span class="copytext">{{ c.opener }}</span></div>
-        <div class="tiny muted" style="margin-top:auto"><b class="ink2">Best channel:</b> {{ c.best_channel }}{% if c.avoid %} · <b class="ink2">Avoid:</b> {{ c.avoid[0] }}{% endif %}</div>
+        <div class="tiny muted clamp2" style="margin-top:auto"><b class="ink2">Best channel:</b> {{ c.best_channel }}{% if c.avoid %} · <b class="ink2">Avoid:</b> {{ c.avoid[0] }}{% endif %}</div>
       </div>
       {% endfor %}
     </div>
@@ -239,37 +239,47 @@
 <section class="page" id="channels" data-title="Channels">
   <div class="head">
     <div><div class="kicker">Experience audit · the estate</div><h1>{{ channels | length }} support channels, <em>about {{ value.base.contacts }} assisted contacts a year</em></h1>
-    <div class="sub">Volumes are estimates unless marked disclosed. Range across channels: {{ value.low.contacts }} to {{ value.high.contacts }}. Incumbents shape your entry point and objections.</div></div>
+    <div class="sub">Volumes are estimates unless marked disclosed. Assisted range: {{ value.low.contacts }} to {{ value.high.contacts }}. Self-service contacts are shown but not counted as assisted.</div></div>
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
-  <div class="body row" style="gap:22px">
-    <div class="grow">
-      <table>
-        <tr><th>Channel</th><th style="width:150px">Est. contacts / year</th><th>What works</th><th>Headline gap</th></tr>
-        {% for ch in channels %}
-        <tr>
-          <td><b>{{ ch.name }}</b><div class="tiny muted">{{ ch.type_label }} · {{ ch.market }}{% if ch.hours %} · {{ ch.hours }}{% endif %}</div></td>
-          <td>{% if ch.volume %}<div style="display:flex;gap:6px;align-items:center"><b style="width:38px">{{ ch.vol_fmt }}</b><div class="bar grow"><i style="width:{{ ch.vol_pct }}%"></i></div></div><div class="tiny muted">{{ ch.vol_range }} · {{ ch.volume.basis }}</div>{% else %}<span class="tiny muted">Not sized</span>{% endif %}</td>
-          <td class="ink2">{{ ch.strengths }}</td>
-          <td>{{ ch.headline_gap }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-    </div>
-    <div style="width:400px;flex:none">
-      <h2>Incumbent stack</h2>
-      <table>
-        <tr><th>Layer</th><th>Vendor</th><th>So what</th></tr>
-        {% for i in d.incumbents %}
-        <tr><td class="b">{{ i.layer }}</td>
-          <td>{{ i.vendor }}{% if i.product %} <span class="muted">{{ i.product }}</span>{% endif %}<div style="margin-top:2px">{{ m.basis('disclosed' if i.status in ['confirmed', 'in-house'] else 'inferred') }} <span class="tiny muted">{{ i.status }}</span></div></td>
-          <td class="ink2 tiny">{{ i.so_what }}</td></tr>
-        {% endfor %}
-      </table>
-    </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:21%">Channel</th><th style="width:190px">Est. contacts / year</th><th style="width:27%">What works</th><th>Headline gap or open question</th></tr>
+      {% for ch in channels %}
+      <tr>
+        <td><b>{{ ch.name }}</b><div class="tiny muted clamp2">{{ ch.type_label }} · {{ ch.market }}{% if ch.hours %} · {{ ch.hours }}{% endif %}</div></td>
+        <td>{% if ch.volume %}<div style="display:flex;gap:6px;align-items:center"><b style="width:40px;flex:none">{{ ch.vol_fmt }}</b><div class="bar grow"><i style="width:{{ ch.vol_pct }}%"></i></div></div><div class="tiny muted">{{ ch.vol_range }} · {{ ch.volume.basis }}</div>{% else %}<span class="tiny muted">Not sized</span>{% endif %}</td>
+        <td class="ink2">{{ ch.strengths }}</td>
+        <td>{{ ch.headline_gap }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </div>
   {{ m.foot(fl, fr) }}
 </section>
+
+{# ============ 6b INCUMBENTS ============ #}
+{% for page in incumbent_pages %}
+<section class="page" data-title="Incumbents {{ loop.index }}">
+  <div class="head">
+    <div><div class="kicker">Incumbents{% if incumbent_pages | length > 1 %} · {{ loop.index }} of {{ incumbent_pages | length }}{% endif %}</div><h1>What runs their service today, <em>and what it means for you</em></h1>
+    <div class="sub">Dashed tag = our inference, not proof. Never name a vendor to the prospect unless it is marked disclosed. Ask instead.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:19%">Layer</th><th style="width:30%">Vendor or build</th><th style="width:130px">How sure</th><th>So what for your outreach</th></tr>
+      {% for i in page %}
+      <tr><td class="b">{{ i.layer }}</td>
+        <td>{{ i.vendor }}{% if i.product %} <span class="muted">· {{ i.product }}</span>{% endif %}</td>
+        <td>{{ m.basis('disclosed' if i.status in ['confirmed', 'in-house'] else 'inferred') }} <span class="tiny muted">{{ i.status }}</span></td>
+        <td class="ink2">{{ i.so_what }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+{% endfor %}
 
 {# ============ 7 JOURNEY ============ #}
 <section class="page" id="journey" data-title="Journey">
@@ -335,7 +345,7 @@
     <div class="row" style="flex:none;align-items:flex-start">
       <div class="card soft grow" style="padding:8px 12px"><span class="label">Genuine strengths. Say these first.</span>
         <ul class="tight small" style="margin-top:3px;columns:2;column-gap:20px">{% for s in d.maturity.strengths %}<li>{{ s }}</li>{% endfor %}</ul></div>
-      <div style="width:430px;flex:none">{{ m.heat_legend(true) }}<div class="tiny muted" style="margin-top:4px">{{ d.maturity.confidence_note }} Index = average score × 20, weighted by channel volume.</div></div>
+      <div style="width:430px;flex:none">{{ m.heat_legend(true) }}<div class="tiny muted" style="margin-top:4px">{{ d.maturity.confidence_note }} Visible from outside: {{ coverage.exp_seen }} of {{ coverage.exp_total }} experience scores, {{ coverage.ai_seen }} of {{ coverage.ai_total }} AI scores. Index = average score × 20, weighted by channel volume.</div></div>
     </div>
   </div>
   {{ m.foot(fl, fr) }}
@@ -439,11 +449,11 @@
 </section>
 {% endfor %}
 
-{# ============ 12 LIVE TESTS + DISCOVERY ============ #}
+{# ============ 12 LIVE TESTS ============ #}
 <section class="page" id="tests" data-title="Live tests">
   <div class="head">
-    <div><div class="kicker">Do it yourself · 20 minutes</div><h1>Customer's-eye tests and <em>discovery questions</em></h1>
-    <div class="sub">See the experience as their customer does. You are an ordinary member of the public with a general question.</div></div>
+    <div><div class="kicker">Do it yourself · 20 minutes</div><h1>Customer's-eye tests: <em>see what their customer sees</em></h1>
+    <div class="sub">You are an ordinary member of the public with a general question. Each test confirms or removes one point in this brief.</div></div>
     <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
   </div>
   <div class="body col" style="gap:10px">
@@ -452,24 +462,31 @@
       <div class="card soft" style="padding:8px 12px"><span class="label">Always</span><div class="small" style="margin-top:2px">Ask general questions. Be polite and brief. One contact per channel. Keep notes for yourself only.</div></div>
       <div class="card" style="padding:8px 12px;background:var(--crit-bg);border-color:transparent"><span class="label" style="color:var(--crit-ink)">Never</span><div class="small" style="margin-top:2px">Say Sprinklr. Claim an account, transaction or complaint you do not have. Pass an identity check. Fill in a form. Record a call.</div></div>
     </div>
-    <div class="row grow" style="gap:22px;min-height:0">
-    <div class="grow">
-      <h2>Live tests</h2>
-      <table>
-        <tr><th style="width:20px">#</th><th style="width:92px">Channel</th><th>Ask this</th><th>Time and look for</th><th>A break point looks like</th></tr>
-        {% for t in d.mystery_shop %}
-        <tr><td class="b">{{ loop.index }}</td><td class="b">{{ t.channel }}</td><td>“{{ t.opening_question }}”</td><td class="ink2"><b>{{ t.time_this | trim('.') }}.</b> {{ t.look_for }}</td><td class="ink2">{{ t.break_point_looks_like }}</td></tr>
-        {% endfor %}
-      </table>
-    </div>
-    <div style="width:420px;flex:none">
-      <h2>Discovery questions for the first call</h2>
-      <table>
-        {% for q in d.discovery_questions %}
-        <tr><td class="b" style="width:16px">{{ loop.index }}</td><td><b>{{ q.question }}</b><div class="tiny muted">{{ q.why_ask }}</div></td></tr>
-        {% endfor %}
-      </table>
-    </div>
+    <table>
+      <tr><th style="width:20px">#</th><th style="width:15%">Channel</th><th style="width:25%">Ask this</th><th>Time and look for</th><th style="width:26%">A break point looks like</th></tr>
+      {% for t in d.mystery_shop %}
+      <tr><td class="b">{{ loop.index }}</td><td class="b">{{ t.channel }}</td><td>“{{ t.opening_question }}”</td><td class="ink2"><b>{{ t.time_this | trim('.') }}.</b> {{ t.look_for }}</td><td class="ink2">{{ t.break_point_looks_like }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {{ m.foot(fl, fr) }}
+</section>
+
+{# ============ 12b DISCOVERY ============ #}
+<section class="page" data-title="Discovery">
+  <div class="head">
+    <div><div class="kicker">First call</div><h1>Discovery questions that <em>test what we could not see</em></h1>
+    <div class="sub">Open questions. Ask, then listen. Each one checks a point in this brief against what they know.</div></div>
+    <div class="tagright">{{ m.wordmark(theme, logo) }}</div>
+  </div>
+  <div class="body">
+    <div class="grid g2" style="gap:12px 26px;align-content:start">
+      {% for q in d.discovery_questions %}
+      <div style="display:flex;gap:10px;border-bottom:1px solid var(--line);padding-bottom:9px">
+        <span class="avatar" style="width:24px;height:24px;font-size:11px">{{ loop.index }}</span>
+        <div><div class="b" style="font-size:12.5px;line-height:1.3">{{ q.question }}</div><div class="small muted" style="margin-top:2px">{{ q.why_ask }}{% if q.for %} · <b class="ink2">Ask: {{ q.for }}</b>{% endif %}</div></div>
+      </div>
+      {% endfor %}
     </div>
   </div>
   {{ m.foot(fl, fr) }}

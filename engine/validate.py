@@ -227,7 +227,16 @@ def validate(dossier):
     if want == "C":
         E("icp: tier C. This account must not get a pack")
 
+    for ch in dossier["channels"]:
+        if len(ch["name"]) > 30:
+            E(f"channel {ch['id']}: name \"{ch['name']}\" is {len(ch['name'])} characters. Keep channel names to 30. Put detail in strengths or headline_gap")
+    for c in dossier["contacts"]:
+        for field in ("best_channel",):
+            if len(c[field].split()) > 14:
+                W(f"contact {c['name']}: {field} is long. Keep it to 14 words")
     for f in dossier["snapshot"]["facts"]:
+        if len(f["label"]) > 32:
+            E(f"snapshot fact label \"{f['label']}\" is {len(f['label'])} characters. Keep labels to 32")
         if len(f["value"]) > 20:
             E(f"snapshot fact '{f['label']}': value \"{f['value']}\" is {len(f['value'])} characters. Keep headline values to 20, e.g. \"6.1M\" or \"SGD 22.9B\"")
 

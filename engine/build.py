@@ -26,6 +26,7 @@ EXP = [("access", "Access"), ("speed", "Speed"), ("resolution", "Resolution"), (
 AI = [("self_service_ai", "Self-service AI"), ("agent_assist", "Agent assist"), ("smart_routing", "Smart routing"),
       ("insight_quality", "Insight & quality"), ("trust_control", "Trust & control")]
 EXP_LEVELS = ["Fragmented", "Functional", "Connected", "Orchestrated", "Predictive"]
+MIN_COVERAGE = 0.35  # below this share of visible scores, the prospect sees an "early read", not a number
 AI_LEVELS = ["No AI", "Rule-based", "Assisted", "Generative", "Agentic", "Autonomous"]
 CHANNEL_TYPE_LABEL = {"voice": "Voice", "chat": "Chat", "messaging": "Messaging", "email": "Email / form", "social": "Social",
                       "self_service": "Self-service", "in_person": "In person"}
@@ -134,12 +135,18 @@ def build_context(dossier, theme):
     for block in (pv["strengths"], pv["observations"]):
         for item in block:
             for r in item["evidence"]:
-                if ev[r] not in pv_sources:
+                if ev[r].get("source_url") not in {x.get("source_url") for x in pv_sources}:
                     pv_sources.append(ev[r])
     obs_by_stage = {}
     for o in pv["observations"]:
         obs_by_stage.setdefault(o["stage"], []).append(o)
 
+    def seen(block, dims):
+        return sum(1 for ch in dossier["channels"] for k, _ in dims if (ch[block].get(k) or {}).get("score") is not None)
+    n = len(dossier["channels"])
+    coverage = {"exp_seen": seen("experience", EXP), "exp_total": n * len(EXP), "ai_seen": seen("ai", AI), "ai_total": n * len(AI)}
+    coverage["exp_ok"] = coverage["exp_seen"] / coverage["exp_total"] >= MIN_COVERAGE
+    coverage["ai_ok"] = coverage["ai_seen"] / coverage["ai_total"] >= MIN_COVERAGE
     report_path = None
     logo = None
     if theme.get("logo_path"):
@@ -159,7 +166,7 @@ def build_context(dossier, theme):
         "contact_pages": chunks([c for c in contacts if c["priority"] == 1], 6),
         "stages": stages, "all_bps": all_bps, "gaps": gaps,
         "sequence_pages": dossier["outreach"]["sequences"],
-        "evidence_pages": chunks(evidence_used, 22),
+        "evidence_pages": chunks(evidence_used, 22), "incumbent_pages": chunks(dossier["incumbents"], 9), "coverage": coverage,
         "pv": pv, "pv_sources": pv_sources, "obs_by_stage": obs_by_stage,
         "facts": facts, "report_path": report_path,
         "analyst_safe": [a for a in facts.get("analyst_recognition", []) if "NOT" not in a["what"] and "not included" not in a["what"]][:3],
