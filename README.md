@@ -137,3 +137,15 @@ Needs: Python 3 with `jinja2` and `jsonschema`, Node with Playwright and Chromiu
 | Web access | Agents work from web search. Where direct page reads are blocked, evidence is marked "search summary" and capped at medium confidence |
 | Brand | Colours, gradient and type rules follow the Sprinklr Brand Style Guide 2026. The logo and Proxima Nova files are not in this public repository: place them in `engine/theme/brand/` (git-ignored). Without them, packs use a text wordmark and the Inter font |
 | Privacy | Real account folders are git-ignored. Only the fictional `_sample` account is committed. Follow local marketing and privacy rules before outreach |
+
+## The SDR portal (no Claude Code needed)
+
+SDRs who cannot open Claude Code use a web page hosted on Claude. They type an account, and a background runner builds the pack.
+
+| Piece | Where | What it does |
+|---|---|---|
+| Portal page | `web/portal/portal.html`, published as a private Claude artifact | Request form, live status, pack files, next steps, live-test notes |
+| Queue | The page's own database, collection `requests` | One row per request |
+| Runner | `.claude/skills/portal-runner/SKILL.md`, started by an hourly scheduled task | Takes the oldest request, runs the workflow, uploads the files |
+| Access | The page's Share menu | Invite people by email. Only invited people can open it |
+| Prototype | `web/prototype/index.html` | A clickable mock with sample data |

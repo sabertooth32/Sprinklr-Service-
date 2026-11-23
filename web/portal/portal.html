@@ -1,0 +1,287 @@
+<title>Account Radar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one calm column. A request form on top, then live pack cards. Summary before detail. */
+:root{
+  --bg:#fafaf9; --card:#ffffff; --fg:#0b0b0b; --fg2:#454b57; --muted:#6f7682; --line:#e2e3e7; --soft:#f1efef;
+  --brand:#128acb; --dark:#2f3840; --on-dark:#ffffff; --tint:#e7f5fb; --tint-fg:#0a4a70;
+  --good-bg:#e9f6e9; --good-fg:#006300; --good:#0ca30c; --warn-bg:#fff5dc; --warn-fg:#7a5200; --crit-bg:#fbe9e9; --crit-fg:#9c1f1f;
+  --grad:linear-gradient(90deg,#f9a118 0%,#c9d132 34%,#6fbe54 66%,#00bae7 100%);
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#14171b; --card:#1d2227; --fg:#f2f3f5; --fg2:#c3c8d0; --muted:#98a0ab; --line:#333a42; --soft:#262c33;
+  --brand:#4db2e6; --dark:#e9ecef; --on-dark:#14171b; --tint:#12384d; --tint-fg:#cfeaf8;
+  --good-bg:#143217; --good-fg:#8fe08f; --good:#3fc23f; --warn-bg:#3d3112; --warn-fg:#f5d48a; --crit-bg:#431c1c; --crit-fg:#f5b3b3; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#14171b; --card:#1d2227; --fg:#f2f3f5; --fg2:#c3c8d0; --muted:#98a0ab; --line:#333a42; --soft:#262c33;
+  --brand:#4db2e6; --dark:#e9ecef; --on-dark:#14171b; --tint:#12384d; --tint-fg:#cfeaf8;
+  --good-bg:#143217; --good-fg:#8fe08f; --good:#3fc23f; --warn-bg:#3d3112; --warn-fg:#f5d48a; --crit-bg:#431c1c; --crit-fg:#f5b3b3; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.45}
+body::before{content:"";display:block;height:5px;background:var(--grad)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:14px}
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.logo i{width:20px;height:20px;border-radius:50%;background:var(--grad)}
+.logo small{font-weight:500;color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+nav button{border:0;background:none;padding:8px 14px;border-radius:99px;font-weight:600;cursor:pointer;color:var(--fg2)}
+nav button[aria-selected="true"]{background:var(--dark);color:var(--on-dark)}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.who{font-size:13px;color:var(--muted);min-width:0}
+main.wrap{padding-block:26px 72px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:9px;margin:0 0 8px}
+.eyebrow::before{content:"";width:26px;height:3px;border-radius:2px;background:var(--grad)}
+h1{font-size:clamp(26px,4.2vw,34px);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:0;text-wrap:balance}
+h2{font-size:18px;font-weight:800;letter-spacing:-.01em;margin:0}
+h3{font-size:18px;font-weight:800;margin:0;overflow-wrap:anywhere}
+p{margin:0}
+.sub{color:var(--fg2);margin-top:8px;max-width:62ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+.hero{margin-top:20px;padding:24px}
+label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+.hint{font-weight:400;color:var(--muted)}
+input[type=text],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--card)}
+input.big{font-size:19px;padding:15px 16px;font-weight:600}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;background:var(--dark);color:var(--on-dark);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn.primary{font-size:16px;padding:14px 24px}
+.btn.ghost{background:var(--card);color:var(--fg);border:1.5px solid var(--line)}
+.btn.small{padding:8px 12px;font-size:13px;border-radius:8px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.line{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:22px}
+.step{background:var(--soft);border-radius:12px;padding:14px}
+.step b{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.step p{font-size:13px;color:var(--fg2)}
+.packs{display:grid;gap:14px;margin-top:18px}
+.packhead{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.meta{font-size:13px;color:var(--muted);margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.pill.ready{background:var(--good-bg);color:var(--good-fg)} .pill.run{background:var(--tint);color:var(--tint-fg)} .pill.wait{background:var(--soft);color:var(--fg2)} .pill.stop{background:var(--crit-bg);color:var(--crit-fg)}
+.track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:14px}
+.track div{font-size:11.5px;font-weight:600;color:var(--muted);padding-top:8px;border-top:4px solid var(--line);overflow-wrap:anywhere}
+.track div.done{border-color:var(--good);color:var(--fg)} .track div.now{border-color:var(--brand);color:var(--fg)}
+.facts{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:14px}
+.fact .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-size:19px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.detail{margin-top:16px;border-top:1px solid var(--line);padding-top:16px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.ways{list-style:none;display:grid;gap:8px;margin:10px 0 0;padding:0}
+.ways li{display:flex;gap:10px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:400;margin:0}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--brand);flex:none}
+.note{border-radius:10px;padding:12px 14px;font-size:14px;margin-top:14px;background:var(--tint);color:var(--tint-fg)}
+.note.warn{background:var(--warn-bg);color:var(--warn-fg)} .note.crit{background:var(--crit-bg);color:var(--crit-fg)} .note.good{background:var(--good-bg);color:var(--good-fg)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.rule{border-radius:12px;padding:16px}
+.rule.do{background:var(--good-bg);color:var(--good-fg)} .rule.dont{background:var(--crit-bg);color:var(--crit-fg)} .rule.who{background:var(--tint);color:var(--tint-fg)}
+.rule h2{color:inherit}
+.rule ul{margin:8px 0 0 18px;padding:0;font-size:14px}
+.empty{border:1.5px dashed var(--line);border-radius:14px;padding:26px;text-align:center;color:var(--fg2);margin-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--dark);color:var(--on-dark);padding:12px 18px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px)}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+
+<header><div class="wrap">
+  <div class="logo"><i></i>Account Radar <small>Service pipeline · APJI</small></div>
+  <nav role="tablist" aria-label="Sections">
+    <button id="tab-new" role="tab" aria-selected="true" data-tab="new">New pack</button>
+    <button id="tab-packs" role="tab" aria-selected="false" data-tab="packs">Packs <span id="count"></span></button>
+    <button id="tab-help" role="tab" aria-selected="false" data-tab="help">How it works</button>
+  </nav>
+  <span class="who" id="who"></span>
+</div></header>
+
+<main class="wrap">
+<section id="view-new">
+  <p class="eyebrow">Start here</p>
+  <h1>Which account do you want to open?</h1>
+  <p class="sub">Type the company name. We research it, check every fact, and build your pack. It appears under Packs when it is ready.</p>
+
+  <form class="card hero" id="form" novalidate>
+    <label for="acct">Company name</label>
+    <input class="big" id="acct" type="text" placeholder="For example: Qantas" autocomplete="off" maxlength="80">
+    <div class="row">
+      <div><label for="mkt">Main market <span class="hint">(optional)</span></label>
+        <select id="mkt"><option value="">Let the research decide</option><option>Singapore</option><option>India</option><option>Australia / New Zealand</option><option>Japan</option><option>Southeast Asia</option><option>Hong Kong / Taiwan</option><option>Korea</option></select></div>
+      <div><label for="note">Anything we should know? <span class="hint">(optional)</span></label>
+        <input id="note" type="text" placeholder="For example: we already sell them Social" maxlength="200"></div>
+    </div>
+    <div class="line">
+      <button class="btn primary" id="go" type="submit">Build my pack →</button>
+      <span class="hint" id="formhint" style="font-size:14px">Requests are picked up about once an hour. A pack then takes 2–3 hours.</span>
+    </div>
+    <div id="formmsg" role="status" aria-live="polite"></div>
+  </form>
+
+  <div class="steps">
+    <div class="step"><b><span class="num">1</span>Research</b><p>Company, departments, people, channels, customer voice, AI and timing.</p></div>
+    <div class="step"><b><span class="num">2</span>Check</b><p>Facts are re-checked. A weak-fit account stops here.</p></div>
+    <div class="step"><b><span class="num">3</span>Build</b><p>Your brief, the prospect infographic and ready-to-send messages.</p></div>
+    <div class="step"><b><span class="num">4</span>You</b><p>Five quick checks, a few live tests as a customer, then send.</p></div>
+  </div>
+</section>
+
+<section id="view-packs" hidden>
+  <p class="eyebrow">The team's accounts</p>
+  <h1>Packs</h1>
+  <p class="sub">Open a ready pack to see your next steps. Packs in progress update on their own.</p>
+  <div id="list" class="packs"></div>
+</section>
+
+<section id="view-help" hidden>
+  <p class="eyebrow">New here?</p>
+  <h1>How it works, in one minute</h1>
+  <p class="sub">You pick the account. AI agents do the reading and the checking. You do the human part: check, test as a customer, and send.</p>
+  <div class="grid3">
+    <div class="rule who"><h2>You get three files</h2><ul><li><b>SDR brief</b>: for you only. Never forward it.</li><li><b>Infographic</b>: to send to the prospect.</li><li><b>Outreach kit</b>: messages to copy and paste.</li></ul></div>
+    <div class="rule do"><h2>Live tests: do</h2><ul><li>Act as an ordinary customer.</li><li>Give a first name only if asked: “Alex”.</li><li>Ask general questions.</li><li>Use your personal email and phone.</li></ul></div>
+    <div class="rule dont"><h2>Live tests: never</h2><ul><li>Say which company you work for.</li><li>Claim an account or complaint you do not have.</li><li>Pass an identity check or fill in a form.</li><li>Record a call or name their staff.</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h2>Words you will see</h2>
+    <p class="sub" style="max-width:none"><b>ICP</b> = how well the account fits us, out of 100. <b>Tier A</b> = go now. <b>Buying centre</b> = a department with a say. <b>Break point</b> = where the customer journey goes wrong. <b>Outside-in</b> = built from public information only.</p>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var STAGES = [["queued", "Queued"], ["researching", "Researching"], ["checking", "Checking facts"], ["writing", "Writing"], ["ready", "Ready"]];
+  var CHECKS = ["Open each contact on LinkedIn. Same role today?", "Do one live test as a customer. Never as your company.", "Open the source of each fact you use. Still true?", "Check CRM. Open opportunity or owner?", "Read your message aloud. Would you send it to a friend?"];
+  var db = null, user = null, me = null, rows = null, names = {}, state = "loading", open = {};
+  var $ = function (id) { return document.getElementById(id); };
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "text") n.textContent = attrs[k]; else if (k === "class") n.className = attrs[k];
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), attrs[k]); else n.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function toast(t) { var x = $("toast"); x.textContent = t; x.classList.add("on"); setTimeout(function () { x.classList.remove("on"); }, 2800); }
+  function show(tab) {
+    ["new", "packs", "help"].forEach(function (id) { $("view-" + id).hidden = id !== tab; $("tab-" + id).setAttribute("aria-selected", String(id === tab)); });
+  }
+  function when(iso) { var d = new Date(iso); return isNaN(d) ? "" : d.toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+  function safeUrl(u) { return typeof u === "string" && (u.indexOf("/_blob/") === 0 || /^https:\/\//.test(u)) ? u : null; }
+
+  function card(r) {
+    var idx = STAGES.findIndex(function (s) { return s[0] === r.status; });
+    var stopped = r.status === "stopped" || r.status === "failed";
+    var pill = r.status === "ready" ? el("span", { class: "pill ready", text: "✓ Ready" })
+      : stopped ? el("span", { class: "pill stop", text: r.status === "stopped" ? "Stopped" : "Needs attention" })
+      : r.status === "queued" ? el("span", { class: "pill wait", text: "Queued" }) : el("span", { class: "pill run", text: "In progress" });
+    var who = r.requested_by === (me && me.id) ? "you" : (names[r.requested_by] || "a teammate");
+    var a = el("article", { class: "card" }, [
+      el("div", { class: "packhead" }, [el("div", {}, [el("h3", { text: r.account || "Unnamed account" }),
+        el("div", { class: "meta", text: "Requested by " + who + (r.requested_at ? " · " + when(r.requested_at) : "") + (r.market ? " · " + r.market : "") })]), pill])
+    ]);
+    if (stopped) { a.appendChild(el("div", { class: "note crit", text: (r.stage_note || "This request could not be completed.") + (r.status === "stopped" ? " Pick another account." : "") })); return a; }
+    a.appendChild(el("div", { class: "track" }, STAGES.map(function (s, k) {
+      return el("div", { class: r.status === "ready" || k < idx ? "done" : k === idx ? "now" : "", text: s[1] + (k === idx && r.status !== "ready" ? " · now" : "") });
+    })));
+    if (r.status !== "ready") { a.appendChild(el("div", { class: "meta", style: "margin-top:12px", text: r.stage_note || (r.status === "queued" ? "Waiting for the next pickup. Requests are picked up about once an hour." : "Working. The files appear here when the pack is ready.") })); return a; }
+
+    var s = r.summary || {}, f = r.files || {};
+    a.appendChild(el("div", { class: "facts" }, [["Fit", s.fit], ["Experience", s.experience], ["AI", s.ai], ["Contact first", s.contacts]].filter(function (x) { return x[1]; }).map(function (x) {
+      return el("div", { class: "fact" }, [el("div", { class: "k", text: x[0] }), el("div", { class: "v", text: String(x[1]) })]);
+    })));
+    var acts = el("div", { class: "actions" });
+    [["brief", "SDR brief"], ["infographic", "Infographic"], ["kit", "Outreach kit"]].forEach(function (x) {
+      var u = safeUrl(f[x[0]]); if (u) acts.appendChild(el("a", { class: "btn small", href: u, target: "_blank", rel: "noopener", text: "Open " + x[1] }));
+    });
+    acts.appendChild(el("button", { class: "btn small ghost", type: "button", "aria-expanded": String(!!open[r.id]), text: open[r.id] ? "Hide my next steps" : "Show my next steps", onclick: function () { open[r.id] = !open[r.id]; render(); } }));
+    a.appendChild(acts);
+    if (!open[r.id]) return a;
+
+    var left = el("div", {}, [el("h2", { text: "Three ways in" })]);
+    left.appendChild(el("ol", { class: "ways" }, (s.ways || []).slice(0, 3).map(function (w, k) { return el("li", {}, [el("span", { class: "num", text: String(k + 1) }), el("span", { text: String(w) })]); })));
+    if (s.why_now) left.appendChild(el("div", { class: "note", text: "Why now: " + s.why_now }));
+    if (s.open_points) left.appendChild(el("div", { class: "note warn", text: s.open_points + " points still to check. They are on the “Still to check” page of your brief." }));
+    var right = el("div", {}, [el("h2", { text: "Before you send" })]);
+    CHECKS.forEach(function (c, k) { right.appendChild(el("label", { class: "check" }, [el("input", { type: "checkbox", id: "chk-" + r.id + "-" + k }), el("span", { text: c })])); });
+    var ta = el("textarea", { id: "notes-" + r.id, rows: "3", maxlength: "1500", placeholder: "What did you see? For example: chat offered a person after 2 minutes." });
+    ta.value = r.live_notes || "";
+    right.appendChild(el("label", { for: "notes-" + r.id, style: "margin-top:14px", text: "My live-test notes" }));
+    right.appendChild(ta);
+    var st = r.live_notes_status === "pending" ? "Notes saved. Your pack will be updated at the next pickup." : r.live_notes_status === "applied" ? "Your notes are in the latest pack." : "";
+    right.appendChild(el("div", { class: "actions" }, [el("button", { class: "btn small", type: "button", text: "Update my pack with these notes", onclick: function () { saveNotes(r.id, ta.value); } }), st ? el("span", { class: "meta", text: st }) : null]));
+    a.appendChild(el("div", { class: "detail" }, [el("div", { class: "cols" }, [left, right])]));
+    return a;
+  }
+
+  function render() {
+    var list = $("list"); list.textContent = "";
+    $("count").textContent = rows && rows.length ? "(" + rows.length + ")" : "";
+    $("go").disabled = state !== "ready";
+    var msg = { loading: "Loading the team's packs…", signedout: "Sign in to Claude with the email you were invited with to see and request packs.", readonly: "", error: "The packs could not be loaded. Try again in a minute.", ready: "" }[state];
+    if (state !== "ready" && state !== "readonly") { list.appendChild(el("div", { class: "empty", text: msg })); $("formhint").textContent = state === "loading" ? "Connecting…" : msg; return; }
+    $("formhint").textContent = "Requests are picked up about once an hour. A pack then takes 2–3 hours.";
+    if (!rows.length) { list.appendChild(el("div", { class: "empty", text: "No packs yet. Request your first account under “New pack”. It appears here as soon as you send it." })); return; }
+    rows.forEach(function (r) { list.appendChild(card(r)); });
+  }
+
+  function resolveNames() {
+    if (!user) return;
+    var ids = Array.from(new Set(rows.map(function (r) { return r.requested_by; }).filter(Boolean)));
+    if (!ids.length) return;
+    user.profiles(ids).then(function (ps) { ids.forEach(function (i) { names[i] = (ps[i] && ps[i].name) || ""; }); render(); });
+  }
+
+  function saveNotes(id, text) {
+    text = (text || "").trim();
+    if (!text) { toast("Write what you saw first."); return; }
+    db.doc("requests/" + id).update({ live_notes: text, live_notes_status: "pending", live_notes_at: new Date().toISOString() })
+      .then(function () { toast("Notes saved. Your pack will be updated."); })
+      .catch(function () { toast("Your notes could not be saved. Ask the owner for access."); });
+  }
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("acct").value.trim().replace(/\s+/g, " "), box = $("formmsg"); box.textContent = "";
+    if (state !== "ready") return;
+    if (name.length < 2) { box.appendChild(el("div", { class: "note warn", text: "Type the company name first." })); $("acct").focus(); return; }
+    var dup = (rows || []).find(function (r) { return (r.account || "").toLowerCase() === name.toLowerCase() && r.status !== "failed" && r.status !== "stopped"; });
+    if (dup) { box.appendChild(el("div", { class: "note warn", text: name + " is already on the list (" + dup.status + "). Open it under Packs." })); return; }
+    $("go").disabled = true;
+    db.collection("requests").add({ account: name, market: $("mkt").value, note: $("note").value.trim(), status: "queued",
+      requested_by: me && me.id ? me.id : null, requested_at: new Date().toISOString(), live_notes_status: "none" })
+      .then(function () { e.target.reset(); show("packs"); toast("Request received for " + name + "."); })
+      .catch(function () { box.appendChild(el("div", { class: "note crit", text: "Your request could not be sent. You may have view-only access. Ask the owner to let you contribute." })); })
+      .then(function () { $("go").disabled = state !== "ready"; });
+  });
+  ["new", "packs", "help"].forEach(function (t) { $("tab-" + t).addEventListener("click", function () { show(t); }); });
+
+  function start() {
+    render();
+    var timer = setTimeout(function () { if (state === "loading") { state = "error"; render(); } }, 10000);
+    var c = window.claude;
+    if (!c || !c.use) { clearTimeout(timer); state = "signedout"; render(); return; }
+    Promise.all([c.use("db"), c.use("user")]).then(function (caps) {
+      db = caps[0]; user = caps[1];
+      if (!db) { clearTimeout(timer); state = "signedout"; render(); return; }
+      (user ? user.me() : Promise.resolve(null)).then(function (v) {
+        me = v; if (v && v.name) $("who").textContent = "Signed in as " + v.name;
+        db.collection("requests").orderBy("requested_at", "desc").limit(100).onSnapshot(function (snap) {
+          clearTimeout(timer);
+          rows = snap.docs.map(function (d) { var x = d.data() || {}; x.id = d.id; return x; });
+          state = "ready"; resolveNames(); render();
+        }, function () { clearTimeout(timer); state = "error"; render(); });
+      });
+    });
+  }
+  start();
+})();
+</script>
