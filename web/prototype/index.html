@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account Radar — SDR portal (prototype)</title>
+<style>
+:root{
+  --ink:#000; --ink2:#454b57; --muted:#7a808c; --line:#e3e5ea; --soft:#f1efef; --bg:#fafafa; --card:#fff;
+  --brand:#128acb; --brand-dark:#2f3840; --tint:#e7f5fb;
+  --grad:linear-gradient(90deg,#f9a118 0%,#c9d132 34%,#6fbe54 66%,#00bae7 100%);
+  --good:#0ca30c; --good-bg:#e9f6e9; --good-ink:#006300; --warn-bg:#fff5dc; --warn-ink:#7a5200; --crit-bg:#fbe9e9; --crit-ink:#9c1f1f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Proxima Nova","Inter","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+.top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+.top::before{content:"";display:block;height:5px;background:var(--grad)}
+.bar{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.logo i{width:22px;height:22px;border-radius:50%;background:var(--grad);display:inline-block}
+.logo small{font-weight:500;color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+nav button{border:0;background:none;padding:8px 14px;border-radius:99px;font-weight:600;cursor:pointer;color:var(--ink2)}
+nav button[aria-selected=true]{background:var(--brand-dark);color:#fff}
+nav button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.who{font-size:13px;color:var(--muted)}
+.proto{background:var(--warn-bg);color:var(--warn-ink);font-size:13px;text-align:center;padding:6px 16px}
+main{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.eyebrow::before{content:"";width:26px;height:3px;border-radius:2px;background:var(--grad)}
+h1{font-size:34px;line-height:1.12;letter-spacing:-.02em;font-weight:800}
+h2{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.sub{color:var(--ink2);margin-top:8px;max-width:640px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.hero{margin-top:22px;padding:26px;box-shadow:0 10px 30px rgba(15,23,42,.06)}
+label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+.hint{font-weight:400;color:var(--muted)}
+input[type=text],select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;background:#fff}
+input.big{font-size:20px;padding:16px 18px;font-weight:600}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.btn{border:0;border-radius:10px;padding:13px 20px;font-weight:700;cursor:pointer;background:var(--brand-dark);color:#fff;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{background:var(--ink);font-size:16px;padding:15px 26px}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{padding:8px 12px;font-size:13px;border-radius:8px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.suggest{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;font-weight:600}
+.chip:hover{background:var(--tint)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.step{background:var(--soft);border-radius:12px;padding:14px}
+.step b{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.step p{font-size:13px;color:var(--ink2)}
+.packs{display:grid;gap:14px;margin-top:20px}
+.pack{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.pack h3{font-size:18px;font-weight:800}
+.meta{font-size:13px;color:var(--muted);margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.pill.ready{background:var(--good-bg);color:var(--good-ink)} .pill.run{background:var(--tint);color:#0a4a70} .pill.wait{background:var(--soft);color:var(--ink2)} .pill.stop{background:var(--crit-bg);color:var(--crit-ink)}
+.track{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+.track div{font-size:11.5px;font-weight:600;color:var(--muted);padding-top:8px;border-top:4px solid var(--line)}
+.track div.done{border-color:var(--good);color:var(--ink)} .track div.now{border-color:var(--brand);color:var(--ink)}
+.track div.now::after{content:" · now";color:var(--brand)}
+.facts{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+.fact .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.detail{margin-top:16px;border-top:1px solid var(--line);padding-top:16px;display:none}
+.detail.open{display:block}
+.cols{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+ol.ways{list-style:none;display:grid;gap:8px}
+ol.ways li{display:flex;gap:10px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--brand-dark)}
+.note{background:var(--tint);border-radius:10px;padding:12px 14px;font-size:14px;margin-top:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.rule{border-radius:12px;padding:16px}
+.rule.do{background:var(--good-bg)} .rule.dont{background:var(--crit-bg)} .rule.who{background:var(--tint)}
+.rule ul{margin:8px 0 0 18px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--brand-dark);color:#fff;padding:12px 18px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+section[hidden]{display:none}
+@media (max-width:760px){h1{font-size:26px}.row,.steps,.cols,.grid3,.pack{grid-template-columns:1fr}.track{grid-template-columns:1fr 1fr}nav{margin-left:0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <div class="logo"><i></i>Account Radar <small>Sprinklr Service · APJI</small></div>
+    <nav role="tablist" aria-label="Sections">
+      <button role="tab" aria-selected="true" data-tab="new">New pack</button>
+      <button role="tab" aria-selected="false" data-tab="packs">My packs <span id="count"></span></button>
+      <button role="tab" aria-selected="false" data-tab="help">How it works</button>
+    </nav>
+    <span class="who">Signed in as Priya (SDR)</span>
+  </div>
+</header>
+<div class="proto">Prototype for review. Sample data only. Nothing here starts a real run yet.</div>
+
+<main>
+<!-- NEW PACK -->
+<section id="new">
+  <div class="eyebrow">Step 1 of 1</div>
+  <h1>Which account do you want to open?</h1>
+  <p class="sub">Type the company name. We research it, check every fact, and build your pack. You get a message when it is ready.</p>
+
+  <form class="card hero" id="form">
+    <label for="acct">Company name</label>
+    <input class="big" id="acct" type="text" placeholder="For example: Qantas" autocomplete="off" required>
+    <div class="suggest" aria-label="Examples">
+      <button type="button" class="chip">Qantas</button><button type="button" class="chip">Bharti Airtel</button><button type="button" class="chip">Singtel</button><button type="button" class="chip">Tata Motors</button>
+    </div>
+    <div class="row">
+      <div><label for="mkt">Main market <span class="hint">(optional)</span></label>
+        <select id="mkt"><option>Let the research decide</option><option>Singapore</option><option>India</option><option>Australia / New Zealand</option><option>Japan</option><option>Southeast Asia</option><option>Hong Kong / Taiwan</option></select></div>
+      <div><label for="note">Anything we should know? <span class="hint">(optional)</span></label>
+        <input id="note" type="text" placeholder="For example: we already sell them Social"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap">
+      <button class="btn primary" type="submit">Build my pack →</button>
+      <span class="hint" style="font-size:14px">Takes about 2–3 hours. You can close this page.</span>
+    </div>
+  </form>
+
+  <div class="steps">
+    <div class="step"><b><span class="num">1</span>Research</b><p>Company, departments, people, channels, customer voice, AI, timing.</p></div>
+    <div class="step"><b><span class="num">2</span>Check</b><p>Every fact is re-checked. Weak-fit accounts stop here.</p></div>
+    <div class="step"><b><span class="num">3</span>Build</b><p>Your brief, the prospect infographic and ready-to-send messages.</p></div>
+    <div class="step"><b><span class="num">4</span>You</b><p>Five quick checks, a few live tests as a customer, then send.</p></div>
+  </div>
+</section>
+
+<!-- MY PACKS -->
+<section id="packs" hidden>
+  <div class="eyebrow">Your accounts</div>
+  <h1>My packs</h1>
+  <p class="sub">Open a ready pack to see your next step. Packs in progress update on their own.</p>
+  <div class="packs" id="list"></div>
+</section>
+
+<!-- HELP -->
+<section id="help" hidden>
+  <div class="eyebrow">New here?</div>
+  <h1>How it works, in one minute</h1>
+  <p class="sub">You pick the account. The research team of AI agents does the reading. You do the human part: check, test as a customer, and send.</p>
+  <div class="grid3">
+    <div class="rule who"><h2>You get three files</h2><ul><li><b>SDR brief</b> — for you only</li><li><b>Infographic</b> — to send to the prospect</li><li><b>Outreach kit</b> — copy and paste</li></ul></div>
+    <div class="rule do"><h2>Live tests: do</h2><ul><li>Act as an ordinary customer</li><li>First name only if asked: "Alex"</li><li>Ask general questions</li><li>Use your personal email and phone</li></ul></div>
+    <div class="rule dont"><h2>Live tests: never</h2><ul><li>Say you are from Sprinklr</li><li>Claim an account or complaint you do not have</li><li>Pass an identity check or fill in a form</li><li>Record a call or name their staff</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h2>Words you will see</h2>
+    <p class="sub" style="max-width:none"><b>ICP</b> = how well the account fits us, out of 100 · <b>Tier A</b> = go now · <b>Buying centre</b> = a department with a say · <b>Break point</b> = where the customer journey goes wrong · <b>Outside-in</b> = built from public information only</p>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// Sample data. Northstar Pacific Bank is fictional.
+var STAGES = ["Queued", "Researching", "Checking facts", "Writing", "Ready"];
+var packs = [
+  {name:"Northstar Pacific Bank", by:"You", when:"Today, 09:10", stage:4, tier:"A", icp:92, exp:"60 · Connected", ai:"41 · Assisted",
+   ways:["Let the web assistant hand over to a person","Carry context from app to phone","Answer faster in public"],
+   contacts:5, open:3},
+  {name:"Qantas", by:"You", when:"Today, 11:42", stage:2},
+  {name:"Kestrel Mobile", by:"You", when:"Yesterday", stage:-1, why:"Weak fit (tier C, 48 of 100). Fewer than 100 service agents. No pack was built."}
+];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function card(p,i){
+  var pill = p.stage===4?'<span class="pill ready">✓ Ready</span>':p.stage===-1?'<span class="pill stop">Stopped</span>':p.stage===0?'<span class="pill wait">Queued</span>':'<span class="pill run">In progress</span>';
+  var h = '<article class="card"><div class="pack"><div><h3>'+esc(p.name)+'</h3><div class="meta">Requested by '+esc(p.by)+' · '+esc(p.when)+'</div></div>'+pill+'</div>';
+  if(p.stage===-1){ h+='<div class="note" style="background:var(--crit-bg)">'+esc(p.why)+' Pick another account.</div>'; }
+  else{
+    h+='<div class="track">'+STAGES.map(function(s,k){return '<div class="'+(k<p.stage||p.stage===4?'done':k===p.stage?'now':'')+'">'+s+'</div>';}).join('')+'</div>';
+    if(p.stage===4){
+      h+='<div class="facts"><div class="fact"><div class="k">Fit</div><div class="v">Tier '+p.tier+' · '+p.icp+'</div></div><div class="fact"><div class="k">Experience</div><div class="v">'+p.exp+'</div></div><div class="fact"><div class="k">AI</div><div class="v">'+p.ai+'</div></div><div class="fact"><div class="k">Contact first</div><div class="v">'+p.contacts+' people</div></div></div>'
+       + '<div class="actions"><button class="btn small" data-dl="SDR brief">⬇ SDR brief</button><button class="btn small" data-dl="Prospect infographic">⬇ Infographic</button><button class="btn small" data-dl="Outreach kit">⬇ Outreach kit</button><button class="btn small ghost" data-open="'+i+'">Show my next steps</button></div>'
+       + '<div class="detail" id="d'+i+'"><div class="cols"><div><h2>Three ways in</h2><ol class="ways" style="margin-top:10px">'+p.ways.map(function(w,k){return '<li><span class="num">'+(k+1)+'</span>'+esc(w)+'</li>';}).join('')+'</ol>'
+       + '<div class="note"><b>'+p.open+' points still to check.</b> They are on the "Still to check" page of your brief.</div></div>'
+       + '<div><h2>Before you send</h2><div style="margin-top:6px">'+["Open each contact on LinkedIn. Same role today?","Do one live test as a customer. Never as Sprinklr.","Open the source of each fact you use. Still true?","Check CRM. Open opportunity or owner?","Read your message aloud. Would you send it to a friend?"].map(function(c){return '<label class="check" style="font-weight:400;margin:0"><input type="checkbox">'+c+'</label>';}).join('')+'</div>'
+       + '<label for="lt'+i+'" style="margin-top:14px">My live-test notes</label><textarea id="lt'+i+'" rows="3" placeholder="What did you see? For example: chat offered a person after 2 minutes."></textarea><div class="actions"><button class="btn small" data-notes="'+i+'">Update my pack with these notes</button></div></div></div></div>';
+    } else { h+='<div class="meta" style="margin-top:12px">We will show the files here when the pack is ready.</div>'; }
+  }
+  return h+'</article>';
+}
+function render(){ document.getElementById('list').innerHTML = packs.map(card).join(''); document.getElementById('count').textContent='('+packs.length+')'; }
+function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.classList.add('on'); setTimeout(function(){el.classList.remove('on');},2600); }
+function show(tab){ ['new','packs','help'].forEach(function(id){document.getElementById(id).hidden = id!==tab;}); document.querySelectorAll('nav button').forEach(function(b){b.setAttribute('aria-selected', b.dataset.tab===tab);}); window.scrollTo(0,0); }
+document.querySelectorAll('nav button').forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.tab); }); });
+document.querySelectorAll('.chip').forEach(function(c){ c.addEventListener('click', function(){ document.getElementById('acct').value=c.textContent; document.getElementById('acct').focus(); }); });
+document.getElementById('form').addEventListener('submit', function(e){
+  e.preventDefault(); var v=document.getElementById('acct').value.trim(); if(!v) return;
+  packs.unshift({name:v, by:"You", when:"Just now", stage:0}); render(); e.target.reset(); show('packs'); toast('Request received for '+v+'. We will tell you when it is ready.');
+});
+document.getElementById('list').addEventListener('click', function(e){
+  var t=e.target;
+  if(t.dataset.open){ document.getElementById('d'+t.dataset.open).classList.toggle('open'); }
+  if(t.dataset.dl){ toast(t.dataset.dl+' would download here.'); }
+  if(t.dataset.notes){ toast('Thanks. Your pack would be updated with your notes.'); }
+});
+render();
+</script>
+</body>
+</html>
