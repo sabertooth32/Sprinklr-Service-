@@ -2,7 +2,7 @@
 
 **Type one account name. Get a validated, ready-to-send account pack.**
 
-New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes.
+New here? Read [START-HERE.md](START-HERE.md) first. It takes 3 minutes. Leading the team? Read [ROLLOUT.md](ROLLOUT.md).
 
 ```
 /account-radar DBS Bank
@@ -108,7 +108,7 @@ Needs: Python 3 with `jinja2` and `jsonschema`, Node with Playwright and Chromiu
 | Maturity rubrics | `framework/03-maturity-models.md` |
 | Business-case rates and unit costs | `engine/value_defaults.json` |
 | Sprinklr capabilities and proof points | `framework/data/sprinklr-service-facts.json` |
-| Colours, font, logo | `engine/theme/sprinklr.json` |
+| Colours, font, logo | `engine/theme/sprinklr.json`, with logo and font files in `engine/theme/brand/` |
 
 ## Set up once, for best results
 
@@ -135,5 +135,5 @@ Needs: Python 3 with `jinja2` and `jsonschema`, Node with Playwright and Chromiu
 | Outside-in only | Scores and volumes are estimates from public evidence. The brief says so on every page that shows them |
 | Agents never contact the brand | The brief gives the SDR a 20-minute script to test as an ordinary member of the public. Sprinklr is never mentioned in a test. See `framework/08-live-test-rules.md` |
 | Web access | Agents work from web search. Where direct page reads are blocked, evidence is marked "search summary" and capped at medium confidence |
-| Brand | The theme approximates Sprinklr's look. Drop the official logo and colours into `engine/theme/sprinklr.json` |
+| Brand | Colours, gradient and type rules follow the Sprinklr Brand Style Guide 2026. The logo and Proxima Nova files are not in this public repository: place them in `engine/theme/brand/` (git-ignored). Without them, packs use a text wordmark and the Inter font |
 | Privacy | Real account folders are git-ignored. Only the fictional `_sample` account is committed. Follow local marketing and privacy rules before outreach |

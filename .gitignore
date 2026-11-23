@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 node_modules/
 .DS_Store
+
+# Brand logo and licensed font files come from an internal guide. This repository is public.
+engine/theme/brand/

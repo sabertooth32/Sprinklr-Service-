@@ -1,14 +1,36 @@
 {
-  "_note": "Approximation of Sprinklr's public look. Replace with official brand values and set logo_path (SVG or PNG, path from the repo root) to re-skin every pack.",
+  "_note": "Values taken from the Sprinklr Brand Style Guide 2026 (PowerPoint guide): theme colours, Proxima Nova, black sentence-case headlines, the orange-to-cyan gradient. Logo and licensed font files live in engine/theme/brand/, which is git-ignored because this repository is public.",
   "brand_name": "Sprinklr",
   "product_name": "Sprinklr Service",
   "tool_name": "Account Radar",
-  "logo_path": null,
-  "font": "Inter",
+  "logo_path": "engine/theme/brand/sprinklr-logo-black.svg",
+  "logo_path_dark": "engine/theme/brand/sprinklr-logo-white.svg",
+  "font": "Proxima Nova",
+  "font_fallback": "Inter",
+  "font_dir": "engine/theme/brand/fonts",
   "colors": {
-    "brand": "#2a78d6",
-    "brand_dark": "#0d366b",
-    "brand_tint": "#e8f1fd",
-    "accent": ["#2a78d6", "#1baf7a", "#eda100", "#eb6834"]
+    "ink": "#000000",
+    "brand": "#128ACB",
+    "brand_dark": "#2F3840",
+    "brand_tint": "#E7F5FB",
+    "soft": "#F1EFEF",
+    "accent": [
+      "#F9A118",
+      "#C9D132",
+      "#6FBE54",
+      "#00BAE7"
+    ],
+    "gradient": "linear-gradient(90deg, #F9A118 0%, #C9D132 34%, #6FBE54 66%, #00BAE7 100%)",
+    "extra": {
+      "purple": "#AA509E",
+      "link": "#0034C5"
+    },
+    "ramp": [
+      "#DCF0FA",
+      "#A6D8F1",
+      "#63B7E3",
+      "#0F78B2",
+      "#0A4A70"
+    ]
   }
 }

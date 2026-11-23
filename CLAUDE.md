@@ -21,6 +21,7 @@ This repo is a tool for Sprinklr Service SDRs in APJI. One account name in, one 
 python3 engine/validate.py accounts/<slug>/dossier.json    # code gates G5, G6
 python3 engine/build.py accounts/<slug>/dossier.json       # HTML + PDF + outreach kit, runs the layout gate
 SHOTS=1 python3 engine/build.py accounts/_sample/dossier.json   # also writes page images to out/shots/
+NO_BRAND_ASSETS=1 python3 engine/build.py accounts/_sample/dossier.json   # build the sample for committing: no logo, no licensed fonts
 ```
 
 ## Rules
@@ -33,3 +34,4 @@ SHOTS=1 python3 engine/build.py accounts/_sample/dossier.json   # also writes pa
 6. Fix content in the dossier, not in the templates. Change templates only to improve every account.
 7. After changing a template or the engine, rebuild `accounts/_sample` and look at the pages.
 8. Writing style everywhere: short sentences, plain words, tables before paragraphs.
+9. Brand: follow `engine/theme/sprinklr.json` (from the Sprinklr Brand Style Guide 2026). Headlines in sentence case, black. Never more than six bullets. The logo and font files in `engine/theme/brand/` are git-ignored. Before committing the sample pack, build it with `NO_BRAND_ASSETS=1`.

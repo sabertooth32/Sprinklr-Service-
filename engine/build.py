@@ -10,6 +10,7 @@ Outputs in accounts/<slug>/out/:
 """
 import base64
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -179,6 +180,30 @@ def build_context(dossier, theme):
     }
 
 
+def font_faces(theme):
+    """Embed licensed brand font files, if the team has placed them in the theme's font folder."""
+    if not theme.get("font_dir"):
+        return ""
+    folder = ROOT / theme["font_dir"]
+    if not folder.is_dir():
+        return ""
+    weights = (("thin", 100), ("extralight", 200), ("light", 300), ("regular", 400), ("medium", 500), ("semibold", 600),
+               ("extrabold", 800), ("xbold", 800), ("black", 900), ("bold", 700))
+    out = []
+    for f in sorted(folder.iterdir()):
+        ext = f.suffix.lower().lstrip(".")
+        if ext not in ("otf", "ttf", "woff", "woff2"):
+            continue
+        name = f.stem.lower().replace("-", "").replace("_", "").replace(" ", "")
+        weight = next((w for key, w in weights if key in name), 400)
+        style = "italic" if "italic" in name or name.endswith("it") else "normal"
+        fmt = {"otf": "opentype", "ttf": "truetype", "woff": "woff", "woff2": "woff2"}[ext]
+        data = base64.b64encode(f.read_bytes()).decode()
+        out.append(f'@font-face {{ font-family: "{theme["font"]}"; font-weight: {weight}; font-style: {style}; '
+                   f'src: url(data:font/{ext};base64,{data}) format("{fmt}"); }}')
+    return "\n".join(out)
+
+
 def outreach_md(ctx):
     d = ctx["d"]
     out = [f"# Outreach kit — {d['meta']['account']}", "",
@@ -211,11 +236,13 @@ def main():
         sys.exit(1)
 
     theme = json.loads((HERE / "theme" / "sprinklr.json").read_text())
+    if os.environ.get("NO_BRAND_ASSETS"):  # for packs that will be committed to a public repository
+        theme["logo_path"] = theme["logo_path_dark"] = theme["font_dir"] = None
     env = Environment(loader=FileSystemLoader(HERE / "templates"), autoescape=select_autoescape(["html", "j2"]),
                       trim_blocks=True, lstrip_blocks=True)
     ctx = build_context(dossier, theme)
     ctx["report"] = report
-    ctx["css"] = env.get_template("base.css").render(theme=theme)
+    ctx["css"] = env.get_template("base.css").render(theme=theme, font_faces=font_faces(theme))
 
     out = path.parent / "out"
     out.mkdir(exist_ok=True)
