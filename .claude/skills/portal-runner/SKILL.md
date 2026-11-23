@@ -49,7 +49,9 @@ Use the `Workflow` tool with the saved workflow `account-radar`. Args: `account`
 | B | resume with `resumeFromRunId`, `stop_after: "validate"` | If `stopped: "ICP gate"`: `status: "stopped"`, `stage_note: "Weak fit (tier X, N of 100). <one plain reason>. No pack was built."` and stop. Otherwise `status: "writing"`, `stage_note: "Facts are checked. The pack is being written."` |
 | C | resume with `resumeFromRunId`, no `stop_after` | Go to step 4 |
 
-Wait for each workflow notification. Do not poll. If several research agents report "not searched" gaps, follow the search-budget section of `.claude/skills/account-radar/SKILL.md` before stage B.
+Wait for each workflow notification. Do not poll.
+
+**If the `Workflow` tool is not available in your session** (check with ToolSearch `select:Workflow`), run the same stages yourself with the `Agent` tool. Read `.claude/workflows/account-radar.js` for the order. Start one `general-purpose` agent per brief in `swarm/briefs/`, using the same prompt text the script builds, at most four at a time. Research first (R2 before R9), then the five validators, then S1a and S1b together, then S1c, then B1, then Q1 to Q3 together, then F1. Update the row at the same three points. If several research agents report "not searched" gaps, follow the search-budget section of `.claude/skills/account-radar/SKILL.md` before stage B.
 
 If stage C ends with validation or layout not passed, fix the dossier as that skill describes and rebuild. If you cannot make it pass, mark the row `failed` with a plain reason.
 
