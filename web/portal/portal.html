@@ -158,7 +158,8 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
 (function () {
   var STAGES = [["queued", "Queued"], ["researching", "Researching"], ["checking", "Checking facts"], ["writing", "Writing"], ["ready", "Ready"]];
   var CHECKS = ["Open each contact on LinkedIn. Same role today?", "Do one live test as a customer. Never as your company.", "Open the source of each fact you use. Still true?", "Check CRM. Open opportunity or owner?", "Read your message aloud. Would you send it to a friend?"];
-  var db = null, user = null, me = null, rows = null, names = {}, state = "loading", open = {};
+  var db = null, user = null, me = null, rows = null, names = {}, state = "loading", open = {}, canWrite = null;
+  var VIEW_ONLY = "You can see packs, but you cannot request one yet. Ask the owner to open Share and change your access from viewer to contributor.";
   var $ = function (id) { return document.getElementById(id); };
 
   function el(tag, attrs, kids) {
@@ -225,10 +226,10 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
   function render() {
     var list = $("list"); list.textContent = "";
     $("count").textContent = rows && rows.length ? "(" + rows.length + ")" : "";
-    $("go").disabled = state !== "ready";
-    var msg = { loading: "Loading the team's packs…", signedout: "Sign in to Claude with the email you were invited with to see and request packs.", readonly: "", error: "The packs could not be loaded. Try again in a minute.", ready: "" }[state];
+    $("go").disabled = state !== "ready" || canWrite === false;
+    var msg = { loading: "Loading the team's packs…", signedout: "Sign in to Claude with the email you were invited with. If you are signed in and still see this, tell the owner: your access may not allow shared data.", readonly: "", error: "The packs could not be loaded. Try again in a minute.", ready: "" }[state];
     if (state !== "ready" && state !== "readonly") { list.appendChild(el("div", { class: "empty", text: msg })); $("formhint").textContent = state === "loading" ? "Connecting…" : msg; return; }
-    $("formhint").textContent = "Requests are picked up about once an hour. A pack then takes 2–3 hours.";
+    $("formhint").textContent = canWrite === false ? VIEW_ONLY : "Requests are picked up about once an hour. A pack then takes 2–3 hours.";
     if (!rows.length) { list.appendChild(el("div", { class: "empty", text: "No packs yet. Request your first account under “New pack”. It appears here as soon as you send it." })); return; }
     rows.forEach(function (r) { list.appendChild(card(r)); });
   }
@@ -259,8 +260,8 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
     db.collection("requests").add({ account: name, market: $("mkt").value, note: $("note").value.trim(), status: "queued",
       requested_by: me && me.id ? me.id : null, requested_at: new Date().toISOString(), live_notes_status: "none" })
       .then(function () { e.target.reset(); show("packs"); toast("Request received for " + name + "."); })
-      .catch(function () { box.appendChild(el("div", { class: "note crit", text: "Your request could not be sent. You may have view-only access. Ask the owner to let you contribute." })); })
-      .then(function () { $("go").disabled = state !== "ready"; });
+      .catch(function (err) { box.appendChild(el("div", { class: "note crit", text: "Your request was not sent. " + VIEW_ONLY + " (Reason code: " + ((err && err.code) || "unknown") + ")" })); })
+      .then(function () { $("go").disabled = state !== "ready" || canWrite === false; });
   });
   ["new", "packs", "help"].forEach(function (t) { $("tab-" + t).addEventListener("click", function () { show(t); }); });
 
@@ -274,6 +275,7 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
       if (!db) { clearTimeout(timer); state = "signedout"; render(); return; }
       (user ? user.me() : Promise.resolve(null)).then(function (v) {
         me = v; if (v && v.name) $("who").textContent = "Signed in as " + v.name;
+        if (user && user.can) user.can("data.write").then(function (ok) { canWrite = ok; if (ok === false) $("who").textContent = (v && v.name ? "Signed in as " + v.name + " · " : "") + "view only"; render(); });
         db.collection("requests").orderBy("requested_at", "desc").limit(100).onSnapshot(function (snap) {
           clearTimeout(timer);
           rows = snap.docs.map(function (d) { var x = d.data() || {}; x.id = d.id; return x; });
