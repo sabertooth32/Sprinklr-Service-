@@ -85,6 +85,7 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
 .rule h2{color:inherit}
 .rule ul{margin:8px 0 0 18px;padding:0;font-size:14px}
 .empty{border:1.5px dashed var(--line);border-radius:14px;padding:26px;text-align:center;color:var(--fg2);margin-top:18px}
+.kit{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--soft);border-radius:10px;padding:14px;margin:10px 0 0;max-height:420px;overflow:auto}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--dark);color:var(--on-dark);padding:12px 18px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px)}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion: reduce){.toast{transition:none}}
@@ -158,7 +159,7 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
 (function () {
   var STAGES = [["queued", "Queued"], ["researching", "Researching"], ["checking", "Checking facts"], ["writing", "Writing"], ["ready", "Ready"]];
   var CHECKS = ["Open each contact on LinkedIn. Same role today?", "Do one live test as a customer. Never as your company.", "Open the source of each fact you use. Still true?", "Check CRM. Open opportunity or owner?", "Read your message aloud. Would you send it to a friend?"];
-  var db = null, user = null, me = null, rows = null, names = {}, state = "loading", open = {}, canWrite = null;
+  var db = null, user = null, me = null, rows = null, names = {}, state = "loading", open = {}, canWrite = null, dl = null, kitOpen = {}, kitText = {};
   var VIEW_ONLY = "You can see packs, but you cannot request one yet. Ask the owner to open Share and change your access from viewer to contributor.";
   var $ = function (id) { return document.getElementById(id); };
 
@@ -200,11 +201,19 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
       return el("div", { class: "fact" }, [el("div", { class: "k", text: x[0] }), el("div", { class: "v", text: String(x[1]) })]);
     })));
     var acts = el("div", { class: "actions" });
-    [["brief", "SDR brief"], ["infographic", "Infographic"], ["kit", "Outreach kit"]].forEach(function (x) {
-      var u = safeUrl(f[x[0]]); if (u) acts.appendChild(el("a", { class: "btn small", href: u, target: "_blank", rel: "noopener", text: "Open " + x[1] }));
+    [["brief", "SDR brief", "sdr-brief.pdf"], ["infographic", "Infographic", "prospect-infographic.pdf"], ["kit", "Outreach kit", "outreach-kit.md"]].forEach(function (x) {
+      var u = safeUrl(f[x[0]]); if (!u) return;
+      acts.appendChild(el("button", { class: "btn small", type: "button", text: "Save " + x[1], onclick: function (ev) { saveFile(u, slug(r.account) + "-" + x[2], ev.currentTarget); } }));
     });
     acts.appendChild(el("button", { class: "btn small ghost", type: "button", "aria-expanded": String(!!open[r.id]), text: open[r.id] ? "Hide my next steps" : "Show my next steps", onclick: function () { open[r.id] = !open[r.id]; render(); } }));
+    var kitUrl = safeUrl(f.kit);
+    if (kitUrl) acts.appendChild(el("button", { class: "btn small ghost", type: "button", "aria-expanded": String(!!kitOpen[r.id]), text: kitOpen[r.id] ? "Hide messages" : "Read messages here", onclick: function () { toggleKit(r.id, kitUrl); } }));
     a.appendChild(acts);
+    if (kitOpen[r.id]) {
+      var pre = el("pre", { class: "kit", tabindex: "0", text: kitText[r.id] || "Loading the messages…" });
+      a.appendChild(el("div", { class: "detail" }, [el("div", { class: "actions", style: "margin-top:0" }, [el("h2", { text: "Outreach kit" }),
+        el("button", { class: "btn small", type: "button", text: "Copy all", onclick: function () { copyText(kitText[r.id] || ""); } })]), pre]));
+    }
     if (!open[r.id]) return a;
 
     var left = el("div", {}, [el("h2", { text: "Three ways in" })]);
@@ -232,6 +241,34 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
     $("formhint").textContent = canWrite === false ? VIEW_ONLY : "Requests are picked up about once an hour. A pack then takes 2–3 hours.";
     if (!rows.length) { list.appendChild(el("div", { class: "empty", text: "No packs yet. Request your first account under “New pack”. It appears here as soon as you send it." })); return; }
     rows.forEach(function (r) { list.appendChild(card(r)); });
+  }
+
+  function slug(t) { return String(t || "account").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "account"; }
+  function why(err) { return (err && err.code) || "error"; }
+  function saveFile(url, filename, btn) {
+    var label = btn.textContent; btn.disabled = true; btn.textContent = "Preparing…";
+    fetch(url).then(function (res) { if (!res.ok) throw { code: "file_" + res.status }; return res.blob(); })
+      .then(function (blob) { if (!dl) throw { code: "no_save" }; return dl.save({ filename: filename, data: blob }); })
+      .then(function () { toast("Saved " + filename + "."); })
+      .catch(function (err) {
+        var c = why(err);
+        if (c === "declined") return;
+        toast(c === "no_save" || c === "unavailable" || c === "not_granted" ? "Saving files is not available in this view. Open this page in a web browser and try again."
+          : "The file could not be opened. Tell the owner this code: " + c);
+      })
+      .then(function () { btn.disabled = false; btn.textContent = label; });
+  }
+  function toggleKit(id, url) {
+    kitOpen[id] = !kitOpen[id]; render();
+    if (!kitOpen[id] || kitText[id]) return;
+    fetch(url).then(function (res) { if (!res.ok) throw { code: "file_" + res.status }; return res.text(); })
+      .then(function (t) { kitText[id] = t; })
+      .catch(function (err) { kitText[id] = "The messages could not be loaded. Tell the owner this code: " + why(err); })
+      .then(render);
+  }
+  function copyText(t) {
+    if (!t) return;
+    navigator.clipboard.writeText(t).then(function () { toast("Copied."); }).catch(function () { toast("Copy is blocked here. Select the text and copy it."); });
   }
 
   function resolveNames() {
@@ -270,8 +307,8 @@ input.big{font-size:19px;padding:15px 16px;font-weight:600}
     var timer = setTimeout(function () { if (state === "loading") { state = "error"; render(); } }, 10000);
     var c = window.claude;
     if (!c || !c.use) { clearTimeout(timer); state = "signedout"; render(); return; }
-    Promise.all([c.use("db"), c.use("user")]).then(function (caps) {
-      db = caps[0]; user = caps[1];
+    Promise.all([c.use("db"), c.use("user"), c.use("downloads")]).then(function (caps) {
+      db = caps[0]; user = caps[1]; dl = caps[2];
       if (!db) { clearTimeout(timer); state = "signedout"; render(); return; }
       (user ? user.me() : Promise.resolve(null)).then(function (v) {
         me = v; if (v && v.name) $("who").textContent = "Signed in as " + v.name;
