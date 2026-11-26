@@ -38,7 +38,15 @@ You run unattended. Nobody is watching. Never ask a question. Never wait for app
 ### 2. Claim it
 Update the row: `status: "researching"`, `stage_note: "Research has started."`, `claimed_at`, `updated_at`. Pin with `if_version`.
 
-**Dry run:** if `account` starts with `TEST ` (capital letters), do not research. Upload the three files in `accounts/_sample/out/` as in step 4, set the summary from `python3 engine/portal_summary.py accounts/_sample/dossier.json`, set `stage_note: "Dry run. These are the fictional sample files."`, mark `ready`, and stop.
+**Dry run:** if `account` starts with `TEST ` (capital letters), do not research. Do step 2b, then rebuild the sample with `python3 engine/build.py accounts/_sample/dossier.json` so the brand files are tested too. Upload the three files in `accounts/_sample/out/` as in step 4, set the summary from `python3 engine/portal_summary.py accounts/_sample/dossier.json`, set `stage_note: "Dry run. These are the fictional sample files."`, mark `ready`, and stop.
+
+### 2b. Fetch the brand files
+The logo and brand fonts are not in the repository. They are stored privately in the portal.
+1. `ArtifactData` `get` on collection `config`, document `brand`.
+2. For `logo_black` and `logo_white`, download the file (`Artifact` `read` with `url` = portal and `path` = the id) and copy it to `engine/theme/brand/sprinklr-logo-black.svg` and `engine/theme/brand/sprinklr-logo-white.svg`.
+3. For each entry in `fonts` (`{id, filename}`), download it and copy it to `engine/theme/brand/fonts/<filename>`.
+4. If the document or a file is missing, carry on. The pack then uses a text wordmark. Say so in your final line.
+Never commit these files. The folder is git-ignored.
 
 ### 3. Run the swarm in three stages
 Use the `Workflow` tool with the saved workflow `account-radar`. Args: `account`, `slug` (lowercase, hyphens), `run_date` (today), `region` (the row's `market`, or "APJI"), `notes` (the row's `note`, cut to 200 characters).
